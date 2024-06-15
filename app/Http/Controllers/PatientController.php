@@ -51,7 +51,7 @@ class PatientController extends Controller
         // $person->user_id = $validatedData['user_id'];
         $person->user_id = $user_id;
         $person->person_type_id = 1;
-        $person->city_id = $validatedData['city_id'];
+        // $person->city_id = $validatedData['city_id'];
         $person->first_name = $validatedData['first_name'];
         $person->last_name = $validatedData['last_name'];
         $person->date_of_birth = $validatedData['date_of_birth'];
@@ -79,12 +79,12 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Patient $patient)
+    public function show(Request $request)
     {
-        $patient = Patient::findOrFail($patient->id);
+        $patient = Person::find($request->patient_id);
 
         return response()->json([
-            'patient' => $patient,
+            'patient' => $patient
         ]);
     }
 

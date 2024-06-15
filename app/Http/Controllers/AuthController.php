@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-     public function store(Request $request)
+    public function store(Request $request)
     {
 
         $data['status'] = false;
@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         try {
 
-            if(!User::where('email',$request->email )->first()){
+            if (!User::where('email', $request->email)->first()) {
                 $user = User::create([
                     'name' => $request->name,
                     'email' => $request->email,
@@ -36,17 +36,16 @@ class AuthController extends Controller
                 $data['status'] = true;
                 $data['user'] = $user;
                 $data['token'] = $token;
-            }else{
+            } else {
                 $data['message'] = "user already exists";
             }
-
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
         return response()->json($data);
-
     }
-    public function loginUser(Request $request){
+    public function loginUser(Request $request)
+    {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -55,7 +54,7 @@ class AuthController extends Controller
             $token = $user->createToken('AuthToken')->plainTextToken;
 
             return response()->json([
-                'status'=> true,
+                'status' => true,
                 'token' => $token,
                 'user' => $user,
             ], 200);
@@ -63,49 +62,17 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
-    public function logoutUser(Request $request){
+    public function logoutUser(Request $request)
+    {
 
         $data['status'] = false;
 
         try {
-             $request->user()->tokens()->delete();
-             $data['status'] = true;
+            $request->user()->tokens()->delete();
+            $data['status'] = true;
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
         return response()->json($data);
-
     }
-
-    // public function verifyEmail(Request $request)
-    // {
-
-    //     $data = false;
-    //     $email = $request->email;
-
-    //     if ($email) {
-    //         if (User::where("email", $email)->first()) {
-    //             $data  = true;
-    //         }
-    //     }
-
-    //     return $data;
-    // }
-    // public function resetPassword(Request $request)
-    // {
-
-    //     $verify = $this->verifyEmail($request);
-    //     if ($verify) {
-    //         if ($user = User::where('email', $request->email)->first()) {
-    //             $user->update([
-    //                 'password' => bcrypt($request->password)
-    //             ]);
-
-    //             return $this->login($request);
-    //         }
-    //     }
-
-    //     return $verify;
-    // }
-
 }

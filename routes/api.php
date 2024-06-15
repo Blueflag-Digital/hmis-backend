@@ -38,18 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // People routes
-    // Route::prefix('people')->group(function () {
-    //     Route::post('people/{person_id}/phones', [PhoneController::class, 'index']);
-    //     Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
-    // });
-    // //cities routes
-    // Route::prefix('cities')->group(function () {
-    //     Route::controller(CityController::class)->group(function () {
-    //         Route::post('/', 'index');
-    //     });
-    // });
-
-
-
-
+    Route::prefix('people')->group(function () {
+        Route::post('people/{person_id}/phones', [PhoneController::class, 'index']);
+        Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
+    });
 });
