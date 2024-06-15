@@ -26,21 +26,21 @@ Route::prefix('v1')->group(function () {
             //patients routes
             Route::prefix('patients')->group(function () {
                 Route::controller(PatientController::class)->group(function () {
-                    Route::get('/', 'index');
+                    Route::post('/', 'index');
                     Route::post('add', 'store');
-                    Route::get('/patient/{id}', 'show');
+                    Route::post('/patient/{id}', 'show');
                 });
             });
 
             //people routes
             Route::prefix('people')->group(function () {
-                Route::get('people/{person_id}/phones', [PhoneController::class, 'index']);
+                Route::post('people/{person_id}/phones', [PhoneController::class, 'index']);
                 Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
             });
             //cities routes
             Route::prefix('cities')->group(function () {
                 Route::controller(CityController::class)->group(function () {
-                    Route::get('/', 'index');
+                    Route::post('/', 'index');
                 });
             });
         });
