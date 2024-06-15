@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\Person;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -13,7 +14,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::all();
+        $patients = Patient::with(['person', 'person.phones'])->get();
 
         return response()->json([
             'patients' => $patients,
@@ -33,22 +34,29 @@ class PatientController extends Controller
             'last_name' => 'required|string|max:100',
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|max:10',
-            'phone' => 'nullable|string|max:20|unique:people',
+            'phone' => 'nullable|string|max:20|unique:phones,phone_number',
         ]);
 
-        $user_id =  $request->user()->id; //logged in user 
+        $user_id =  $request->user()->id; //logged in user
 
         $person = new Person();
         // $person->user_id = $validatedData['user_id'];
         $person->user_id = $user_id;
         $person->person_type_id = 1;
-        // $person->city_id = $validatedData['city_id'];
+        $person->city_id = $validatedData['city_id'];
         $person->first_name = $validatedData['first_name'];
         $person->last_name = $validatedData['last_name'];
         $person->date_of_birth = $validatedData['date_of_birth'];
         $person->gender = $validatedData['gender'];
         $person->phone = $validatedData['phone'];
         $person->save();
+
+        if (!empty($validatedData['phone'])) {
+            $phone = new Phone();
+            $phone->person_id = $person->id;
+            $phone->phone_number = $validatedData['phone'];
+            $phone->save();
+        }
 
         $patient = new Patient();
         $patient->person_id = $person->id;

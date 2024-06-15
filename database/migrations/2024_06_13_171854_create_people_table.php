@@ -21,6 +21,8 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('gender', 10)->nullable();
             $table->string('phone', 20)->unique()->nullable();
+            $table->string('identifier', 20)->nullable()->default('national_id');
+            $table->string('identifier_number', 20)->nullable();
             $table->timestamps();
         });
     }
