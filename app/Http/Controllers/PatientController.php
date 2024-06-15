@@ -26,9 +26,9 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' => 'nullable|string|max:255|unique:people',
-            'person_type_id' => 'required|integer|exists:person_types,id',
-            'city_id' => 'required|integer|exists:cities,id',
+            // 'user_id' => 'nullable|string|max:255|unique:people',
+            // 'person_type_id' => 'required|integer|exists:person_types,id',
+            // 'city_id' => 'required|integer|exists:cities,id',
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'date_of_birth' => 'nullable|date',
@@ -36,10 +36,13 @@ class PatientController extends Controller
             'phone' => 'nullable|string|max:20|unique:people',
         ]);
 
+        $user_id =  $request->user()->id; //logged in user 
+
         $person = new Person();
-        $person->user_id = $validatedData['user_id'];
+        // $person->user_id = $validatedData['user_id'];
+        $person->user_id = $user_id;
         $person->person_type_id = 1;
-        $person->city_id = $validatedData['city_id'];
+        // $person->city_id = $validatedData['city_id'];
         $person->first_name = $validatedData['first_name'];
         $person->last_name = $validatedData['last_name'];
         $person->date_of_birth = $validatedData['date_of_birth'];
