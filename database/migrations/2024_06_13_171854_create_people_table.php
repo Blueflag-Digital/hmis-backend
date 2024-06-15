@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone', 20)->unique()->nullable();
             $table->string('identifier', 20)->nullable()->default('national_id');
             $table->string('identifier_number', 20)->nullable();
+            $table->string('blood_group', 5)->nullable();
             $table->timestamps();
         });
     }
