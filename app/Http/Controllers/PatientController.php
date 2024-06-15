@@ -12,12 +12,19 @@ class PatientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $patients = Patient::with(['person', 'person.phones'])->get();
+        $pageNo = $request->pageNo;
+        $limit = $request->limit;
+
+        $count = Patient::count();
+
+        $patients = Patient::with(['person', 'person.phones'])
+            ->paginate($limit, ['*'], 'page', $pageNo);
 
         return response()->json([
             'patients' => $patients,
+            'totalCount' => $count
         ]);
     }
 
@@ -30,6 +37,7 @@ class PatientController extends Controller
             // 'user_id' => 'nullable|string|max:255|unique:people',
             // 'person_type_id' => 'required|integer|exists:person_types,id',
             // 'city_id' => 'required|integer|exists:cities,id',
+
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'date_of_birth' => 'nullable|date',
