@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class PhoneController extends Controller
 {
+    /**
+     * PHONES :: Store
+     */
     public function store(Request $request, $person_id)
     {
         $validatedData = $request->validate([
@@ -24,6 +27,9 @@ class PhoneController extends Controller
         return response()->json($phone, 201);
     }
 
+    /**
+     * PHONES :: List
+     */
     public function index($person_id)
     {
         $person = Person::findOrFail($person_id);

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CountryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * COUNTRIES :: List
      */
     public function index()
     {
@@ -16,7 +16,7 @@ class CountryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * COUNTRIES :: Store
      */
     public function store(Request $request)
     {

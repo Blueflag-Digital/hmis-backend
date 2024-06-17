@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PersonController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * PEOPLE :: List
      */
     public function index()
     {
@@ -16,7 +16,7 @@ class PersonController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * PEOPLE :: Store
      */
     public function store(Request $request)
     {

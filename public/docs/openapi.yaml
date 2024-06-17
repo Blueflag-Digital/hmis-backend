@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: 'Hospital Management System API Docs'
+  description: 'Hospital Management System API Docs'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/register:
+    post:
+      summary: ''
+      operationId: postApiRegister
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/login-user:
+    post:
+      summary: ''
+      operationId: postApiLoginUser
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/patients:
+    post:
+      summary: 'PATIENTS :: List'
+      operationId: pATIENTSList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patients/add:
+    post:
+      summary: 'PATIENTS :: Store'
+      operationId: pATIENTSStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',. Must not be greater than 100 characters."
+                  example: bmwswwrfqg
+                last_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: qscrduucmiffaaanipzpsr
+                date_of_birth:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2024-06-17T10:05:16'
+                gender:
+                  type: string
+                  description: 'Must not be greater than 10 characters.'
+                  example: sg
+                phone:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: p
+              required:
+                - first_name
+                - last_name
+      security: []
+  /api/patients/show:
+    post:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patientvisits:
+    post:
+      summary: 'PATIENT VISITS :: List'
+      operationId: pATIENTVISITSList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patientvisits/add:
+    post:
+      summary: 'PATIENT VISITS :: Store'
+      operationId: pATIENTVISITSStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patientvisits/show:
+    post:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/logout-user:
+    post:
+      summary: ''
+      operationId: postApiLogoutUser
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/cities:
+    post:
+      summary: 'CITIES :: List'
+      operationId: cITIESList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/departments:
+    post:
+      summary: 'DEPARTMENTS :: List'
+      operationId: dEPARTMENTSList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/people/people/{person_id}/phones':
+    post:
+      summary: 'PHONES :: Store'
+      operationId: pHONESStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: jacpivlh
+              required:
+                - phone_number
+      security: []
+    parameters:
+      -
+        in: path
+        name: person_id
+        description: 'The ID of the person.'
+        example: nesciunt
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: Endpoints
+    description: ''

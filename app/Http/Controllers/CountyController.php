@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CountyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * COUNTIES :: List
      */
     public function index()
     {
@@ -16,7 +16,7 @@ class CountyController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * COUNTIES :: Store
      */
     public function store(Request $request)
     {

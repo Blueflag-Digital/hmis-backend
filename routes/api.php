@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,21 +23,30 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::prefix('patients')->group(function () {
-        Route::post('/', [PatientController::class, 'index']);
-        Route::post('/add', [PatientController::class, 'store']);
-        Route::post('/show', [PatientController::class, 'show']);
+    Route::controller(PatientController::class)->prefix('patients')->group(function () {
+        Route::post('/', 'index');
+        Route::post('/add', 'store');
+        Route::post('/show', 'show');
+    });
+
+    Route::controller(PatientVisitController::class)->prefix('patientvisits')->group(function () {
+        Route::post('/', 'index');
+        Route::post('/add', 'store');
+        Route::post('/show', 'show');
     });
 
     Route::controller(AuthController::class)->group(function () {
         Route::post('logout-user', 'logoutUser');
     });
 
-    Route::prefix('cities')->group(function () {
-        Route::controller(CityController::class)->group(function () {
-            Route::post('/', 'index');
-        });
+    Route::controller(CityController::class)->prefix('cities')->group(function () {
+        Route::post('/', 'index');
     });
+
+    Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
+        Route::post('/', 'index');
+    });
+
 
     // People routes
     Route::prefix('people')->group(function () {

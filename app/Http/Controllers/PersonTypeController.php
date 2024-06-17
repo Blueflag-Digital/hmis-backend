@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PersonTypeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * PERSON TYPES :: List
      */
     public function index()
     {

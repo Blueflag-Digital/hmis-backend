@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class DepartmentController extends Controller
 {
     /**
-     * CITIES :: List
+     * DEPARTMENTS :: List
      */
     public function index()
     {
-        $cities = City::all();
-        return response()->json([
-            'cities' => $cities,
-        ]);
+        //
     }
 
     /**
-     * CITIES :: Store
+     * DEPARTMENTS :: Store
      */
     public function store(Request $request)
     {
@@ -29,7 +26,7 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(City $city)
+    public function show(Department $department)
     {
         //
     }
@@ -37,7 +34,7 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, Department $department)
     {
         //
     }
@@ -45,7 +42,7 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(City $city)
+    public function destroy(Department $department)
     {
         //
     }

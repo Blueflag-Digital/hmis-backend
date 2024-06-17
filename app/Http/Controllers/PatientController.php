@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PatientController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * PATIENTS :: List
      */
     public function index(Request $request)
     {
@@ -29,7 +29,7 @@ class PatientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * PATIENTS :: Store
      */
     public function store(Request $request)
     {
