@@ -37,6 +37,7 @@ class PatientController extends Controller
             // 'user_id' => 'nullable|string|max:255|unique:people',
             // 'person_type_id' => 'required|integer|exists:person_types,id',
             // 'city_id' => 'required|integer|exists:cities,id',
+            'identifier_number' => 'string',
             'blood_group' => 'nullable|string|max:255',
             'email' => 'nullable|string|max:255|unique:people',
             'city_id' => 'required|integer',
@@ -54,8 +55,6 @@ class PatientController extends Controller
             $phone  = $validatedData['phones'][0];
         }
 
-
-
         $person = new Person();
         $person->user_id = null;
         $person->person_type_id = 1;
@@ -65,6 +64,7 @@ class PatientController extends Controller
         $person->date_of_birth = $validatedData['date_of_birth'];
         $person->gender = $validatedData['gender'];
         $person->phone = $phone;
+        $person->identifier_number = $validatedData['identifier_number'];
         $person->email = $validatedData['email'];
         $person->blood_group = $validatedData['blood_group'];
         $person->save();
