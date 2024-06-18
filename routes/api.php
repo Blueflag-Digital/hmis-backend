@@ -27,7 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'index');
         Route::post('/add', 'store');
         Route::post('/show', 'show');
+        Route::post('bulk-upload-patients', 'bulkUpload');
     });
+
 
     Route::controller(PatientVisitController::class)->prefix('patientvisits')->group(function () {
         Route::post('/', 'index');

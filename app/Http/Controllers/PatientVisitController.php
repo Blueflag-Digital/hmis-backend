@@ -10,20 +10,33 @@ class PatientVisitController extends Controller
     /**
      * PATIENT VISITS :: List
      */
-    public function index()
+    public function index(Request $request)
     {
-        $patientVisits = PatientVisit::all();
 
-        $patientVisits = $patientVisits->map(function ($visit) {
-            return [
-                'id' => $visit->id,
-                'patient_name' => $visit->patient->name,
-                'department_name' => $visit->department->name,
-                'status' => $visit->status,
-            ];
-        });
+        $pageNo = $request->pageNo;
+        $limit = $request->limit;
+        $count = 0;
+        $patientVisits = [];
+        try {
+            $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
+            $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
+                return [
+                    'id' => $visit->id,
+                    'patient_name' => $visit->patient->name ?? 'Unknown', // Default to 'Unknown' if null
+                    'department_name' => $visit->department->name ?? 'Unknown', // Default to 'Unknown' if null
+                    'status' => $visit->status,
+                ];
+            });
+            $patientVisits->setCollection($transformedVisits);
+            $count = PatientVisit::count();
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
 
-        return response()->json($patientVisits);
+        return response()->json([
+            'data' => $patientVisits,
+            'totalCount' => $count
+        ]);
     }
 
     /**
