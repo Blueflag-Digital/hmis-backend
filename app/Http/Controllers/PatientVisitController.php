@@ -22,15 +22,11 @@ class PatientVisitController extends Controller
         try {
             $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
             $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
-                $patientId = $visit->patient_id;
-                $patient = Patient::where('id', $patientId)->first();
-                $person = Person::where('id', $patient->id)->first('first_name');
-                info($person);
+
 
                 return [
                     'id' => $visit->id,
-                    // 'patient_name' => $visit->patient->name ?? 'Unknown',
-                    'patient_name' => $person,
+                    'patient_name' => $visit->patient->name ?? 'Unknown', // Default to 'Unknown' if null
                     'department_name' => $visit->department->name ?? 'Unknown', // Default to 'Unknown' if null
                     'status' => $visit->status,
                 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Patient;
 use App\Models\Person;
 use App\Models\Phone;
@@ -17,15 +18,37 @@ class PatientController extends Controller
         $pageNo = $request->pageNo;
         $limit = $request->limit;
 
-        $count = Patient::count();
+        $data = [
+            'patients' => [],
+            'status' => false,
+        ];
 
-        $patients = Patient::with(['person', 'person.phones'])
-            ->paginate($limit, ['*'], 'page', $pageNo);
 
-        return response()->json([
-            'patients' => $patients,
-            'totalCount' => $count
-        ]);
+        try {
+            $data['totalCount'] = Patient::count();
+            $paginatedData = Patient::paginate($limit, ['*'], 'page', $pageNo);
+            $patients = $paginatedData->getCollection()->map(function ($patient) {
+
+                    return [
+                        'id' => $patient->id,
+                        'name' =>  isset($patient->person) ? $patient->person->first_name . " ". $patient->person->last_name : "" ,
+                        'dob' => isset($patient->person) ? $patient->person->date_of_birth :"",
+                        'gender' => isset($patient->person) ? $patient->person->gender : "",
+                        'phone' => isset($patient->person) ? $patient->person->phone :" ",
+                        'email' => isset($patient->person) ? $patient->person->email : "",
+                        'blood_group' => isset($patient->person) ? $patient->person->blood_group :"",
+                        'national_id' => isset($patient->person) ? $patient->person->identifier_no :"",
+                        'national_id' => isset($patient->person) ? "23656524" :"",
+                        'city' => isset($patient->person) && isset($patient->person->city) ? $patient->person->city->name : null,
+                    ];
+                });
+            $paginatedData->setCollection($patients);
+            $data['patients'] = $paginatedData;
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+            return response()->json($data);
     }
 
     /**
@@ -54,6 +77,8 @@ class PatientController extends Controller
         if (!empty($validatedData['phones'])) {
             $phone  = $validatedData['phones'][0];
         }
+
+
 
         $person = new Person();
         $person->user_id = null;
@@ -132,11 +157,48 @@ class PatientController extends Controller
      */
     public function show(Request $request)
     {
-        $patient = Person::find($request->patient_id);
+        $person = Patient::find($request->patient_id);
+        $patient = Person::find($person->person_id);
         $phones = Phone::where('person_id', $patient->id)->pluck('phone_number')->toArray();
 
+        $patientData = [
+            'id' => null,
+            'name' => "",
+            'dob' => "",
+            'gender' => "",
+            'phone' => " ",
+            'email' => "",
+            'blood_group' => "",
+            'national_id' => "",
+            'city' => null,
+            'first_name' => "",
+            'last_name' => ""
+        ];
+
+
+        if ($patient) {
+            // If the patient exists, populate the response array
+            $patientData = [
+                'id' => $patient->id,
+                'name' => $patient->first_name . " " . $patient->last_name,
+                'dob' => $patient->date_of_birth,
+                'gender' => $patient->gender,
+                'phone' => $patient->phone,
+                'email' => $patient->email,
+                'blood_group' => $patient->blood_group,
+                'national_id' => "23656524",
+                'city' => $patient->city ? $patient->city->name : null,
+                'city_id' => $patient->city ? $patient->city->id : null,
+                'first_name' =>  $patient->first_name,
+                'last_name' => $patient->last_name,
+                'national_id' =>  $patient->identifier_number
+            ];
+        }
+
+
+
         return response()->json([
-            'patient' => $patient,
+            'patient' => $patientData,
             'phones' => $phones,
         ]);
     }
@@ -144,9 +206,60 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request)
     {
-        //
+
+        info($request->all());
+
+         $validatedData = $request->validate([
+            'identifier_number' => 'string',
+            'blood_group' => 'nullable|string|max:255',
+            'city_id' => 'required|integer',
+            'first_name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
+            'date_of_birth' => 'nullable|date',
+            'gender' => 'nullable|string|max:10',
+            // 'phone' => 'nullable|string|max:20|unique:phones,phone_number',
+            'phone' => 'nullable|max:20',
+        ]);
+
+        $data = [
+            'status' => false
+        ];
+
+        try {
+            $patient = Patient::find($request->id);
+            //find the person
+            $person = Person::find($patient->person_id);
+            //update with info
+
+            $validatedData['email'] = $person->email;
+            if(!Person::where('email',$request->email)->first() ){
+                //update the email if its not the same
+                $validatedData['email']  = $request->email;
+            }
+
+
+
+            $person->user_id = null;
+            $person->person_type_id = 1;
+            $person->city_id = $validatedData['city_id'];
+            $person->first_name = $validatedData['first_name'];
+            $person->last_name = $validatedData['last_name'];
+            $person->date_of_birth = $validatedData['date_of_birth'];
+            $person->gender = $validatedData['gender'];
+            $person->phone = $validatedData['phone'];
+            $person->identifier_number = $validatedData['identifier_number'];
+            $person->email = $validatedData['email'] ;
+            $person->blood_group = $validatedData['blood_group'];
+            $person->save();
+            $data['status'] = true;
+
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
+
     }
 
     /**

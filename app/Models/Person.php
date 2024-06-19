@@ -23,4 +23,8 @@ class Person extends Model
     {
         return $this->hasMany(Phone::class);
     }
+      public function city()
+    {
+        return $this->belongsTo(City::class,'city_id');
+    }
 }

@@ -12,7 +12,6 @@ class AuthController extends Controller
 {
     public function store(Request $request)
     {
-
         $data['status'] = false;
         $data['user'] = null;
         $data['message']  = "";
