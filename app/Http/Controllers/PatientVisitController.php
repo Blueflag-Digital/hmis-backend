@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class PatientVisitController extends Controller
 {
+
+
+
     /**
      * PATIENT VISITS :: List
      */
@@ -19,6 +22,11 @@ class PatientVisitController extends Controller
         $limit = $request->limit;
         $count = 0;
         $patientVisits = [];
+
+        $data = [
+            'count' => 0,
+            'patientVisits' => [],
+        ];
         try {
             $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
             $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
@@ -32,15 +40,13 @@ class PatientVisitController extends Controller
                 ];
             });
             $patientVisits->setCollection($transformedVisits);
-            $count = PatientVisit::count();
+            $data['patientVisits'] = $patientVisits;
+            $data['count'] = PatientVisit::count();
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
 
-        return response()->json([
-            'data' => $patientVisits,
-            'totalCount' => $count
-        ]);
+        return response()->json($data);
     }
 
     /**
@@ -57,6 +63,9 @@ class PatientVisitController extends Controller
             'checked_in_by' => 'required|exists:users,id',
         ]);
         */
+
+        info($request->all());
+
 
         $patientVisit = PatientVisit::create([
             'patient_id' => $request->patient_id,

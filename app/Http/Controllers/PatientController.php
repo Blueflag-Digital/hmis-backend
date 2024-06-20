@@ -10,11 +10,34 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
+
+    //reusable functions
+    function getInitials($firstName, $lastName)
+    {
+        $firstInitial = isset($firstName) ? strtoupper($firstName[0]) : '';
+        $lastInitial = isset($lastName) ? strtoupper($lastName[0]) : '';
+        return $firstInitial . $lastInitial;
+    }
+
+
+    //end reusbale code
+
     /**
      * PATIENTS :: List
      */
     public function index(Request $request)
     {
+
+        if ($request->value) {
+            //fetch all patients
+            return Person::get()->map(function ($patient) {
+                return [
+                    'id' => $patient->id,
+                    'name' =>   $patient->first_name . " " . $patient->last_name
+                ];
+            });
+        }
+
         $pageNo = $request->pageNo;
         $limit = $request->limit;
 
@@ -29,26 +52,27 @@ class PatientController extends Controller
             $paginatedData = Patient::paginate($limit, ['*'], 'page', $pageNo);
             $patients = $paginatedData->getCollection()->map(function ($patient) {
 
-                    return [
-                        'id' => $patient->id,
-                        'name' =>  isset($patient->person) ? $patient->person->first_name . " ". $patient->person->last_name : "" ,
-                        'dob' => isset($patient->person) ? $patient->person->date_of_birth :"",
-                        'gender' => isset($patient->person) ? $patient->person->gender : "",
-                        'phone' => isset($patient->person) ? $patient->person->phone :" ",
-                        'email' => isset($patient->person) ? $patient->person->email : "",
-                        'blood_group' => isset($patient->person) ? $patient->person->blood_group :"",
-                        'national_id' => isset($patient->person) ? $patient->person->identifier_no :"",
-                        'national_id' => isset($patient->person) ? "23656524" :"",
-                        'city' => isset($patient->person) && isset($patient->person->city) ? $patient->person->city->name : null,
-                    ];
-                });
+                return [
+                    'id' => $patient->id,
+                    'initials' => isset($patient->person)  ?  $this->getInitials($patient->person->first_name, $patient->person->last_name)  : "",
+                    'name' =>  isset($patient->person) ? $patient->person->first_name . " " . $patient->person->last_name : "",
+                    'dob' => isset($patient->person) ? $patient->person->date_of_birth : "",
+                    'gender' => isset($patient->person) ? $patient->person->gender : "",
+                    'phone' => isset($patient->person) ? $patient->person->phone : " ",
+                    'email' => isset($patient->person) ? $patient->person->email : "",
+                    'blood_group' => isset($patient->person) ? $patient->person->blood_group : "",
+                    'national_id' => isset($patient->person) ? $patient->person->identifier_no : "",
+                    'national_id' => isset($patient->person) ? "23656524" : "",
+                    'city' => isset($patient->person) && isset($patient->person->city) ? $patient->person->city->name : null,
+                ];
+            });
             $paginatedData->setCollection($patients);
             $data['patients'] = $paginatedData;
             $data['status'] = true;
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
-            return response()->json($data);
+        return response()->json($data);
     }
 
     /**
@@ -186,7 +210,6 @@ class PatientController extends Controller
                 'phone' => $patient->phone,
                 'email' => $patient->email,
                 'blood_group' => $patient->blood_group,
-                'national_id' => "23656524",
                 'city' => $patient->city ? $patient->city->name : null,
                 'city_id' => $patient->city ? $patient->city->id : null,
                 'first_name' =>  $patient->first_name,
@@ -211,7 +234,7 @@ class PatientController extends Controller
 
         info($request->all());
 
-         $validatedData = $request->validate([
+        $validatedData = $request->validate([
             'identifier_number' => 'string',
             'blood_group' => 'nullable|string|max:255',
             'city_id' => 'required|integer',
@@ -234,7 +257,7 @@ class PatientController extends Controller
             //update with info
 
             $validatedData['email'] = $person->email;
-            if(!Person::where('email',$request->email)->first() ){
+            if (!Person::where('email', $request->email)->first()) {
                 //update the email if its not the same
                 $validatedData['email']  = $request->email;
             }
@@ -250,16 +273,14 @@ class PatientController extends Controller
             $person->gender = $validatedData['gender'];
             $person->phone = $validatedData['phone'];
             $person->identifier_number = $validatedData['identifier_number'];
-            $person->email = $validatedData['email'] ;
+            $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
             $person->save();
             $data['status'] = true;
-
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
         return response()->json($data);
-
     }
 
     /**
