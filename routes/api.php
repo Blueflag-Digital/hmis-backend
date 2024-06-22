@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/show', 'show');
         Route::post('bulk-upload-patients', 'bulkUpload');
         Route::post('/update', 'update');
+        Route::post('/delete', 'destroy');
     });
 
 

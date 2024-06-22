@@ -253,8 +253,6 @@ class PatientController extends Controller
     public function update(Request $request)
     {
 
-        info($request->all());
-
         $validatedData = $request->validate([
             'identifier_number' => 'string',
             'blood_group' => 'nullable|string|max:255',
@@ -263,8 +261,7 @@ class PatientController extends Controller
             'last_name' => 'required|string|max:100',
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|max:10',
-            // 'phone' => 'nullable|string|max:20|unique:phones,phone_number',
-            'phone' => 'nullable|max:20',
+            'phones' => 'nullable|max:20',
         ]);
 
         $data = [
@@ -283,6 +280,11 @@ class PatientController extends Controller
                 $validatedData['email']  = $request->email;
             }
 
+            $phone = "";
+            if (!empty($validatedData['phones'])) {
+                $phone  = $validatedData['phones'][0];
+            }
+
 
 
             $person->user_id = null;
@@ -292,11 +294,29 @@ class PatientController extends Controller
             $person->last_name = $validatedData['last_name'];
             $person->date_of_birth = $validatedData['date_of_birth'];
             $person->gender = $validatedData['gender'];
-            $person->phone = $validatedData['phone'];
+            $person->phone = $phone;
             $person->identifier_number = $validatedData['identifier_number'];
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
             $person->save();
+
+            if (!empty($validatedData['phones'])) {
+                // Delete all existing phone numbers for the person
+                $existingPhones = Phone::where('person_id', $person->id)->get();
+                if ($existingPhones->count() > 0) {
+                    foreach ($existingPhones as $existingPhone) {
+                        $existingPhone->delete();
+                    }
+                }
+                // Insert new phone numbers
+                foreach ($validatedData['phones'] as $newPhoneNumber) {
+                    $newPhone = new Phone();
+                    $newPhone->person_id = $person->id;
+                    $newPhone->phone_number = $newPhoneNumber; // Use the new phone number from validated data
+                    $newPhone->save();
+                }
+            }
+
             $data['status'] = true;
         } catch (\Throwable $th) {
             info($th->getMessage());
