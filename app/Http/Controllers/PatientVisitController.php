@@ -64,14 +64,12 @@ class PatientVisitController extends Controller
         ]);
         */
 
-        info($request->all());
-
+        $user = $request->user();
 
         $patientVisit = PatientVisit::create([
             'patient_id' => $request->patient_id,
             'department_id' => $request->department_id,
-            'status' => $request->status,
-            'checked_in_by' => $request->checked_in_by,
+            'checked_in_by' => $user->id,
         ]);
 
         return response()->json($patientVisit, 201);
