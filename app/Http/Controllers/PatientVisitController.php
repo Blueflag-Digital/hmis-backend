@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\PatientVisit;
 use App\Models\Person;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PatientVisitController extends Controller
@@ -38,6 +39,8 @@ class PatientVisitController extends Controller
                     'patient_name' => $visit->patient->name ?? 'Unknown', // Default to 'Unknown' if null
                     'department_name' => $visit->department->name ?? 'Unknown', // Default to 'Unknown' if null
                     'status' => $visit->status,
+                    'formatted_visit_date' => Carbon::parse($visit->created_at)->format('Y-m-d H:i:s'),
+
                 ];
             });
             $patientVisits->setCollection($transformedVisits);
