@@ -28,7 +28,8 @@ class PatientVisitController extends Controller
             'patientVisits' => [],
         ];
         try {
-            $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
+            $patientVisits = PatientVisit::with(['patient', 'department'])->paginate($limit, ['*'], 'page', $pageNo);
+
             $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
 
 
@@ -94,8 +95,16 @@ class PatientVisitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PatientVisit $patientVisit)
+    public function destroy($id)
     {
-        //
+        try {
+            $patientVisit = PatientVisit::findOrFail($id);
+            $patientVisit->delete();
+
+            return response()->json(['message' => 'Patient visit deleted successfully'], 200);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+            return response()->json(['message' => 'Failed to delete patient visit'], 500);
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Email;
 use App\Models\Patient;
 use App\Models\Person;
 use App\Models\Phone;
@@ -127,6 +128,15 @@ class PatientController extends Controller
             }
         }
 
+        if (!empty($validatedData['email_addresses'])) {
+            foreach ($validatedData['email_addresses'] as $email_address) {
+                $email = new Email();
+                $email->person_id = $person->id;
+                $email->email_address = $email_address; // Use the current email address in the loop
+                $email->save();
+            }
+        }
+
         $patient = new Patient();
         $patient->person_id = $person->id;
         $patient->save();
@@ -145,20 +155,31 @@ class PatientController extends Controller
         $datas = $request->data;
         try {
             foreach ($datas as $key => $validatedData) {
+
+                // Look up the city by name
+                $city = City::where('name', $validatedData['City'])->first();
+
+                if (!$city) {
+                    $city_id = 1;
+                    continue;
+                } else {
+                    $city_id = $city->id;
+                }
+
+
                 //save the data if the patient is not in the system
                 if (!Person::where('email', $validatedData['Email'])
                     ->orWhere('phone', $validatedData['Phone'])->first()) {
                     $person = new Person();
                     $person->user_id = null;
                     $person->person_type_id = 1;
-                    // $person->city_id = $validatedData['city_id'];
                     $person->first_name = $validatedData['First Name'];
                     $person->last_name = $validatedData['Last Name'];
                     // $person->date_of_birth = $validatedData['DOB'];
                     $person->gender = $validatedData['Gender'];
                     $person->phone = $validatedData['Phone'];
                     $person->email = $validatedData['Email'];
-                    $person->city_id = $validatedData['City'];
+                    $person->city_id = $city_id;
                     $person->blood_group = $validatedData['Blood Group'];
                     $person->save();
                     // $person->identifier_number = $validatedData['NationalID'];
@@ -286,8 +307,18 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Patient $patient)
+    public function destroy(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'patient_id' => 'required|exists:patients,id',
+        ]);
+
+        $patient = Patient::findOrFail($validatedData['patient_id']);
+
+        $patient->delete();
+
+        return response()->json([
+            'message' => 'Patient deleted successfully',
+        ], 200);
     }
 }

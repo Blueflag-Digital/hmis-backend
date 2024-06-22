@@ -23,6 +23,11 @@ class Person extends Model
     {
         return $this->hasMany(Phone::class);
     }
+
+    public function emails()
+    {
+        return $this->hasMany(Email::class);
+    }
       public function city()
     {
         return $this->belongsTo(City::class,'city_id');

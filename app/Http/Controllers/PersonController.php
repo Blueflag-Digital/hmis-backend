@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
@@ -42,8 +43,8 @@ class PersonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Person $person)
+    public function destroy(Request $request)
     {
-        //
+
     }
 }
