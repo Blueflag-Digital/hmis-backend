@@ -161,8 +161,18 @@ class PatientController extends Controller
 
                 $formattedDate = "";
                 if (!empty($validatedData['DOB'])) {
-                    $dateTime = DateTime::createFromFormat('d/m/Y', $validatedData['DOB']);
-                    $formattedDate = $dateTime->format('Y-m-d');
+
+                    if (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $validatedData['DOB'])) {
+                        // Create a DateTime object and format it to Y-m-d
+                        $dateTime = DateTime::createFromFormat('d/m/Y', $validatedData['DOB']);
+                        if ($dateTime) {
+                            $formattedDate = $dateTime->format('Y-m-d');
+                        } else {
+                            throw new \Exception("Date of Birth {$validatedData['DOB']} is invalid.");
+                        }
+                    } else {
+                        throw new \Exception("Date of Birth {$validatedData['DOB']} is not in the correct format. use format (d/m/Y).");
+                    }
                 }
 
                 $city_id = null;
@@ -171,8 +181,24 @@ class PatientController extends Controller
                         $city_id = $city->id;
                     }
                 }
+
+                $phone = null;
+                if (!empty($validatedData['Phone'])) {
+                    $phone = $validatedData['Phone'];
+                    // Transform phone numbers starting with '07' to '254'
+                    if (strpos($phone, '07') === 0) {
+                        $phone = '254' . substr($phone, 1);
+                    }
+
+                    // Validate phone number format
+                    if (!preg_match('/^254\d{9}$/', $phone)) {
+                        throw new \Exception("{$phone} is invalid for email: {$validatedData['Email']}.It must start with '254' or '07' and be followed by 9 digits.");
+                    }
+                }
+
+
                 //save the data if the patient is not in the system
-                if (!Person::where('email', $validatedData['Email'])
+                if (!$personExists = Person::where('email', $validatedData['Email'])
                     ->orWhere('phone', $validatedData['Phone'])->first()) {
 
                     $person = new Person();
@@ -182,7 +208,7 @@ class PatientController extends Controller
                     $person->last_name = $validatedData['Last Name'];
                     $person->date_of_birth = $formattedDate;
                     $person->gender = $validatedData['Gender'];
-                    $person->phone = $validatedData['Phone'];
+                    $person->phone = $phone;
                     $person->email = $validatedData['Email'];
                     $person->city_id = $city_id;
                     $person->blood_group = $validatedData['Blood Group'];
@@ -192,6 +218,20 @@ class PatientController extends Controller
                     $patient = new Patient();
                     $patient->person_id = $person->id;
                     $patient->save();
+                } else {
+                    info("updated");
+                    $personExists->user_id = null;
+                    $personExists->person_type_id = 1;
+                    $personExists->first_name = $validatedData['First Name'];
+                    $personExists->last_name = $validatedData['Last Name'];
+                    $personExists->date_of_birth = $formattedDate;
+                    $personExists->gender = $validatedData['Gender'];
+                    $personExists->phone = $phone;
+                    $personExists->email = $validatedData['Email'];
+                    $personExists->city_id = $city_id;
+                    $personExists->blood_group = $validatedData['Blood Group'];
+                    $personExists->identifier_number = $validatedData['National ID'];
+                    $personExists->update();
                 }
             }
             $data['status'] = true;
@@ -291,8 +331,6 @@ class PatientController extends Controller
                 $phone  = $validatedData['phones'][0];
             }
 
-
-
             $person->user_id = null;
             $person->person_type_id = 1;
             $person->city_id = $validatedData['city_id'];
@@ -339,12 +377,23 @@ class PatientController extends Controller
             'patient_id' => 'required|exists:patients,id',
         ]);
 
-        $patient = Patient::findOrFail($validatedData['patient_id']);
+        $data['status'] = false;
+        $data['message'] = "";
 
-        $patient->delete();
-
-        return response()->json([
-            'message' => 'Patient deleted successfully',
-        ], 200);
+        try {
+            if (!$patient = Patient::findOrFail($validatedData['patient_id'])) {
+                throw new \Exception("Patient not found", 1);
+            }
+            if (!$person = Person::find($patient->person_id)) {
+                throw new \Exception("person not found", 1);
+            }
+            $person->delete();
+            $patient->delete();
+            $data['message'] = 'Patient deleted successfully';
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            $data['message'] = $th->getMessage();
+        }
+        return response()->json($data, 200);
     }
 }
