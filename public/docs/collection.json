@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "199cc8d6-b475-4672-a259-f48d6009560b",
+        "_postman_id": "88849122-f3eb-4844-9462-ec4089eac817",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"first_name\":\"bmwswwrfqg\",\"last_name\":\"qscrduucmiffaaanipzpsr\",\"date_of_birth\":\"2024-06-17T10:05:16\",\"gender\":\"sg\",\"phone\":\"p\"}"
+                            "raw": "{\"identifier_number\":\"eos\",\"blood_group\":\"y\",\"email\":\"robin69@example.org\",\"city_id\":10,\"first_name\":\"axxzginbnxzxxjj\",\"last_name\":\"zpfxwlbyriindflbwcn\",\"date_of_birth\":\"2024-06-24T13:53:23\",\"gender\":\"zbn\",\"phones\":\"gsodt\"}"
                         },
                         "description": "",
                         "auth": {
@@ -211,13 +211,103 @@
                     "response": []
                 },
                 {
+                    "name": "POST api\/patients\/bulk-upload-patients",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patients\/bulk-upload-patients",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patients\/bulk-upload-patients"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patients\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patients\/update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"identifier_number\":\"officia\",\"blood_group\":\"mfafqxdivbvxnvned\",\"city_id\":12,\"first_name\":\"hny\",\"last_name\":\"kxsciaoeig\",\"date_of_birth\":\"2024-06-24T13:53:23\",\"gender\":\"xfuiyuota\",\"phones\":\"b\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patients\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patients\/delete"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"patient_id\":\"tempora\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "PATIENT VISITS :: List",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/patientvisits",
+                            "path": "api\/patient-visits",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/patientvisits"
+                            "raw": "{{baseUrl}}\/api\/patient-visits"
                         },
                         "method": "POST",
                         "header": [
@@ -243,9 +333,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/patientvisits\/add",
+                            "path": "api\/patient-visits\/add",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/patientvisits\/add"
+                            "raw": "{{baseUrl}}\/api\/patient-visits\/add"
                         },
                         "method": "POST",
                         "header": [
@@ -271,9 +361,9 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/patientvisits\/show",
+                            "path": "api\/patient-visits\/show",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/patientvisits\/show"
+                            "raw": "{{baseUrl}}\/api\/patient-visits\/show"
                         },
                         "method": "POST",
                         "header": [
@@ -379,6 +469,90 @@
                     "response": []
                 },
                 {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/consultation",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/consultation"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "CONSULTATION :: Store",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/consultation\/add",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/consultation\/add"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/consultation\/show",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/consultation\/show"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "PHONES :: Store",
                     "request": {
                         "url": {
@@ -390,7 +564,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "nesciunt",
+                                    "value": "consequatur",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -408,7 +582,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"jacpivlh\"}"
+                            "raw": "{\"phone_number\":\"dnti\"}"
                         },
                         "description": "",
                         "auth": {

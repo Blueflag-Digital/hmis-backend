@@ -75,27 +75,44 @@ paths:
             schema:
               type: object
               properties:
+                identifier_number:
+                  type: string
+                  description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',."
+                  example: eos
+                blood_group:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: 'y'
+                email:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: robin69@example.org
+                city_id:
+                  type: integer
+                  description: ''
+                  example: 10
                 first_name:
                   type: string
-                  description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',. Must not be greater than 100 characters."
-                  example: bmwswwrfqg
+                  description: 'Must not be greater than 100 characters.'
+                  example: axxzginbnxzxxjj
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: qscrduucmiffaaanipzpsr
+                  example: zpfxwlbyriindflbwcn
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-17T10:05:16'
+                  example: '2024-06-24T13:53:23'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: sg
-                phone:
+                  example: zbn
+                phones:
                   type: string
-                  description: 'Must not be greater than 20 characters.'
-                  example: p
+                  description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
+                  example: gsodt
               required:
+                - city_id
                 - first_name
                 - last_name
       security: []
@@ -109,7 +126,93 @@ paths:
       tags:
         - Endpoints
       security: []
-  /api/patientvisits:
+  /api/patients/bulk-upload-patients:
+    post:
+      summary: ''
+      operationId: postApiPatientsBulkUploadPatients
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patients/update:
+    post:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier_number:
+                  type: string
+                  description: ''
+                  example: officia
+                blood_group:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: mfafqxdivbvxnvned
+                city_id:
+                  type: integer
+                  description: ''
+                  example: 12
+                first_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: hny
+                last_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: kxsciaoeig
+                date_of_birth:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2024-06-24T13:53:23'
+                gender:
+                  type: string
+                  description: 'Must not be greater than 10 characters.'
+                  example: xfuiyuota
+                phones:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: b
+              required:
+                - city_id
+                - first_name
+                - last_name
+      security: []
+  /api/patients/delete:
+    post:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_id:
+                  type: string
+                  description: ''
+                  example: tempora
+              required:
+                - patient_id
+      security: []
+  /api/patient-visits:
     post:
       summary: 'PATIENT VISITS :: List'
       operationId: pATIENTVISITSList
@@ -119,7 +222,7 @@ paths:
       tags:
         - Endpoints
       security: []
-  /api/patientvisits/add:
+  /api/patient-visits/add:
     post:
       summary: 'PATIENT VISITS :: Store'
       operationId: pATIENTVISITSStore
@@ -129,7 +232,7 @@ paths:
       tags:
         - Endpoints
       security: []
-  /api/patientvisits/show:
+  /api/patient-visits/show:
     post:
       summary: 'Display the specified resource.'
       operationId: displayTheSpecifiedResource
@@ -169,6 +272,36 @@ paths:
       tags:
         - Endpoints
       security: []
+  /api/consultation:
+    post:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation/add:
+    post:
+      summary: 'CONSULTATION :: Store'
+      operationId: cONSULTATIONStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation/show:
+    post:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
   '/api/people/people/{person_id}/phones':
     post:
       summary: 'PHONES :: Store'
@@ -188,7 +321,7 @@ paths:
                 phone_number:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: jacpivlh
+                  example: dnti
               required:
                 - phone_number
       security: []
@@ -197,7 +330,7 @@ paths:
         in: path
         name: person_id
         description: 'The ID of the person.'
-        example: nesciunt
+        example: consequatur
         required: true
         schema:
           type: string

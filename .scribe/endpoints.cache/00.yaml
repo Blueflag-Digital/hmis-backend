@@ -153,14 +153,50 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      first_name:
-        name: first_name
+      identifier_number:
+        name: identifier_number
         description: |-
           'user_id' => 'nullable|string|max:255|unique:people',
           'person_type_id' => 'required|integer|exists:person_types,id',
-          'city_id' => 'required|integer|exists:cities,id',. Must not be greater than 100 characters.
+          'city_id' => 'required|integer|exists:cities,id',.
+        required: false
+        example: eos
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      blood_group:
+        name: blood_group
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'y'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      email:
+        name: email
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: robin69@example.org
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      city_id:
+        name: city_id
+        description: ''
         required: true
-        example: bmwswwrfqg
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      first_name:
+        name: first_name
+        description: 'Must not be greater than 100 characters.'
+        required: true
+        example: axxzginbnxzxxjj
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -169,7 +205,7 @@ endpoints:
         name: last_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: qscrduucmiffaaanipzpsr
+        example: zpfxwlbyriindflbwcn
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -178,7 +214,7 @@ endpoints:
         name: date_of_birth
         description: 'Must be a valid date.'
         required: false
-        example: '2024-06-17T10:05:16'
+        example: '2024-06-24T13:53:23'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -187,26 +223,30 @@ endpoints:
         name: gender
         description: 'Must not be greater than 10 characters.'
         required: false
-        example: sg
+        example: zbn
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
-      phone:
-        name: phone
-        description: 'Must not be greater than 20 characters.'
+      phones:
+        name: phones
+        description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
         required: false
-        example: p
+        example: gsodt
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      first_name: bmwswwrfqg
-      last_name: qscrduucmiffaaanipzpsr
-      date_of_birth: '2024-06-17T10:05:16'
-      gender: sg
-      phone: p
+      identifier_number: eos
+      blood_group: 'y'
+      email: robin69@example.org
+      city_id: 10
+      first_name: axxzginbnxzxxjj
+      last_name: zpfxwlbyriindflbwcn
+      date_of_birth: '2024-06-24T13:53:23'
+      gender: zbn
+      phones: gsodt
     fileParameters: []
     responses: []
     responseFields: []
@@ -248,7 +288,187 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/patientvisits
+    uri: api/patients/bulk-upload-patients
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/patients/update
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      identifier_number:
+        name: identifier_number
+        description: ''
+        required: false
+        example: officia
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      blood_group:
+        name: blood_group
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: mfafqxdivbvxnvned
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      city_id:
+        name: city_id
+        description: ''
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      first_name:
+        name: first_name
+        description: 'Must not be greater than 100 characters.'
+        required: true
+        example: hny
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      last_name:
+        name: last_name
+        description: 'Must not be greater than 100 characters.'
+        required: true
+        example: kxsciaoeig
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      date_of_birth:
+        name: date_of_birth
+        description: 'Must be a valid date.'
+        required: false
+        example: '2024-06-24T13:53:23'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      gender:
+        name: gender
+        description: 'Must not be greater than 10 characters.'
+        required: false
+        example: xfuiyuota
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      phones:
+        name: phones
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      identifier_number: officia
+      blood_group: mfafqxdivbvxnvned
+      city_id: 12
+      first_name: hny
+      last_name: kxsciaoeig
+      date_of_birth: '2024-06-24T13:53:23'
+      gender: xfuiyuota
+      phones: b
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/patients/delete
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified resource from storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      patient_id:
+        name: patient_id
+        description: ''
+        required: true
+        example: tempora
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      patient_id: tempora
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/patient-visits
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -278,7 +498,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/patientvisits/add
+    uri: api/patient-visits/add
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -308,7 +528,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/patientvisits/show
+    uri: api/patient-visits/show
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -428,6 +648,96 @@ endpoints:
   -
     httpMethods:
       - POST
+    uri: api/consultation
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of the resource.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/consultation/add
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'CONSULTATION :: Store'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/consultation/show
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified resource.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
     uri: 'api/people/people/{person_id}/phones'
     metadata:
       groupName: Endpoints
@@ -446,13 +756,13 @@ endpoints:
         name: person_id
         description: 'The ID of the person.'
         required: true
-        example: nesciunt
+        example: consequatur
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      person_id: nesciunt
+      person_id: consequatur
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -460,13 +770,13 @@ endpoints:
         name: phone_number
         description: 'Must not be greater than 20 characters.'
         required: true
-        example: jacpivlh
+        example: dnti
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      phone_number: jacpivlh
+      phone_number: dnti
     fileParameters: []
     responses: []
     responseFields: []

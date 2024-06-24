@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
+use App\Http\Controllers\ConsulationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
         Route::post('/', 'index');
+    });
+
+    Route::controller(ConsulationController::class)->prefix('consultation')->group(function () {
+        Route::post('/', 'index');
+        Route::post('/add', 'store');
+        Route::post('/show', 'show');
     });
 
 

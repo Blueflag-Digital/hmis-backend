@@ -89,14 +89,23 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patients-show">
                                 <a href="#endpoints-POSTapi-patients-show">Display the specified resource.</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patientvisits">
-                                <a href="#endpoints-POSTapi-patientvisits">PATIENT VISITS :: List</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patients-bulk-upload-patients">
+                                <a href="#endpoints-POSTapi-patients-bulk-upload-patients">POST api/patients/bulk-upload-patients</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patientvisits-add">
-                                <a href="#endpoints-POSTapi-patientvisits-add">PATIENT VISITS :: Store</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patients-update">
+                                <a href="#endpoints-POSTapi-patients-update">Update the specified resource in storage.</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patientvisits-show">
-                                <a href="#endpoints-POSTapi-patientvisits-show">Display the specified resource.</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patients-delete">
+                                <a href="#endpoints-POSTapi-patients-delete">Remove the specified resource from storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patient-visits">
+                                <a href="#endpoints-POSTapi-patient-visits">PATIENT VISITS :: List</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patient-visits-add">
+                                <a href="#endpoints-POSTapi-patient-visits-add">PATIENT VISITS :: Store</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-patient-visits-show">
+                                <a href="#endpoints-POSTapi-patient-visits-show">Display the specified resource.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-logout-user">
                                 <a href="#endpoints-POSTapi-logout-user">POST api/logout-user</a>
@@ -106,6 +115,15 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-departments">
                                 <a href="#endpoints-POSTapi-departments">DEPARTMENTS :: List</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-consultation">
+                                <a href="#endpoints-POSTapi-consultation">Display a listing of the resource.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-consultation-add">
+                                <a href="#endpoints-POSTapi-consultation-add">CONSULTATION :: Store</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-consultation-show">
+                                <a href="#endpoints-POSTapi-consultation-show">Display the specified resource.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-people-people--person_id--phones">
                                 <a href="#endpoints-POSTapi-people-people--person_id--phones">PHONES :: Store</a>
@@ -121,7 +139,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 17, 2024</li>
+        <li>Last updated: June 24, 2024</li>
     </ul>
 </div>
 
@@ -609,11 +627,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"first_name\": \"bmwswwrfqg\",
-    \"last_name\": \"qscrduucmiffaaanipzpsr\",
-    \"date_of_birth\": \"2024-06-17T10:05:16\",
-    \"gender\": \"sg\",
-    \"phone\": \"p\"
+    \"identifier_number\": \"eos\",
+    \"blood_group\": \"y\",
+    \"email\": \"robin69@example.org\",
+    \"city_id\": 10,
+    \"first_name\": \"axxzginbnxzxxjj\",
+    \"last_name\": \"zpfxwlbyriindflbwcn\",
+    \"date_of_birth\": \"2024-06-24T13:53:23\",
+    \"gender\": \"zbn\",
+    \"phones\": \"gsodt\"
 }"
 </code></pre></div>
 
@@ -629,11 +651,15 @@ const headers = {
 };
 
 let body = {
-    "first_name": "bmwswwrfqg",
-    "last_name": "qscrduucmiffaaanipzpsr",
-    "date_of_birth": "2024-06-17T10:05:16",
-    "gender": "sg",
-    "phone": "p"
+    "identifier_number": "eos",
+    "blood_group": "y",
+    "email": "robin69@example.org",
+    "city_id": 10,
+    "first_name": "axxzginbnxzxxjj",
+    "last_name": "zpfxwlbyriindflbwcn",
+    "date_of_birth": "2024-06-24T13:53:23",
+    "gender": "zbn",
+    "phones": "gsodt"
 };
 
 fetch(url, {
@@ -717,17 +743,61 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>identifier_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="identifier_number"                data-endpoint="POSTapi-patients-add"
+               value="eos"
+               data-component="body">
+    <br>
+<p>'user_id' =&gt; 'nullable|string|max:255|unique:people',
+'person_type_id' =&gt; 'required|integer|exists:person_types,id',
+'city_id' =&gt; 'required|integer|exists:cities,id',. Example: <code>eos</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>blood_group</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="blood_group"                data-endpoint="POSTapi-patients-add"
+               value="y"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>y</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-patients-add"
+               value="robin69@example.org"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>robin69@example.org</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="city_id"                data-endpoint="POSTapi-patients-add"
+               value="10"
+               data-component="body">
+    <br>
+<p>Example: <code>10</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="first_name"                data-endpoint="POSTapi-patients-add"
-               value="bmwswwrfqg"
+               value="axxzginbnxzxxjj"
                data-component="body">
     <br>
-<p>'user_id' =&gt; 'nullable|string|max:255|unique:people',
-'person_type_id' =&gt; 'required|integer|exists:person_types,id',
-'city_id' =&gt; 'required|integer|exists:cities,id',. Must not be greater than 100 characters. Example: <code>bmwswwrfqg</code></p>
+<p>Must not be greater than 100 characters. Example: <code>axxzginbnxzxxjj</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
@@ -735,10 +805,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="last_name"                data-endpoint="POSTapi-patients-add"
-               value="qscrduucmiffaaanipzpsr"
+               value="zpfxwlbyriindflbwcn"
                data-component="body">
     <br>
-<p>Must not be greater than 100 characters. Example: <code>qscrduucmiffaaanipzpsr</code></p>
+<p>Must not be greater than 100 characters. Example: <code>zpfxwlbyriindflbwcn</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>date_of_birth</code></b>&nbsp;&nbsp;
@@ -746,10 +816,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="date_of_birth"                data-endpoint="POSTapi-patients-add"
-               value="2024-06-17T10:05:16"
+               value="2024-06-24T13:53:23"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2024-06-17T10:05:16</code></p>
+<p>Must be a valid date. Example: <code>2024-06-24T13:53:23</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>gender</code></b>&nbsp;&nbsp;
@@ -757,21 +827,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="gender"                data-endpoint="POSTapi-patients-add"
-               value="sg"
+               value="zbn"
                data-component="body">
     <br>
-<p>Must not be greater than 10 characters. Example: <code>sg</code></p>
+<p>Must not be greater than 10 characters. Example: <code>zbn</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>phones</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-patients-add"
-               value="p"
+                              name="phones"                data-endpoint="POSTapi-patients-add"
+               value="gsodt"
                data-component="body">
     <br>
-<p>Must not be greater than 20 characters. Example: <code>p</code></p>
+<p>'phone' =&gt; 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters. Example: <code>gsodt</code></p>
         </div>
         </form>
 
@@ -883,27 +953,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-patientvisits">PATIENT VISITS :: List</h2>
+                    <h2 id="endpoints-POSTapi-patients-bulk-upload-patients">POST api/patients/bulk-upload-patients</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-POSTapi-patientvisits">
+<span id="example-requests-POSTapi-patients-bulk-upload-patients">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/patientvisits" \
+    "http://localhost/api/patients/bulk-upload-patients" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/patientvisits"
+    "http://localhost/api/patients/bulk-upload-patients"
 );
 
 const headers = {
@@ -918,45 +988,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-POSTapi-patientvisits">
+<span id="example-responses-POSTapi-patients-bulk-upload-patients">
 </span>
-<span id="execution-results-POSTapi-patientvisits" hidden>
+<span id="execution-results-POSTapi-patients-bulk-upload-patients" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-patientvisits"></span>:
+                id="execution-response-status-POSTapi-patients-bulk-upload-patients"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-patientvisits"
+    <pre class="json"><code id="execution-response-content-POSTapi-patients-bulk-upload-patients"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-patientvisits" hidden>
+<span id="execution-error-POSTapi-patients-bulk-upload-patients" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-patientvisits">
+    <pre><code id="execution-error-message-POSTapi-patients-bulk-upload-patients">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-patientvisits" data-method="POST"
-      data-path="api/patientvisits"
+<form id="form-POSTapi-patients-bulk-upload-patients" data-method="POST"
+      data-path="api/patients/bulk-upload-patients"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patientvisits', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patients-bulk-upload-patients', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-patientvisits"
-                    onclick="tryItOut('POSTapi-patientvisits');">Try it out ⚡
+                    id="btn-tryout-POSTapi-patients-bulk-upload-patients"
+                    onclick="tryItOut('POSTapi-patients-bulk-upload-patients');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-patientvisits"
-                    onclick="cancelTryOut('POSTapi-patientvisits');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-patients-bulk-upload-patients"
+                    onclick="cancelTryOut('POSTapi-patients-bulk-upload-patients');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-patientvisits"
+                    id="btn-executetryout-POSTapi-patients-bulk-upload-patients"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -964,7 +1034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/patientvisits</code></b>
+            <b><code>api/patients/bulk-upload-patients</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -972,7 +1042,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-patientvisits"
+                              name="Content-Type"                data-endpoint="POSTapi-patients-bulk-upload-patients"
                value="application/json"
                data-component="header">
     <br>
@@ -983,7 +1053,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-patientvisits"
+                              name="Accept"                data-endpoint="POSTapi-patients-bulk-upload-patients"
                value="application/json"
                data-component="header">
     <br>
@@ -991,27 +1061,376 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-patientvisits-add">PATIENT VISITS :: Store</h2>
+                    <h2 id="endpoints-POSTapi-patients-update">Update the specified resource in storage.</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-POSTapi-patientvisits-add">
+<span id="example-requests-POSTapi-patients-update">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/patientvisits/add" \
+    "http://localhost/api/patients/update" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"identifier_number\": \"officia\",
+    \"blood_group\": \"mfafqxdivbvxnvned\",
+    \"city_id\": 12,
+    \"first_name\": \"hny\",
+    \"last_name\": \"kxsciaoeig\",
+    \"date_of_birth\": \"2024-06-24T13:53:23\",
+    \"gender\": \"xfuiyuota\",
+    \"phones\": \"b\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/patients/update"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "identifier_number": "officia",
+    "blood_group": "mfafqxdivbvxnvned",
+    "city_id": 12,
+    "first_name": "hny",
+    "last_name": "kxsciaoeig",
+    "date_of_birth": "2024-06-24T13:53:23",
+    "gender": "xfuiyuota",
+    "phones": "b"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-patients-update">
+</span>
+<span id="execution-results-POSTapi-patients-update" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-patients-update"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-patients-update"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-patients-update" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-patients-update">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-patients-update" data-method="POST"
+      data-path="api/patients/update"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patients-update', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-patients-update"
+                    onclick="tryItOut('POSTapi-patients-update');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-patients-update"
+                    onclick="cancelTryOut('POSTapi-patients-update');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-patients-update"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/patients/update</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-patients-update"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-patients-update"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>identifier_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="identifier_number"                data-endpoint="POSTapi-patients-update"
+               value="officia"
+               data-component="body">
+    <br>
+<p>Example: <code>officia</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>blood_group</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="blood_group"                data-endpoint="POSTapi-patients-update"
+               value="mfafqxdivbvxnvned"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>mfafqxdivbvxnvned</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="city_id"                data-endpoint="POSTapi-patients-update"
+               value="12"
+               data-component="body">
+    <br>
+<p>Example: <code>12</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="first_name"                data-endpoint="POSTapi-patients-update"
+               value="hny"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>hny</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="last_name"                data-endpoint="POSTapi-patients-update"
+               value="kxsciaoeig"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters. Example: <code>kxsciaoeig</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>date_of_birth</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="date_of_birth"                data-endpoint="POSTapi-patients-update"
+               value="2024-06-24T13:53:23"
+               data-component="body">
+    <br>
+<p>Must be a valid date. Example: <code>2024-06-24T13:53:23</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>gender</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="gender"                data-endpoint="POSTapi-patients-update"
+               value="xfuiyuota"
+               data-component="body">
+    <br>
+<p>Must not be greater than 10 characters. Example: <code>xfuiyuota</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phones</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phones"                data-endpoint="POSTapi-patients-update"
+               value="b"
+               data-component="body">
+    <br>
+<p>Must not be greater than 20 characters. Example: <code>b</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-patients-delete">Remove the specified resource from storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-patients-delete">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/patients/delete" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"patient_id\": \"tempora\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/patients/delete"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "patient_id": "tempora"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-patients-delete">
+</span>
+<span id="execution-results-POSTapi-patients-delete" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-patients-delete"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-patients-delete"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-patients-delete" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-patients-delete">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-patients-delete" data-method="POST"
+      data-path="api/patients/delete"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patients-delete', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-patients-delete"
+                    onclick="tryItOut('POSTapi-patients-delete');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-patients-delete"
+                    onclick="cancelTryOut('POSTapi-patients-delete');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-patients-delete"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/patients/delete</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-patients-delete"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-patients-delete"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>patient_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="patient_id"                data-endpoint="POSTapi-patients-delete"
+               value="tempora"
+               data-component="body">
+    <br>
+<p>Example: <code>tempora</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-patient-visits">PATIENT VISITS :: List</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-patient-visits">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/patient-visits" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/patientvisits/add"
+    "http://localhost/api/patient-visits"
 );
 
 const headers = {
@@ -1026,45 +1445,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-POSTapi-patientvisits-add">
+<span id="example-responses-POSTapi-patient-visits">
 </span>
-<span id="execution-results-POSTapi-patientvisits-add" hidden>
+<span id="execution-results-POSTapi-patient-visits" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-patientvisits-add"></span>:
+                id="execution-response-status-POSTapi-patient-visits"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-patientvisits-add"
+    <pre class="json"><code id="execution-response-content-POSTapi-patient-visits"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-patientvisits-add" hidden>
+<span id="execution-error-POSTapi-patient-visits" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-patientvisits-add">
+    <pre><code id="execution-error-message-POSTapi-patient-visits">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-patientvisits-add" data-method="POST"
-      data-path="api/patientvisits/add"
+<form id="form-POSTapi-patient-visits" data-method="POST"
+      data-path="api/patient-visits"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patientvisits-add', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patient-visits', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-patientvisits-add"
-                    onclick="tryItOut('POSTapi-patientvisits-add');">Try it out ⚡
+                    id="btn-tryout-POSTapi-patient-visits"
+                    onclick="tryItOut('POSTapi-patient-visits');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-patientvisits-add"
-                    onclick="cancelTryOut('POSTapi-patientvisits-add');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-patient-visits"
+                    onclick="cancelTryOut('POSTapi-patient-visits');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-patientvisits-add"
+                    id="btn-executetryout-POSTapi-patient-visits"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -1072,7 +1491,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/patientvisits/add</code></b>
+            <b><code>api/patient-visits</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -1080,7 +1499,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-patientvisits-add"
+                              name="Content-Type"                data-endpoint="POSTapi-patient-visits"
                value="application/json"
                data-component="header">
     <br>
@@ -1091,7 +1510,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-patientvisits-add"
+                              name="Accept"                data-endpoint="POSTapi-patient-visits"
                value="application/json"
                data-component="header">
     <br>
@@ -1099,27 +1518,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-patientvisits-show">Display the specified resource.</h2>
+                    <h2 id="endpoints-POSTapi-patient-visits-add">PATIENT VISITS :: Store</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-POSTapi-patientvisits-show">
+<span id="example-requests-POSTapi-patient-visits-add">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/patientvisits/show" \
+    "http://localhost/api/patient-visits/add" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/patientvisits/show"
+    "http://localhost/api/patient-visits/add"
 );
 
 const headers = {
@@ -1134,45 +1553,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-POSTapi-patientvisits-show">
+<span id="example-responses-POSTapi-patient-visits-add">
 </span>
-<span id="execution-results-POSTapi-patientvisits-show" hidden>
+<span id="execution-results-POSTapi-patient-visits-add" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-POSTapi-patientvisits-show"></span>:
+                id="execution-response-status-POSTapi-patient-visits-add"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-patientvisits-show"
+    <pre class="json"><code id="execution-response-content-POSTapi-patient-visits-add"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-POSTapi-patientvisits-show" hidden>
+<span id="execution-error-POSTapi-patient-visits-add" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-patientvisits-show">
+    <pre><code id="execution-error-message-POSTapi-patient-visits-add">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-POSTapi-patientvisits-show" data-method="POST"
-      data-path="api/patientvisits/show"
+<form id="form-POSTapi-patient-visits-add" data-method="POST"
+      data-path="api/patient-visits/add"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patientvisits-show', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patient-visits-add', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-patientvisits-show"
-                    onclick="tryItOut('POSTapi-patientvisits-show');">Try it out ⚡
+                    id="btn-tryout-POSTapi-patient-visits-add"
+                    onclick="tryItOut('POSTapi-patient-visits-add');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-patientvisits-show"
-                    onclick="cancelTryOut('POSTapi-patientvisits-show');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-patient-visits-add"
+                    onclick="cancelTryOut('POSTapi-patient-visits-add');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-patientvisits-show"
+                    id="btn-executetryout-POSTapi-patient-visits-add"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -1180,7 +1599,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-black">POST</small>
-            <b><code>api/patientvisits/show</code></b>
+            <b><code>api/patient-visits/add</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -1188,7 +1607,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-patientvisits-show"
+                              name="Content-Type"                data-endpoint="POSTapi-patient-visits-add"
                value="application/json"
                data-component="header">
     <br>
@@ -1199,7 +1618,115 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-patientvisits-show"
+                              name="Accept"                data-endpoint="POSTapi-patient-visits-add"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-patient-visits-show">Display the specified resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-patient-visits-show">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/patient-visits/show" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/patient-visits/show"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-patient-visits-show">
+</span>
+<span id="execution-results-POSTapi-patient-visits-show" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-patient-visits-show"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-patient-visits-show"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-patient-visits-show" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-patient-visits-show">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-patient-visits-show" data-method="POST"
+      data-path="api/patient-visits/show"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-patient-visits-show', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-patient-visits-show"
+                    onclick="tryItOut('POSTapi-patient-visits-show');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-patient-visits-show"
+                    onclick="cancelTryOut('POSTapi-patient-visits-show');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-patient-visits-show"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/patient-visits/show</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-patient-visits-show"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-patient-visits-show"
                value="application/json"
                data-component="header">
     <br>
@@ -1531,6 +2058,330 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                    <h2 id="endpoints-POSTapi-consultation">Display a listing of the resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-consultation">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/consultation" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/consultation"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-consultation">
+</span>
+<span id="execution-results-POSTapi-consultation" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-consultation"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-consultation"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-consultation" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-consultation">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-consultation" data-method="POST"
+      data-path="api/consultation"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-consultation', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-consultation"
+                    onclick="tryItOut('POSTapi-consultation');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-consultation"
+                    onclick="cancelTryOut('POSTapi-consultation');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-consultation"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/consultation</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-consultation"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-consultation"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-consultation-add">CONSULTATION :: Store</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-consultation-add">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/consultation/add" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/consultation/add"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-consultation-add">
+</span>
+<span id="execution-results-POSTapi-consultation-add" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-consultation-add"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-consultation-add"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-consultation-add" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-consultation-add">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-consultation-add" data-method="POST"
+      data-path="api/consultation/add"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-consultation-add', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-consultation-add"
+                    onclick="tryItOut('POSTapi-consultation-add');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-consultation-add"
+                    onclick="cancelTryOut('POSTapi-consultation-add');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-consultation-add"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/consultation/add</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-consultation-add"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-consultation-add"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-consultation-show">Display the specified resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-consultation-show">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/consultation/show" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/consultation/show"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-consultation-show">
+</span>
+<span id="execution-results-POSTapi-consultation-show" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-consultation-show"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-consultation-show"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-consultation-show" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-consultation-show">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-consultation-show" data-method="POST"
+      data-path="api/consultation/show"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-consultation-show', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-consultation-show"
+                    onclick="tryItOut('POSTapi-consultation-show');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-consultation-show"
+                    onclick="cancelTryOut('POSTapi-consultation-show');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-consultation-show"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/consultation/show</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-consultation-show"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-consultation-show"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                     <h2 id="endpoints-POSTapi-people-people--person_id--phones">PHONES :: Store</h2>
 
 <p>
@@ -1544,18 +2395,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/people/people/nesciunt/phones" \
+    "http://localhost/api/people/people/consequatur/phones" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"phone_number\": \"jacpivlh\"
+    \"phone_number\": \"dnti\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/people/people/nesciunt/phones"
+    "http://localhost/api/people/people/consequatur/phones"
 );
 
 const headers = {
@@ -1564,7 +2415,7 @@ const headers = {
 };
 
 let body = {
-    "phone_number": "jacpivlh"
+    "phone_number": "dnti"
 };
 
 fetch(url, {
@@ -1653,10 +2504,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="person_id"                data-endpoint="POSTapi-people-people--person_id--phones"
-               value="nesciunt"
+               value="consequatur"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>nesciunt</code></p>
+<p>The ID of the person. Example: <code>consequatur</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1665,10 +2516,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="phone_number"                data-endpoint="POSTapi-people-people--person_id--phones"
-               value="jacpivlh"
+               value="dnti"
                data-component="body">
     <br>
-<p>Must not be greater than 20 characters. Example: <code>jacpivlh</code></p>
+<p>Must not be greater than 20 characters. Example: <code>dnti</code></p>
         </div>
         </form>
 
