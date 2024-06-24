@@ -7,6 +7,7 @@ use App\Models\Email;
 use App\Models\Patient;
 use App\Models\Person;
 use App\Models\Phone;
+use DateTime;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -62,8 +63,8 @@ class PatientController extends Controller
                     'phone' => isset($patient->person) ? $patient->person->phone : " ",
                     'email' => isset($patient->person) ? $patient->person->email : "",
                     'blood_group' => isset($patient->person) ? $patient->person->blood_group : "",
-                    'national_id' => isset($patient->person) ? $patient->person->identifier_no : "",
-                    'national_id' => isset($patient->person) ? "23656524" : "",
+                    'national_id' => isset($patient->person) ? $patient->person->identifier_number : "",
+                    // 'national_id' => isset($patient->person) ? "23656524" : "",
                     'city' => isset($patient->person) && isset($patient->person->city) ? $patient->person->city->name : null,
                 ];
             });
@@ -149,40 +150,45 @@ class PatientController extends Controller
 
     public function bulkUpload(Request $request)
     {
+
         $data['status'] = false;
         $data['message'] = "";
 
         $datas = $request->data;
+
         try {
             foreach ($datas as $key => $validatedData) {
 
-                // Look up the city by name
-                $city = City::where('name', $validatedData['City'])->first();
-
-                if (!$city) {
-                    $city_id = 1;
-                    continue;
-                } else {
-                    $city_id = $city->id;
+                $formattedDate = "";
+                if (!empty($validatedData['DOB'])) {
+                    $dateTime = DateTime::createFromFormat('d/m/Y', $validatedData['DOB']);
+                    $formattedDate = $dateTime->format('Y-m-d');
                 }
 
-
+                $city_id = null;
+                if (!empty($validatedData['City'])) {
+                    if ($city = City::where('name', 'LIKE', '%' . $validatedData['City'] . '%')->first()) {
+                        $city_id = $city->id;
+                    }
+                }
                 //save the data if the patient is not in the system
                 if (!Person::where('email', $validatedData['Email'])
                     ->orWhere('phone', $validatedData['Phone'])->first()) {
+
                     $person = new Person();
                     $person->user_id = null;
                     $person->person_type_id = 1;
                     $person->first_name = $validatedData['First Name'];
                     $person->last_name = $validatedData['Last Name'];
-                    // $person->date_of_birth = $validatedData['DOB'];
+                    $person->date_of_birth = $formattedDate;
                     $person->gender = $validatedData['Gender'];
                     $person->phone = $validatedData['Phone'];
                     $person->email = $validatedData['Email'];
                     $person->city_id = $city_id;
                     $person->blood_group = $validatedData['Blood Group'];
+                    $person->identifier_number = $validatedData['National ID'];
                     $person->save();
-                    // $person->identifier_number = $validatedData['NationalID'];
+
                     $patient = new Patient();
                     $patient->person_id = $person->id;
                     $patient->save();
