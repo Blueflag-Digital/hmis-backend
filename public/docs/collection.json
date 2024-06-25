@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "4cebbca6-b580-43a9-99da-944046994dd2",
+        "_postman_id": "a800783c-765e-47d8-81e9-ffd003b267f6",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"ut\",\"blood_group\":\"bkjmblzfefhkeueir\",\"email\":\"hheller@example.org\",\"city_id\":10,\"first_name\":\"uquqhqderympgxmbnwjnqh\",\"last_name\":\"qcbzsxmbtmstqdlyzpndw\",\"date_of_birth\":\"2024-06-25T09:26:53\",\"gender\":\"rkwuydlz\",\"phones\":\"rcxsb\"}"
+                            "raw": "{\"identifier_number\":\"beatae\",\"blood_group\":\"hllgbacjhtcc\",\"email\":\"ernestine54@example.net\",\"city_id\":18,\"first_name\":\"ouhvqqrlmgcvmbetjjes\",\"last_name\":\"bkkdlxyzpdgc\",\"date_of_birth\":\"2024-06-25T10:14:41\",\"gender\":\"yzos\",\"phones\":\"z\"}"
                         },
                         "description": "",
                         "auth": {
@@ -260,7 +260,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"tenetur\",\"blood_group\":\"jxyvpoa\",\"city_id\":1,\"first_name\":\"plunjcon\",\"last_name\":\"qqotvozjqgpaqresqhrpsufsi\",\"date_of_birth\":\"2024-06-25T09:26:53\",\"gender\":\"pbo\",\"phones\":\"zcdasvtay\"}"
+                            "raw": "{\"identifier_number\":\"recusandae\",\"blood_group\":\"s\",\"city_id\":11,\"first_name\":\"yzpwnzysqwypok\",\"last_name\":\"hh\",\"date_of_birth\":\"2024-06-25T10:14:41\",\"gender\":\"h\",\"phones\":\"lftm\"}"
                         },
                         "description": "",
                         "auth": {
@@ -291,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_id\":\"iste\"}"
+                            "raw": "{\"patient_id\":\"ipsa\"}"
                         },
                         "description": "",
                         "auth": {
@@ -612,7 +612,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "ea",
+                                    "value": "et",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -630,7 +630,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"feloizhlioxahrpo\"}"
+                            "raw": "{\"phone_number\":\"yzhpysvekdv\"}"
                         },
                         "description": "",
                         "auth": {

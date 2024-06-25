@@ -7,7 +7,7 @@ use App\Http\Controllers\DiagnosisCodeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
-use App\Http\Controllers\ConsulationController;
+use App\Http\Controllers\ConsultationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'index');
     });
 
-    Route::controller(ConsulationController::class)->prefix('consultation')->group(function () {
+    Route::controller(ConsultationController::class)->prefix('consultation')->group(function () {
         Route::post('/', 'index');
         Route::post('/add', 'store');
         Route::post('/show', 'show');

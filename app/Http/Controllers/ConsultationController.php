@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Consulation;
+use App\Models\Consultation;
 use Illuminate\Http\Request;
 
-class ConsulationController extends Controller
+class ConsultationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class ConsulationController extends Controller
      */
     public function store(Request $request)
     {
-        $consultation = new Consulation();
+        $consultation = new Consultation();
         $consultation->patient_visit_id = $request->patient_visit_id;
         $consultation->height_cm = $request->height_cm;
         $consultation->weight_kg = $request->weight_kg;
@@ -77,7 +77,7 @@ class ConsulationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $consultation = Consulation::findOrFail($id);
+        $consultation = Consultation::findOrFail($id);
 
         // Validate the request data
         $validatedData = $request->validate([
@@ -114,5 +114,35 @@ class ConsulationController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * CONSULTATION :: Create a new consultation or return the existing consultation.
+     */
+    public function createOrRetrieve(Request $request)
+    {
+        $validatedData = $request->validate([
+            'patient_visit_id' => 'required|exists:patient_visits,id',
+        ]);
+
+        $consultation = Consultation::where('patient_visit_id', $validatedData['patient_visit_id'])->first();
+
+        if ($consultation) {
+            // If a consultation exists, return it
+            return response()->json([
+                'message' => 'Consultation already exists',
+                'consultation' => $consultation,
+            ], 200);
+        } else {
+            // If no consultation exists, create a new one
+            $consultation = new Consultation();
+            $consultation->patient_visit_id = $validatedData['patient_visit_id'];
+            $consultation->save();
+
+            return response()->json([
+                'message' => 'Consultation created successfully',
+                'consultation' => $consultation,
+            ], 201);
+        }
     }
 }
