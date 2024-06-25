@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\PatientVisit;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Const_;
 
@@ -58,6 +59,7 @@ class ConsultationController extends Controller
         $consultation->respiratory_rate = $request->respiratory_rate;
         $consultation->oxygen_saturation = $request->oxygen_saturation;
         $consultation->doctors_notes = $request->doctors_notes;
+        $consultation->diagnosis_ids = $request->diagnosis_ids;
         $consultation->custom_diagnosis = $request->custom_diagnosis;
         $consultation->next_appointment = $request->next_appointment;
 
@@ -109,6 +111,7 @@ class ConsultationController extends Controller
             'respiratory_rate' => 'nullable|numeric',
             'oxygen_saturation' => 'nullable|numeric',
             'doctors_notes' => 'nullable|string',
+            'diagnosis_ids' => 'nullable|array',
             'custom_diagnosis' => 'nullable|string',
             'next_appointment' => 'nullable|date',
         ]);
@@ -158,6 +161,33 @@ class ConsultationController extends Controller
                 'consultation_id' => $consultation->id,
                 'message' => 'Consultation created successfully',
             ], 200);
+        }
+    }
+
+    /**
+     * CONSULTATION :: Get Patient Details By Patient Visit Id
+     */
+    public function getPatientDetailsByVisit($patient_visit_id)
+    {
+        try {
+            $patientVisit = PatientVisit::with(['patient.person'])->findOrFail($patient_visit_id);
+            $person = $patientVisit->patient->person;
+
+            if (!$person) {
+                return response()->json(['message' => 'Patient not found'], 404);
+            }
+
+            $patientDetails = [
+                'name' => $person->first_name . ' ' . $person->last_name,
+                'date_of_birth' => $person->date_of_birth,
+                'gender' => $person->gender,
+                'phone' => $person->phone,
+            ];
+
+            return response()->json($patientDetails, 200);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+            return response()->json(['message' => 'Failed to retrieve patient details'], 500);
         }
     }
 }

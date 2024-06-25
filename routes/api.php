@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/show', 'show');
         Route::post('/get-consultation-data', 'getCounsulatationData');
         Route::post('/create-or-retrieve', 'createOrRetrieve');
-
+        Route::get('patient-details/{patient_visit_id}', 'getPatientDetailsByVisit');
     });
 
     Route::get('diagnosis-codes', [DiagnosisCodeController::class, 'index']);
