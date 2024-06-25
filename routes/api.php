@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DiagnosisCodeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
@@ -58,6 +59,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/add', 'store');
         Route::post('/show', 'show');
     });
+
+    Route::get('diagnosis-codes', [DiagnosisCodeController::class, 'index']);
 
 
     // People routes

@@ -78,15 +78,15 @@ paths:
                 identifier_number:
                   type: string
                   description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',."
-                  example: eos
+                  example: ut
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: 'y'
+                  example: bkjmblzfefhkeueir
                 email:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: robin69@example.org
+                  example: hheller@example.org
                 city_id:
                   type: integer
                   description: ''
@@ -94,23 +94,23 @@ paths:
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: axxzginbnxzxxjj
+                  example: uquqhqderympgxmbnwjnqh
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: zpfxwlbyriindflbwcn
+                  example: qcbzsxmbtmstqdlyzpndw
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-24T13:53:23'
+                  example: '2024-06-25T09:26:53'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: zbn
+                  example: rkwuydlz
                 phones:
                   type: string
                   description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
-                  example: gsodt
+                  example: rcxsb
               required:
                 - city_id
                 - first_name
@@ -155,35 +155,35 @@ paths:
                 identifier_number:
                   type: string
                   description: ''
-                  example: officia
+                  example: tenetur
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: mfafqxdivbvxnvned
+                  example: jxyvpoa
                 city_id:
                   type: integer
                   description: ''
-                  example: 12
+                  example: 1
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: hny
+                  example: plunjcon
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: kxsciaoeig
+                  example: qqotvozjqgpaqresqhrpsufsi
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-24T13:53:23'
+                  example: '2024-06-25T09:26:53'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: xfuiyuota
+                  example: pbo
                 phones:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: b
+                  example: zcdasvtay
               required:
                 - city_id
                 - first_name
@@ -208,7 +208,7 @@ paths:
                 patient_id:
                   type: string
                   description: ''
-                  example: tempora
+                  example: iste
               required:
                 - patient_id
       security: []
@@ -302,6 +302,28 @@ paths:
       tags:
         - Endpoints
       security: []
+  /api/diagnosis-codes:
+    get:
+      summary: 'DIAGNOSIS CODES :: List'
+      operationId: dIAGNOSISCODESList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
   '/api/people/people/{person_id}/phones':
     post:
       summary: 'PHONES :: Store'
@@ -321,7 +343,7 @@ paths:
                 phone_number:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: dnti
+                  example: feloizhlioxahrpo
               required:
                 - phone_number
       security: []
@@ -330,7 +352,7 @@ paths:
         in: path
         name: person_id
         description: 'The ID of the person.'
-        example: consequatur
+        example: ea
         required: true
         schema:
           type: string

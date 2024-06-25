@@ -77,7 +77,35 @@ class ConsulationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $consultation = Consulation::findOrFail($id);
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'patient_visit_id' => 'required|exists:patient_visits,id',
+            'height_cm' => 'nullable|numeric',
+            'weight_kg' => 'nullable|numeric',
+            'allergies' => 'nullable|string',
+            'current_medications' => 'nullable|string',
+            'past_medical_history' => 'nullable|string',
+            'family_medical_history' => 'nullable|string',
+            'immunization_history' => 'nullable|string',
+            'reason_for_visit' => 'nullable|string',
+            'blood_pressure' => 'nullable|string',
+            'heart_rate' => 'nullable|numeric',
+            'temperature' => 'nullable|numeric',
+            'respiratory_rate' => 'nullable|numeric',
+            'oxygen_saturation' => 'nullable|numeric',
+            'doctors_notes' => 'nullable|string',
+            'custom_diagnosis' => 'nullable|string',
+            'next_appointment' => 'nullable|date',
+        ]);
+
+        $consultation->update($validatedData);
+
+        return response()->json([
+            'message' => 'Consultation updated successfully',
+            'consultation' => $consultation,
+        ], 200);
     }
 
     /**

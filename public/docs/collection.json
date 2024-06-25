@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "88849122-f3eb-4844-9462-ec4089eac817",
+        "_postman_id": "4cebbca6-b580-43a9-99da-944046994dd2",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"eos\",\"blood_group\":\"y\",\"email\":\"robin69@example.org\",\"city_id\":10,\"first_name\":\"axxzginbnxzxxjj\",\"last_name\":\"zpfxwlbyriindflbwcn\",\"date_of_birth\":\"2024-06-24T13:53:23\",\"gender\":\"zbn\",\"phones\":\"gsodt\"}"
+                            "raw": "{\"identifier_number\":\"ut\",\"blood_group\":\"bkjmblzfefhkeueir\",\"email\":\"hheller@example.org\",\"city_id\":10,\"first_name\":\"uquqhqderympgxmbnwjnqh\",\"last_name\":\"qcbzsxmbtmstqdlyzpndw\",\"date_of_birth\":\"2024-06-25T09:26:53\",\"gender\":\"rkwuydlz\",\"phones\":\"rcxsb\"}"
                         },
                         "description": "",
                         "auth": {
@@ -260,7 +260,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"officia\",\"blood_group\":\"mfafqxdivbvxnvned\",\"city_id\":12,\"first_name\":\"hny\",\"last_name\":\"kxsciaoeig\",\"date_of_birth\":\"2024-06-24T13:53:23\",\"gender\":\"xfuiyuota\",\"phones\":\"b\"}"
+                            "raw": "{\"identifier_number\":\"tenetur\",\"blood_group\":\"jxyvpoa\",\"city_id\":1,\"first_name\":\"plunjcon\",\"last_name\":\"qqotvozjqgpaqresqhrpsufsi\",\"date_of_birth\":\"2024-06-25T09:26:53\",\"gender\":\"pbo\",\"phones\":\"zcdasvtay\"}"
                         },
                         "description": "",
                         "auth": {
@@ -291,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_id\":\"tempora\"}"
+                            "raw": "{\"patient_id\":\"iste\"}"
                         },
                         "description": "",
                         "auth": {
@@ -553,6 +553,54 @@
                     "response": []
                 },
                 {
+                    "name": "DIAGNOSIS CODES :: List",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/diagnosis-codes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/diagnosis-codes"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
                     "name": "PHONES :: Store",
                     "request": {
                         "url": {
@@ -564,7 +612,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "consequatur",
+                                    "value": "ea",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -582,7 +630,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"dnti\"}"
+                            "raw": "{\"phone_number\":\"feloizhlioxahrpo\"}"
                         },
                         "description": "",
                         "auth": {

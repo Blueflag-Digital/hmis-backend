@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('diagnosis_codes', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 10)->nullable();
+            $table->string('diagnosis', 255)->nullable();
             $table->timestamps();
         });
     }

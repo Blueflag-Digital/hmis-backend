@@ -34,7 +34,7 @@ return new class extends Migration
             $table->json('diagnosis_ids')->nullable(); // To store multiple diagnosis IDs
             $table->string('custom_diagnosis')->nullable(); // To store a custom diagnosis
 
-            $table->date('next_appointment');
+            $table->date('next_appointment')->nullable();
 
             $table->timestamps();
         });

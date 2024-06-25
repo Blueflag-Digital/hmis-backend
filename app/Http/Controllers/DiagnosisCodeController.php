@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 class DiagnosisCodeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * DIAGNOSIS CODES :: List
      */
     public function index()
     {
-        //
+        $diagnosisCodes = DiagnosisCode::all();
+
+        return response()->json($diagnosisCodes);
     }
 
     /**
