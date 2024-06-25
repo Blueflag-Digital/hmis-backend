@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 class PatientVisitController extends Controller
 {
 
+     //reusable functions
+    function getInitials($firstName, $lastName)
+    {
+        $firstInitial = isset($firstName) ? strtoupper($firstName[0]) : '';
+        $lastInitial = isset($lastName) ? strtoupper($lastName[0]) : '';
+        return $firstInitial . $lastInitial;
+    }
 
 
     /**
@@ -29,17 +36,40 @@ class PatientVisitController extends Controller
             'patientVisits' => [],
         ];
         try {
-            $patientVisits = PatientVisit::with(['patient', 'department'])->paginate($limit, ['*'], 'page', $pageNo);
+
+            $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
 
             $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
 
+                $name = "";
+                $initials = "";
+                $email = "";
+                $pid = " ";
+
+                $patientId = $visit->patient_id; //this is person id not patient id.
+                //get patient id from patients table where person_id matches  $patientId
+
+
+               if($person =  Person::where('id',$patientId )->first()){
+
+                   if($pat = Patient::where('person_id',$patientId)->first() ){
+                      $pid = $pat->id;
+                   }
+
+                   $name = $person->first_name . " ". $person->last_name ;
+                   $initials =  $this->getInitials($person->first_name,$person->last_name) ;
+                   $email = $person->email;
+               }
 
                 return [
                     'id' => $visit->id,
-                    'patient_name' => $visit->patient->name ?? 'Unknown', // Default to 'Unknown' if null
+                    'patient_id' =>  $pid  ,
+                    'patient_name' => $name,
+                    'email' =>  $email ,
+                    'initials' => $initials,
                     'department_name' => $visit->department->name ?? 'Unknown', // Default to 'Unknown' if null
                     'status' => $visit->status,
-                    'formatted_visit_date' => Carbon::parse($visit->created_at)->format('Y-m-d H:i:s'),
+                    'checkin_date' => Carbon::parse($visit->created_at)->format('Y-m-d H:i:s'),
 
                 ];
             });

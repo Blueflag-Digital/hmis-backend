@@ -58,7 +58,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'index');
         Route::post('/add', 'store');
         Route::post('/show', 'show');
-        Route::post('create-or-retrieve', 'createOrRetrieve');
+        Route::post('/get-consultation-data', 'getCounsulatationData');
+        Route::post('/create-or-retrieve', 'createOrRetrieve');
 
     });
 

@@ -4,12 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultation;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Const_;
 
 class ConsultationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public function getCounsulatationData(Request $request){
+        $data = [
+            'status' => false,
+            'data' => null
+        ];
+        if($consultation = Consultation::find($request->consultation_id)){
+            $data['status'] = true;
+            $data['data'] = $consultation;
+        }
+        return response()->json($data);
+    }
     public function index()
     {
         //
@@ -121,17 +134,19 @@ class ConsultationController extends Controller
      */
     public function createOrRetrieve(Request $request)
     {
+
         $validatedData = $request->validate([
             'patient_visit_id' => 'required|exists:patient_visits,id',
         ]);
+
 
         $consultation = Consultation::where('patient_visit_id', $validatedData['patient_visit_id'])->first();
 
         if ($consultation) {
             // If a consultation exists, return it
             return response()->json([
+                'consultation_id' => $consultation->id,
                 'message' => 'Consultation already exists',
-                'consultation' => $consultation,
             ], 200);
         } else {
             // If no consultation exists, create a new one
@@ -140,9 +155,9 @@ class ConsultationController extends Controller
             $consultation->save();
 
             return response()->json([
+                'consultation_id' => $consultation->id,
                 'message' => 'Consultation created successfully',
-                'consultation' => $consultation,
-            ], 201);
+            ], 200);
         }
     }
 }
