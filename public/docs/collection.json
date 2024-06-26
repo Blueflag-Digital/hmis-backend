@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "1237e9ad-1c67-4ebd-89ac-f402ea625983",
+        "_postman_id": "222e4499-114a-41f7-b763-314599195052",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"enim\",\"blood_group\":\"zvkpjztqynbiwsodjarjwcp\",\"email\":\"qkrajcik@example.org\",\"city_id\":4,\"first_name\":\"b\",\"last_name\":\"kxhndxjrrhjsywnlkbmkcger\",\"date_of_birth\":\"2024-06-25T20:11:48\",\"gender\":\"vwmeslnwh\",\"phones\":\"zbyi\"}"
+                            "raw": "{\"identifier_number\":\"aliquam\",\"blood_group\":\"p\",\"email\":\"jjacobi@example.org\",\"city_id\":4,\"first_name\":\"axdggikkaxbgvgihaot\",\"last_name\":\"bcaenpgbmtu\",\"date_of_birth\":\"2024-06-26T19:54:31\",\"gender\":\"gu\",\"phones\":\"i\"}"
                         },
                         "description": "",
                         "auth": {
@@ -260,7 +260,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"minima\",\"blood_group\":\"ldwygwanvttghdsymh\",\"city_id\":14,\"first_name\":\"hugyix\",\"last_name\":\"ep\",\"date_of_birth\":\"2024-06-25T20:11:48\",\"gender\":\"sjmwpd\",\"phones\":\"rvdpzoeabwmxqszlycex\"}"
+                            "raw": "{\"identifier_number\":\"cum\",\"blood_group\":\"p\",\"city_id\":20,\"first_name\":\"wnswxctax\",\"last_name\":\"ftunkgdqalmpbvwnnonllgj\",\"date_of_birth\":\"2024-06-26T19:54:31\",\"gender\":\"yxshhq\",\"phones\":\"ayaehozpuv\"}"
                         },
                         "description": "",
                         "auth": {
@@ -291,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_id\":\"repellat\"}"
+                            "raw": "{\"patient_id\":\"mollitia\"}"
                         },
                         "description": "",
                         "auth": {
@@ -553,7 +553,38 @@
                     "response": []
                 },
                 {
-                    "name": "Display a listing of the resource.",
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/consultation\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/consultation\/update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"current_medications\":\"sint\",\"height_cm\":0.75500655,\"weight_kg\":0.84314259,\"allergies\":\"qui\",\"reason_for_visit\":\"odio\",\"blood_pressure\":\"labore\",\"heart_rate\":11172323.5719,\"temperature\":5.22838,\"respiratory_rate\":1547438.6912,\"oxygen_saturation\":20103294.8910125,\"past_medical_history\":\"corporis\",\"family_medical_history\":\"modi\",\"immunization_history\":\"distinctio\",\"doctors_notes\":\"possimus\",\"custom_diagnosis\":\"repudiandae\",\"next_appointment\":\"2024-06-26T19:54:31\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "CONSULTATION :: Get consultation data.",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
@@ -602,7 +633,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_visit_id\":\"quia\"}"
+                            "raw": "{\"patient_visit_id\":\"omnis\"}"
                         },
                         "description": "",
                         "auth": {
@@ -623,7 +654,7 @@
                                 {
                                     "id": "patient_visit_id",
                                     "key": "patient_visit_id",
-                                    "value": "occaecati",
+                                    "value": "quia",
                                     "description": "The ID of the patient visit."
                                 }
                             ]
@@ -672,11 +703,11 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/diagnosis-codes",
+                            "path": "api\/diagnosis\/diagnosis-codes",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/diagnosis-codes"
+                            "raw": "{{baseUrl}}\/api\/diagnosis\/diagnosis-codes"
                         },
-                        "method": "GET",
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -693,27 +724,35 @@
                             "type": "noauth"
                         }
                     },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "access-control-allow-origin",
-                                    "value": "*"
-                                }
-                            ],
-                            "code": 401,
-                            "body": "{\"message\":\"Unauthenticated.\"}",
-                            "name": ""
+                    "response": []
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/diagnosis\/save-diagnosis",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/diagnosis\/save-diagnosis"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
                         }
-                    ]
+                    },
+                    "response": []
                 },
                 {
                     "name": "PHONES :: Store",
@@ -727,7 +766,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "vel",
+                                    "value": "doloremque",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -745,7 +784,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"kvgtg\"}"
+                            "raw": "{\"phone_number\":\"nbdti\"}"
                         },
                         "description": "",
                         "auth": {

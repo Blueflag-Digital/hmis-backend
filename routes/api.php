@@ -65,8 +65,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('patient-details/{patient_visit_id}', 'getPatientDetailsByVisit');
     });
 
-    Route::get('diagnosis-codes', [DiagnosisCodeController::class, 'index']);
-
+    Route::controller(ConsultationController::class)->prefix('diagnosis')->group(function () {
+        Route::post('diagnosis-codes', [DiagnosisCodeController::class, 'index']);
+        Route::post('save-diagnosis', [DiagnosisCodeController::class, 'store']);
+    });
 
     // People routes
     Route::prefix('people')->group(function () {

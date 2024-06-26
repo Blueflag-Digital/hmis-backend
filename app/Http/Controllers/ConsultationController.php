@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\Const_;
 class ConsultationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * CONSULTATION :: Get consultation data.
      */
 
     public function getCounsulatationData(Request $request)
@@ -117,6 +117,7 @@ class ConsultationController extends Controller
             'custom_diagnosis' => 'nullable|string',
             'next_appointment' => 'nullable|date',
         ]);
+
 
         $consultation->update($validatedData);
 

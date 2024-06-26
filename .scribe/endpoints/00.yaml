@@ -158,7 +158,7 @@ endpoints:
           'person_type_id' => 'required|integer|exists:person_types,id',
           'city_id' => 'required|integer|exists:cities,id',.
         required: false
-        example: enim
+        example: aliquam
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -167,7 +167,7 @@ endpoints:
         name: blood_group
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: zvkpjztqynbiwsodjarjwcp
+        example: p
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -176,7 +176,7 @@ endpoints:
         name: email
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: qkrajcik@example.org
+        example: jjacobi@example.org
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -194,7 +194,7 @@ endpoints:
         name: first_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: b
+        example: axdggikkaxbgvgihaot
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -203,7 +203,7 @@ endpoints:
         name: last_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: kxhndxjrrhjsywnlkbmkcger
+        example: bcaenpgbmtu
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -212,7 +212,7 @@ endpoints:
         name: date_of_birth
         description: 'Must be a valid date.'
         required: false
-        example: '2024-06-25T20:11:48'
+        example: '2024-06-26T19:54:31'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -221,7 +221,7 @@ endpoints:
         name: gender
         description: 'Must not be greater than 10 characters.'
         required: false
-        example: vwmeslnwh
+        example: gu
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -230,21 +230,21 @@ endpoints:
         name: phones
         description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
         required: false
-        example: zbyi
+        example: i
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      identifier_number: enim
-      blood_group: zvkpjztqynbiwsodjarjwcp
-      email: qkrajcik@example.org
+      identifier_number: aliquam
+      blood_group: p
+      email: jjacobi@example.org
       city_id: 4
-      first_name: b
-      last_name: kxhndxjrrhjsywnlkbmkcger
-      date_of_birth: '2024-06-25T20:11:48'
-      gender: vwmeslnwh
-      phones: zbyi
+      first_name: axdggikkaxbgvgihaot
+      last_name: bcaenpgbmtu
+      date_of_birth: '2024-06-26T19:54:31'
+      gender: gu
+      phones: i
     fileParameters: []
     responses: []
     responseFields: []
@@ -338,7 +338,7 @@ endpoints:
         name: identifier_number
         description: ''
         required: false
-        example: minima
+        example: cum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -347,7 +347,7 @@ endpoints:
         name: blood_group
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: ldwygwanvttghdsymh
+        example: p
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -356,7 +356,7 @@ endpoints:
         name: city_id
         description: ''
         required: true
-        example: 14
+        example: 20
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -365,7 +365,7 @@ endpoints:
         name: first_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: hugyix
+        example: wnswxctax
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -374,7 +374,7 @@ endpoints:
         name: last_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: ep
+        example: ftunkgdqalmpbvwnnonllgj
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -383,7 +383,7 @@ endpoints:
         name: date_of_birth
         description: 'Must be a valid date.'
         required: false
-        example: '2024-06-25T20:11:48'
+        example: '2024-06-26T19:54:31'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -392,7 +392,7 @@ endpoints:
         name: gender
         description: 'Must not be greater than 10 characters.'
         required: false
-        example: sjmwpd
+        example: yxshhq
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -401,20 +401,20 @@ endpoints:
         name: phones
         description: 'Must not be greater than 20 characters.'
         required: false
-        example: rvdpzoeabwmxqszlycex
+        example: ayaehozpuv
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      identifier_number: minima
-      blood_group: ldwygwanvttghdsymh
-      city_id: 14
-      first_name: hugyix
-      last_name: ep
-      date_of_birth: '2024-06-25T20:11:48'
-      gender: sjmwpd
-      phones: rvdpzoeabwmxqszlycex
+      identifier_number: cum
+      blood_group: p
+      city_id: 20
+      first_name: wnswxctax
+      last_name: ftunkgdqalmpbvwnnonllgj
+      date_of_birth: '2024-06-26T19:54:31'
+      gender: yxshhq
+      phones: ayaehozpuv
     fileParameters: []
     responses: []
     responseFields: []
@@ -448,13 +448,13 @@ endpoints:
         name: patient_id
         description: ''
         required: true
-        example: repellat
+        example: mollitia
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      patient_id: repellat
+      patient_id: mollitia
     fileParameters: []
     responses: []
     responseFields: []
@@ -736,13 +736,212 @@ endpoints:
   -
     httpMethods:
       - POST
+    uri: api/consultation/update
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      current_medications:
+        name: current_medications
+        description: "'patient_visit_id' => 'required|exists:patient_visits,id',."
+        required: false
+        example: sint
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      height_cm:
+        name: height_cm
+        description: ''
+        required: false
+        example: 0.75500655
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      weight_kg:
+        name: weight_kg
+        description: ''
+        required: false
+        example: 0.84314259
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      allergies:
+        name: allergies
+        description: ''
+        required: false
+        example: qui
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      reason_for_visit:
+        name: reason_for_visit
+        description: ''
+        required: false
+        example: odio
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      blood_pressure:
+        name: blood_pressure
+        description: ''
+        required: false
+        example: labore
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      heart_rate:
+        name: heart_rate
+        description: ''
+        required: false
+        example: 11172323.5719
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      temperature:
+        name: temperature
+        description: ''
+        required: false
+        example: 5.22838
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      respiratory_rate:
+        name: respiratory_rate
+        description: ''
+        required: false
+        example: 1547438.6912
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      oxygen_saturation:
+        name: oxygen_saturation
+        description: ''
+        required: false
+        example: 20103294.891013
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      past_medical_history:
+        name: past_medical_history
+        description: ''
+        required: false
+        example: corporis
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      family_medical_history:
+        name: family_medical_history
+        description: ''
+        required: false
+        example: modi
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      immunization_history:
+        name: immunization_history
+        description: ''
+        required: false
+        example: distinctio
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      doctors_notes:
+        name: doctors_notes
+        description: ''
+        required: false
+        example: possimus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      diagnosis_ids:
+        name: diagnosis_ids
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      custom_diagnosis:
+        name: custom_diagnosis
+        description: ''
+        required: false
+        example: repudiandae
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      next_appointment:
+        name: next_appointment
+        description: 'Must be a valid date.'
+        required: false
+        example: '2024-06-26T19:54:31'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      current_medications: sint
+      height_cm: 0.75500655
+      weight_kg: 0.84314259
+      allergies: qui
+      reason_for_visit: odio
+      blood_pressure: labore
+      heart_rate: 11172323.5719
+      temperature: 5.22838
+      respiratory_rate: 1547438.6912
+      oxygen_saturation: 20103294.891013
+      past_medical_history: corporis
+      family_medical_history: modi
+      immunization_history: distinctio
+      doctors_notes: possimus
+      custom_diagnosis: repudiandae
+      next_appointment: '2024-06-26T19:54:31'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
     uri: api/consultation/get-consultation-data
     metadata:
       groupName: Endpoints
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Display a listing of the resource.'
+      title: 'CONSULTATION :: Get consultation data.'
       description: ''
       authenticated: false
       custom: []
@@ -788,13 +987,13 @@ endpoints:
         name: patient_visit_id
         description: ''
         required: true
-        example: quia
+        example: omnis
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      patient_visit_id: quia
+      patient_visit_id: omnis
     fileParameters: []
     responses: []
     responseFields: []
@@ -824,13 +1023,13 @@ endpoints:
         name: patient_visit_id
         description: 'The ID of the patient visit.'
         required: true
-        example: occaecati
+        example: quia
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      patient_visit_id: occaecati
+      patient_visit_id: quia
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -854,8 +1053,8 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - GET
-    uri: api/diagnosis-codes
+      - POST
+    uri: api/diagnosis/diagnosis-codes
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -875,16 +1074,37 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/diagnosis/save-diagnosis
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -912,13 +1132,13 @@ endpoints:
         name: person_id
         description: 'The ID of the person.'
         required: true
-        example: vel
+        example: doloremque
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      person_id: vel
+      person_id: doloremque
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -926,13 +1146,13 @@ endpoints:
         name: phone_number
         description: 'Must not be greater than 20 characters.'
         required: true
-        example: kvgtg
+        example: nbdti
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      phone_number: kvgtg
+      phone_number: nbdti
     fileParameters: []
     responses: []
     responseFields: []

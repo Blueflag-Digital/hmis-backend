@@ -30,7 +30,17 @@ class DiagnosisCodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        info($request->all());
+        $data['status'] = false;
+        if (!empty($request->customDiagnosis)) {
+            //save the custom diagnosis
+            DiagnosisCode::create([
+                'diagnosis' =>  $request->customDiagnosis,
+                'code' => rand(123, 1000)
+            ]);
+            $data['status'] = true;
+        }
+        return response()->json($data);
     }
 
     /**
