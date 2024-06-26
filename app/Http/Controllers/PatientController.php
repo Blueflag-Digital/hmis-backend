@@ -248,10 +248,6 @@ class PatientController extends Controller
      */
     public function show(Request $request)
     {
-        $person = Patient::find($request->patient_id);
-        $patient = Person::find($person->person_id);
-        $phones = Phone::where('person_id', $patient->id)->pluck('phone_number')->toArray();
-
         $patientData = [
             'id' => null,
             'name' => "",
@@ -266,6 +262,11 @@ class PatientController extends Controller
             'last_name' => ""
         ];
 
+        info($request->patient_id);
+        $person = Patient::find($request->patient_id);
+        
+        $patient = Person::find($person->person_id);
+        $phones = Phone::where('person_id', $patient->id)->pluck('phone_number')->toArray();
 
         if ($patient) {
             // If the patient exists, populate the response array

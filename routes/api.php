@@ -54,13 +54,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'index');
     });
 
+
     Route::controller(ConsultationController::class)->prefix('consultation')->group(function () {
         Route::post('/', 'index');
         Route::post('/add', 'store');
         Route::post('/show', 'show');
+        Route::post('/update', 'update');
         Route::post('/get-consultation-data', 'getCounsulatationData');
         Route::post('/create-or-retrieve', 'createOrRetrieve');
+<<<<<<< Updated upstream
         Route::get('patient-details/{patient_visit_id}', 'getPatientDetailsByVisit');
+=======
+>>>>>>> Stashed changes
     });
 
     Route::get('diagnosis-codes', [DiagnosisCodeController::class, 'index']);

@@ -9,6 +9,8 @@ class Consultation extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'diagnosis_ids' => 'array',
     ];

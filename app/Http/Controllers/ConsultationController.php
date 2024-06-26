@@ -13,12 +13,13 @@ class ConsultationController extends Controller
      * Display a listing of the resource.
      */
 
-    public function getCounsulatationData(Request $request){
+    public function getCounsulatationData(Request $request)
+    {
         $data = [
             'status' => false,
             'data' => null
         ];
-        if($consultation = Consultation::find($request->consultation_id)){
+        if ($consultation = Consultation::find($request->consultation_id)) {
             $data['status'] = true;
             $data['data'] = $consultation;
         }
@@ -90,26 +91,27 @@ class ConsultationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
+        $id = $request->id;
+
         $consultation = Consultation::findOrFail($id);
 
-        // Validate the request data
         $validatedData = $request->validate([
-            'patient_visit_id' => 'required|exists:patient_visits,id',
+            // 'patient_visit_id' => 'required|exists:patient_visits,id',
+            'current_medications' => 'nullable|string',
             'height_cm' => 'nullable|numeric',
             'weight_kg' => 'nullable|numeric',
             'allergies' => 'nullable|string',
-            'current_medications' => 'nullable|string',
-            'past_medical_history' => 'nullable|string',
-            'family_medical_history' => 'nullable|string',
-            'immunization_history' => 'nullable|string',
             'reason_for_visit' => 'nullable|string',
             'blood_pressure' => 'nullable|string',
             'heart_rate' => 'nullable|numeric',
             'temperature' => 'nullable|numeric',
             'respiratory_rate' => 'nullable|numeric',
             'oxygen_saturation' => 'nullable|numeric',
+            'past_medical_history' => 'nullable|string',
+            'family_medical_history' => 'nullable|string',
+            'immunization_history' => 'nullable|string',
             'doctors_notes' => 'nullable|string',
             'diagnosis_ids' => 'nullable|array',
             'custom_diagnosis' => 'nullable|string',
