@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "222e4499-114a-41f7-b763-314599195052",
+        "_postman_id": "0c795f0b-fba4-4f0b-a272-aaac272e4618",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"aliquam\",\"blood_group\":\"p\",\"email\":\"jjacobi@example.org\",\"city_id\":4,\"first_name\":\"axdggikkaxbgvgihaot\",\"last_name\":\"bcaenpgbmtu\",\"date_of_birth\":\"2024-06-26T19:54:31\",\"gender\":\"gu\",\"phones\":\"i\"}"
+                            "raw": "{\"identifier_number\":\"facilis\",\"blood_group\":\"szynwkxeobxdmnknlln\",\"email\":\"mathilde.fay@example.net\",\"city_id\":20,\"first_name\":\"znuatdyopzucwm\",\"last_name\":\"lmpsle\",\"date_of_birth\":\"2024-06-27T17:48:24\",\"gender\":\"cqd\",\"phones\":\"kgkjb\"}"
                         },
                         "description": "",
                         "auth": {
@@ -260,7 +260,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"cum\",\"blood_group\":\"p\",\"city_id\":20,\"first_name\":\"wnswxctax\",\"last_name\":\"ftunkgdqalmpbvwnnonllgj\",\"date_of_birth\":\"2024-06-26T19:54:31\",\"gender\":\"yxshhq\",\"phones\":\"ayaehozpuv\"}"
+                            "raw": "{\"identifier_number\":\"ipsa\",\"blood_group\":\"ev\",\"city_id\":2,\"first_name\":\"gybqjndoizeeytrkrhvov\",\"last_name\":\"gzqiaczmdncepqrfxumo\",\"date_of_birth\":\"2024-06-27T17:48:24\",\"gender\":\"qozkxresh\",\"phones\":\"shpeqcaazi\"}"
                         },
                         "description": "",
                         "auth": {
@@ -291,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_id\":\"mollitia\"}"
+                            "raw": "{\"patient_id\":\"maiores\"}"
                         },
                         "description": "",
                         "auth": {
@@ -574,7 +574,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_medications\":\"sint\",\"height_cm\":0.75500655,\"weight_kg\":0.84314259,\"allergies\":\"qui\",\"reason_for_visit\":\"odio\",\"blood_pressure\":\"labore\",\"heart_rate\":11172323.5719,\"temperature\":5.22838,\"respiratory_rate\":1547438.6912,\"oxygen_saturation\":20103294.8910125,\"past_medical_history\":\"corporis\",\"family_medical_history\":\"modi\",\"immunization_history\":\"distinctio\",\"doctors_notes\":\"possimus\",\"custom_diagnosis\":\"repudiandae\",\"next_appointment\":\"2024-06-26T19:54:31\"}"
+                            "raw": "{\"current_medications\":\"dolores\",\"height_cm\":6798677,\"weight_kg\":20304971.619,\"allergies\":\"nostrum\",\"reason_for_visit\":\"voluptatem\",\"blood_pressure\":\"mollitia\",\"heart_rate\":90.3039,\"temperature\":5590,\"respiratory_rate\":45.01,\"oxygen_saturation\":578,\"past_medical_history\":\"odit\",\"family_medical_history\":\"laborum\",\"immunization_history\":\"ratione\",\"doctors_notes\":\"odit\",\"custom_diagnosis\":\"vel\",\"next_appointment\":\"2024-06-27T17:48:24\"}"
                         },
                         "description": "",
                         "auth": {
@@ -633,7 +633,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_visit_id\":\"omnis\"}"
+                            "raw": "{\"patient_visit_id\":\"assumenda\"}"
                         },
                         "description": "",
                         "auth": {
@@ -654,7 +654,7 @@
                                 {
                                     "id": "patient_visit_id",
                                     "key": "patient_visit_id",
-                                    "value": "quia",
+                                    "value": "earum",
                                     "description": "The ID of the patient visit."
                                 }
                             ]
@@ -755,6 +755,138 @@
                     "response": []
                 },
                 {
+                    "name": "INVESTIGATIONS :: List",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/investigations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/investigations"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PATIENT INVESTIGATIONS :: Store",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations",
+                            "variable": [
+                                {
+                                    "id": "consultation_id",
+                                    "key": "consultation_id",
+                                    "value": "quod",
+                                    "description": "The ID of the consultation."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PATIENT INVESTIGATIONS :: Update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations\/:investigation_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations\/:investigation_id",
+                            "variable": [
+                                {
+                                    "id": "consultation_id",
+                                    "key": "consultation_id",
+                                    "value": "magni",
+                                    "description": "The ID of the consultation."
+                                },
+                                {
+                                    "id": "investigation_id",
+                                    "key": "investigation_id",
+                                    "value": "enim",
+                                    "description": "The ID of the investigation."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"status\":\"non\",\"results\":\"a\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "PHONES :: Store",
                     "request": {
                         "url": {
@@ -766,7 +898,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "doloremque",
+                                    "value": "facilis",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -784,7 +916,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"nbdti\"}"
+                            "raw": "{\"phone_number\":\"y\"}"
                         },
                         "description": "",
                         "auth": {

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('investigations', function (Blueprint $table) {
+        Schema::create('patient_investigation', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 10)->nullable();
-            $table->string('name', 255)->nullable();
-            $table->string('type', 10)->default('Lab');
+            $table->foreignId('consultation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('investigation_id')->constrained()->onDelete('cascade');
+            $table->string('status')->default('ordered');
+            $table->text('results')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('investigations');
+        Schema::dropIfExists('patient_investigation');
     }
 };

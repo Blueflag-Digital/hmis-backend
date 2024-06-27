@@ -78,39 +78,39 @@ paths:
                 identifier_number:
                   type: string
                   description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',."
-                  example: aliquam
+                  example: facilis
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: p
+                  example: szynwkxeobxdmnknlln
                 email:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: jjacobi@example.org
+                  example: mathilde.fay@example.net
                 city_id:
                   type: integer
                   description: ''
-                  example: 4
+                  example: 20
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: axdggikkaxbgvgihaot
+                  example: znuatdyopzucwm
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: bcaenpgbmtu
+                  example: lmpsle
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-26T19:54:31'
+                  example: '2024-06-27T17:48:24'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: gu
+                  example: cqd
                 phones:
                   type: string
                   description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
-                  example: i
+                  example: kgkjb
               required:
                 - city_id
                 - first_name
@@ -155,35 +155,35 @@ paths:
                 identifier_number:
                   type: string
                   description: ''
-                  example: cum
+                  example: ipsa
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: p
+                  example: ev
                 city_id:
                   type: integer
                   description: ''
-                  example: 20
+                  example: 2
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: wnswxctax
+                  example: gybqjndoizeeytrkrhvov
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: ftunkgdqalmpbvwnnonllgj
+                  example: gzqiaczmdncepqrfxumo
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-26T19:54:31'
+                  example: '2024-06-27T17:48:24'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: yxshhq
+                  example: qozkxresh
                 phones:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: ayaehozpuv
+                  example: shpeqcaazi
               required:
                 - city_id
                 - first_name
@@ -208,7 +208,7 @@ paths:
                 patient_id:
                   type: string
                   description: ''
-                  example: mollitia
+                  example: maiores
               required:
                 - patient_id
       security: []
@@ -321,59 +321,59 @@ paths:
                 current_medications:
                   type: string
                   description: "'patient_visit_id' => 'required|exists:patient_visits,id',."
-                  example: sint
+                  example: dolores
                 height_cm:
                   type: number
                   description: ''
-                  example: 0.75500655
+                  example: 6798677.0
                 weight_kg:
                   type: number
                   description: ''
-                  example: 0.84314259
+                  example: 20304971.619
                 allergies:
                   type: string
                   description: ''
-                  example: qui
+                  example: nostrum
                 reason_for_visit:
                   type: string
                   description: ''
-                  example: odio
+                  example: voluptatem
                 blood_pressure:
                   type: string
                   description: ''
-                  example: labore
+                  example: mollitia
                 heart_rate:
                   type: number
                   description: ''
-                  example: 11172323.5719
+                  example: 90.3039
                 temperature:
                   type: number
                   description: ''
-                  example: 5.22838
+                  example: 5590.0
                 respiratory_rate:
                   type: number
                   description: ''
-                  example: 1547438.6912
+                  example: 45.01
                 oxygen_saturation:
                   type: number
                   description: ''
-                  example: 20103294.891013
+                  example: 578.0
                 past_medical_history:
                   type: string
                   description: ''
-                  example: corporis
+                  example: odit
                 family_medical_history:
                   type: string
                   description: ''
-                  example: modi
+                  example: laborum
                 immunization_history:
                   type: string
                   description: ''
-                  example: distinctio
+                  example: ratione
                 doctors_notes:
                   type: string
                   description: ''
-                  example: possimus
+                  example: odit
                 diagnosis_ids:
                   type: object
                   description: ''
@@ -382,11 +382,11 @@ paths:
                 custom_diagnosis:
                   type: string
                   description: ''
-                  example: repudiandae
+                  example: vel
                 next_appointment:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-26T19:54:31'
+                  example: '2024-06-27T17:48:24'
       security: []
   /api/consultation/get-consultation-data:
     post:
@@ -417,7 +417,7 @@ paths:
                 patient_visit_id:
                   type: string
                   description: ''
-                  example: omnis
+                  example: assumenda
               required:
                 - patient_visit_id
       security: []
@@ -448,7 +448,7 @@ paths:
         in: path
         name: patient_visit_id
         description: 'The ID of the patient visit.'
-        example: quia
+        example: earum
         required: true
         schema:
           type: string
@@ -472,6 +472,104 @@ paths:
       tags:
         - Endpoints
       security: []
+  /api/investigations:
+    get:
+      summary: 'INVESTIGATIONS :: List'
+      operationId: iNVESTIGATIONSList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/patient-investigations/patient-investigations/{consultation_id}/investigations':
+    post:
+      summary: 'PATIENT INVESTIGATIONS :: Store'
+      operationId: pATIENTINVESTIGATIONSStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                investigation_ids:
+                  type: array
+                  description: ''
+                  example: null
+                  items:
+                    type: string
+      security: []
+    parameters:
+      -
+        in: path
+        name: consultation_id
+        description: 'The ID of the consultation.'
+        example: quod
+        required: true
+        schema:
+          type: string
+  '/api/patient-investigations/patient-investigations/{consultation_id}/investigations/{investigation_id}':
+    put:
+      summary: 'PATIENT INVESTIGATIONS :: Update'
+      operationId: pATIENTINVESTIGATIONSUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: ''
+                  example: non
+                results:
+                  type: string
+                  description: ''
+                  example: a
+              required:
+                - status
+      security: []
+    parameters:
+      -
+        in: path
+        name: consultation_id
+        description: 'The ID of the consultation.'
+        example: magni
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: investigation_id
+        description: 'The ID of the investigation.'
+        example: enim
+        required: true
+        schema:
+          type: string
   '/api/people/people/{person_id}/phones':
     post:
       summary: 'PHONES :: Store'
@@ -491,7 +589,7 @@ paths:
                 phone_number:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: nbdti
+                  example: 'y'
               required:
                 - phone_number
       security: []
@@ -500,7 +598,7 @@ paths:
         in: path
         name: person_id
         description: 'The ID of the person.'
-        example: doloremque
+        example: facilis
         required: true
         schema:
           type: string

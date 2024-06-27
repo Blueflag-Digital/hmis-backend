@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DiagnosisCodeController;
+use App\Http\Controllers\InvestigationController;
+use App\Http\Controllers\PatientInvestigationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
@@ -65,9 +67,22 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('patient-details/{patient_visit_id}', 'getPatientDetailsByVisit');
     });
 
-    Route::controller(ConsultationController::class)->prefix('diagnosis')->group(function () {
-        Route::post('diagnosis-codes', [DiagnosisCodeController::class, 'index']);
-        Route::post('save-diagnosis', [DiagnosisCodeController::class, 'store']);
+    Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
+        Route::post('diagnosis-codes', 'index');
+        Route::post('save-diagnosis', 'store');
+    });
+
+    Route::get('investigations', [InvestigationController::class, 'index']);
+
+    Route::controller(PatientInvestigationController::class)->prefix('patient-investigations')->group(function () {
+        Route::post('patient-investigations/{consultation_id}/investigations', 'index');
+        Route::post('patient-investigations/{consultation_id}/investigations', 'store');
+        Route::put('patient-investigations/{consultation_id}/investigations/{investigation_id}', 'updateInvestigation');
+    });
+
+    Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
+        Route::post('diagnosis-codes', 'index');
+        Route::post('save-diagnosis', 'store');
     });
 
     // People routes

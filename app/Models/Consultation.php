@@ -14,4 +14,12 @@ class Consultation extends Model
     protected $casts = [
         'diagnosis_ids' => 'array',
     ];
+
+    public function investigations()
+    {
+        return $this->belongsToMany(Investigation::class, 'patient_investigation')
+            ->withPivot('status', 'results', 'ordered_at', 'updated_at')
+            ->withTimestamps();
+
+    }
 }

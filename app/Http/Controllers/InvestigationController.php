@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Investigation;
 use Illuminate\Http\Request;
 
 class InvestigationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * INVESTIGATIONS :: List
      */
     public function index()
     {
-        //
+        try {
+            $investigations = Investigation::all();
+            return response()->json($investigations, 200);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+            return response()->json(['message' => 'Failed to retrieve investigations'], 500);
+        }
     }
 
     /**
