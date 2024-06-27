@@ -13,20 +13,32 @@ class PatientInvestigationController extends Controller
 
     public function store(Request $request, $consultation_id)
     {
-        $request->validate([
-            'investigation_ids' => 'required|array',
-            'investigation_ids.*' => 'exists:investigations,id',
-        ]);
+        // $request->validate([
+        //     'investigation_ids' => 'required|array',
+        //     'investigation_ids.*' => 'exists:investigations,id',
+        // ]);
+
+        // $investigationIds = [];
+        // foreach ($request->investigations as $investigation) {
+        //     $investigationIds[] = $investigation['id'];
+        // }
+
+        // info($investigationIds);
 
         $consultation = Consultation::findOrFail($consultation_id);
         $investigations = [];
 
         foreach ($request->investigations as $investigation) {
             $investigations[$investigation['id']] = [
+                'results' => $investigation['results'],
                 'status' => 'ordered',
-                'ordered_at' => now(),
+                'created_at' => now(),
             ];
         }
+
+        // $results = json_encode($investigations);
+        // info($results);
+
 
         $consultation->investigations()->sync($investigations);
 

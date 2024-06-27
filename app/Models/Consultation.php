@@ -18,8 +18,7 @@ class Consultation extends Model
     public function investigations()
     {
         return $this->belongsToMany(Investigation::class, 'patient_investigation')
-            ->withPivot('status', 'results', 'ordered_at', 'updated_at')
+            ->withPivot('status', 'results', 'created_at', 'updated_at')
             ->withTimestamps();
-
     }
 }
