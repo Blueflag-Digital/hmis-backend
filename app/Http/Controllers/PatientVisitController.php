@@ -26,19 +26,49 @@ class PatientVisitController extends Controller
     public function index(Request $request)
     {
 
-        $pageNo = $request->pageNo;
-        $limit = $request->limit;
-        $count = 0;
-        $patientVisits = [];
 
-        $data = [
-            'count' => 0,
-            'patientVisits' => [],
-        ];
+        $pageNo = $request->pageNo ??  1;
+        $limit = $request->limit ?? 10;
+
+         $data = [
+                'status' => false,
+                'data' => [],
+                'count' => 0
+            ];
+        //this block gets individuals patient visits
+        if($request->value && !empty($request->value)){
+            $patientId = $request->patientId;
+            try {
+                if( $patient = Patient::find($patientId) ){
+                    $data['count'] = PatientVisit::where('patient_id',$patient->person_id)->count();
+                    $paginatedData = PatientVisit::where('patient_id',$patient->person_id)->paginate($limit, ['*'], 'page', $pageNo);
+                    $patientVisitsData = $paginatedData->getCollection()->map(function ($visit) use($patientId) {
+                        $initials = "";
+                        if($person =  Person::where('id',$patientId )->first()){
+                            $initials =  $this->getInitials($person->first_name,$person->last_name) ;
+                        }
+                        return [
+                            'id' => $visit->id,
+                            'initials' => $initials,
+                            'department_name' => $visit->department->name ?? 'Unknown', // Default to 'Unknown' if null
+                            'status' => $visit->status,
+                            'checkin_date' => Carbon::parse($visit->created_at)->format('Y-m-d H:i:s '),
+                        ];
+                    });
+                    $paginatedData->setCollection($patientVisitsData);
+                    $data['data'] = $paginatedData;
+                    $data['status'] = true;
+                }
+                return response()->json($data,200);
+            } catch (\Throwable $th) {
+                info($th->getMessage());
+                return response()->json($data,500);
+            }
+        }
+
+
+        //all visits data fetching
         try {
-
-
-
             $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
 
             $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
@@ -75,8 +105,9 @@ class PatientVisitController extends Controller
                 ];
             });
             $patientVisits->setCollection($transformedVisits);
-            $data['patientVisits'] = $patientVisits;
+            $data['data'] = $patientVisits;
             $data['count'] = PatientVisit::count();
+            $data['status'] = true ;
         } catch (\Throwable $th) {
             info($th->getMessage());
         }

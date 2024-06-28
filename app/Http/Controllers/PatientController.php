@@ -222,6 +222,7 @@ class PatientController extends Controller
                     if (!preg_match('/^254\d{9}$/', $phone)) {
                         throw new \Exception("{$phone} is invalid for email: {$validatedData['Email']}.It must start with '254' or '07' and be followed by 9 digits.");
                     }
+
                 }
 
 
@@ -259,7 +260,25 @@ class PatientController extends Controller
                     $personExists->blood_group = $validatedData['Blood Group'];
                     $personExists->identifier_number = $validatedData['National ID'];
                     $personExists->update();
+
+                    // //update phone table as well
+                    // if(!$phone = Phone::where('person_id',$personExists->id)->first() ){
+                    //     $phone = new Phone;
+                    //     $phone->phone_number = $phone;
+                    //     $phone->person_id = $personExists->id;
+                    //     $phone->save();
+                    // }else{
+                    //     $phone->phone_number = $phone; // Use the new phone number from validated data
+                    //     $phone->update();
+                    // }
+
+
                 }
+
+
+
+
+
             }
             $data['status'] = true;
         } catch (\Throwable $th) {
@@ -353,11 +372,6 @@ class PatientController extends Controller
                 $validatedData['email']  = $request->email;
             }
 
-            $phone = "";
-            if (!empty($validatedData['phones'])) {
-                $phone  = $validatedData['phones'][0];
-            }
-
             $person->user_id = null;
             $person->person_type_id = 1;
             $person->city_id = $validatedData['city_id'];
@@ -404,7 +418,16 @@ class PatientController extends Controller
                 }
                 $person->phone = $formattedPhones[0];
                 $person->update();
-
+            }else{
+                //delet every phone number if it comes empty
+                $existingPhones = Phone::where('person_id', $person->id)->get();
+                if ($existingPhones->count() > 0) {
+                    foreach ($existingPhones as $existingPhone) {
+                        $existingPhone->delete();
+                    }
+                }
+                $person->phone = null;
+                $person->update();
             }
 
             $data['status'] = true;
