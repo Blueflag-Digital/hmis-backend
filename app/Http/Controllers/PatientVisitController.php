@@ -37,6 +37,8 @@ class PatientVisitController extends Controller
         ];
         try {
 
+
+
             $patientVisits = PatientVisit::paginate($limit, ['*'], 'page', $pageNo);
 
             $transformedVisits = $patientVisits->getCollection()->map(function ($visit) {
@@ -48,7 +50,6 @@ class PatientVisitController extends Controller
 
                 $patientId = $visit->patient_id; //this is person id not patient id.
                 //get patient id from patients table where person_id matches  $patientId
-
 
                if($person =  Person::where('id',$patientId )->first()){
 
