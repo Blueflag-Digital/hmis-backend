@@ -1,15 +1,19 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DiagnosisCodeController;
+use App\Http\Controllers\DrugController;
 use App\Http\Controllers\InvestigationController;
 use App\Http\Controllers\PatientInvestigationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -84,6 +88,38 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
         Route::post('diagnosis-codes', 'index');
         Route::post('save-diagnosis', 'store');
+    });
+
+    Route::controller(SupplierController::class)->prefix('suppliers')->group(function () {
+        Route::post('list', 'index');
+        Route::post('create', 'store');
+        Route::post('view/{id}', 'show');
+        Route::post('update/{id}', 'update');
+        Route::post('delete/{id}', 'destroy');
+    });
+
+    Route::controller(BrandController::class)->prefix('brands')->group(function () {
+        Route::post('list', 'index');
+        Route::post('create', 'store');
+        Route::post('view/{id}', 'show');
+        Route::post('update/{id}', 'update');
+        Route::post('delete/{id}', 'destroy');
+    });
+
+    Route::controller(DrugController::class)->prefix('drugs')->group(function () {
+        Route::post('list', 'index');
+        Route::post('create', 'store');
+        Route::post('view/{id}', 'show');
+        Route::post('update/{id}', 'update');
+        Route::post('delete/{id}', 'destroy');
+    });
+
+    Route::controller(BatchController::class)->prefix('batches')->group(function () {
+        Route::post('list', 'index');
+        Route::post('create', 'store');
+        Route::post('view/{id}', 'show');
+        Route::post('update/{id}', 'update');
+        Route::post('delete/{id}', 'destroy');
     });
 
     // People routes

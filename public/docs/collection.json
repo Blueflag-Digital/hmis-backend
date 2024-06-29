@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "0c795f0b-fba4-4f0b-a272-aaac272e4618",
+        "_postman_id": "1200ebe2-eea1-4922-8e6f-b94eb3e50c28",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"facilis\",\"blood_group\":\"szynwkxeobxdmnknlln\",\"email\":\"mathilde.fay@example.net\",\"city_id\":20,\"first_name\":\"znuatdyopzucwm\",\"last_name\":\"lmpsle\",\"date_of_birth\":\"2024-06-27T17:48:24\",\"gender\":\"cqd\",\"phones\":\"kgkjb\"}"
+                            "raw": "{\"identifier_number\":\"eaque\",\"blood_group\":\"rfxxxlxilkblyovgbnhaj\",\"email\":\"renner.gertrude@example.org\",\"city_id\":1,\"first_name\":\"mnojsd\",\"last_name\":\"xbvlqzyfi\",\"date_of_birth\":\"2024-06-29T20:17:41\",\"gender\":\"vmwomfivx\",\"phones\":\"fpozxjtbseisasxjll\"}"
                         },
                         "description": "",
                         "auth": {
@@ -260,7 +260,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"ipsa\",\"blood_group\":\"ev\",\"city_id\":2,\"first_name\":\"gybqjndoizeeytrkrhvov\",\"last_name\":\"gzqiaczmdncepqrfxumo\",\"date_of_birth\":\"2024-06-27T17:48:24\",\"gender\":\"qozkxresh\",\"phones\":\"shpeqcaazi\"}"
+                            "raw": "{\"identifier_number\":\"unde\",\"blood_group\":\"pfygpgx\",\"city_id\":2,\"first_name\":\"ndyltzygonvma\",\"last_name\":\"xfyewlpkpteampbg\",\"date_of_birth\":\"2024-06-29T20:17:41\",\"gender\":\"em\",\"phones\":\"ibltg\"}"
                         },
                         "description": "",
                         "auth": {
@@ -291,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_id\":\"maiores\"}"
+                            "raw": "{\"patient_id\":\"sed\"}"
                         },
                         "description": "",
                         "auth": {
@@ -574,7 +574,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_medications\":\"dolores\",\"height_cm\":6798677,\"weight_kg\":20304971.619,\"allergies\":\"nostrum\",\"reason_for_visit\":\"voluptatem\",\"blood_pressure\":\"mollitia\",\"heart_rate\":90.3039,\"temperature\":5590,\"respiratory_rate\":45.01,\"oxygen_saturation\":578,\"past_medical_history\":\"odit\",\"family_medical_history\":\"laborum\",\"immunization_history\":\"ratione\",\"doctors_notes\":\"odit\",\"custom_diagnosis\":\"vel\",\"next_appointment\":\"2024-06-27T17:48:24\"}"
+                            "raw": "{\"current_medications\":\"aut\",\"height_cm\":15936.414,\"weight_kg\":8210555.6,\"allergies\":\"modi\",\"reason_for_visit\":\"rem\",\"blood_pressure\":\"sed\",\"heart_rate\":2290.518631,\"temperature\":37214239.55817727,\"respiratory_rate\":0.98643,\"oxygen_saturation\":208.2362859,\"past_medical_history\":\"excepturi\",\"family_medical_history\":\"et\",\"immunization_history\":\"dolor\",\"doctors_notes\":\"sunt\",\"custom_diagnosis\":\"perferendis\",\"next_appointment\":\"2024-06-29T20:17:42\"}"
                         },
                         "description": "",
                         "auth": {
@@ -633,7 +633,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_visit_id\":\"assumenda\"}"
+                            "raw": "{\"patient_visit_id\":\"quod\"}"
                         },
                         "description": "",
                         "auth": {
@@ -654,7 +654,7 @@
                                 {
                                     "id": "patient_visit_id",
                                     "key": "patient_visit_id",
-                                    "value": "earum",
+                                    "value": "voluptas",
                                     "description": "The ID of the patient visit."
                                 }
                             ]
@@ -803,6 +803,62 @@
                     ]
                 },
                 {
+                    "name": "PATIENT INVESTIGATIONS :: List",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations",
+                            "variable": [
+                                {
+                                    "id": "consultation_id",
+                                    "key": "consultation_id",
+                                    "value": "facere",
+                                    "description": "The ID of the consultation."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
                     "name": "PATIENT INVESTIGATIONS :: Store",
                     "request": {
                         "url": {
@@ -814,7 +870,7 @@
                                 {
                                     "id": "consultation_id",
                                     "key": "consultation_id",
-                                    "value": "quod",
+                                    "value": "incidunt",
                                     "description": "The ID of the consultation."
                                 }
                             ]
@@ -846,21 +902,15 @@
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations\/:investigation_id",
+                            "path": "api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations\/:investigation_id",
+                            "raw": "{{baseUrl}}\/api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations",
                             "variable": [
                                 {
                                     "id": "consultation_id",
                                     "key": "consultation_id",
-                                    "value": "magni",
+                                    "value": "et",
                                     "description": "The ID of the consultation."
-                                },
-                                {
-                                    "id": "investigation_id",
-                                    "key": "investigation_id",
-                                    "value": "enim",
-                                    "description": "The ID of the investigation."
                                 }
                             ]
                         },
@@ -875,10 +925,663 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"status\":\"non\",\"results\":\"a\"}"
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "SUPPLIERS :: List suppliers",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/suppliers\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/suppliers\/list"
                         },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "SUPPLIERS :: Create supplier",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/suppliers\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/suppliers\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "SUPPLIERS :: View supplier",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/suppliers\/view\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/suppliers\/view\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "sapiente",
+                                    "description": "The ID of the view."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "SUPPLIERS :: Update supplier",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/suppliers\/update\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/suppliers\/update\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "qui",
+                                    "description": "The ID of the update."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "SUPPLIERS :: Delete supplier",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/suppliers\/delete\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/suppliers\/delete\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "sunt",
+                                    "description": "The ID of the delete."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BRANDS :: List brands",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/brands\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/brands\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BRANDS :: Create brand",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/brands\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/brands\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BRANDS :: View brand",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/brands\/view\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/brands\/view\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "quo",
+                                    "description": "The ID of the view."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BRANDS :: Update brand",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/brands\/update\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/brands\/update\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "unde",
+                                    "description": "The ID of the update."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BRANDS :: Delete brand",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/brands\/delete\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/brands\/delete\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "voluptatem",
+                                    "description": "The ID of the delete."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DRUGS :: List drugs",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/drugs\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/drugs\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DRUGS :: Create drug",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/drugs\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/drugs\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DRUGS :: View drug",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/drugs\/view\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/drugs\/view\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "enim",
+                                    "description": "The ID of the view."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DRUGS :: Update drug",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/drugs\/update\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/drugs\/update\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "repellendus",
+                                    "description": "The ID of the update."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DRUGS :: Delete drug",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/drugs\/delete\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/drugs\/delete\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "officiis",
+                                    "description": "The ID of the delete."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BATCHES :: List batches",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/batches\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/batches\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BATCHES :: Create batch",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/batches\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/batches\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BATCHES :: View batch",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/batches\/view\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/batches\/view\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "necessitatibus",
+                                    "description": "The ID of the view."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BATCHES :: Update batch",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/batches\/update\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/batches\/update\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "necessitatibus",
+                                    "description": "The ID of the update."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "BATCHES :: Delete batch",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/batches\/delete\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/batches\/delete\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "aut",
+                                    "description": "The ID of the delete."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -898,7 +1601,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "facilis",
+                                    "value": "perferendis",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -916,7 +1619,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"y\"}"
+                            "raw": "{\"phone_number\":\"pzetmgrfl\"}"
                         },
                         "description": "",
                         "auth": {

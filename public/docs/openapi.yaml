@@ -78,39 +78,39 @@ paths:
                 identifier_number:
                   type: string
                   description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',."
-                  example: facilis
+                  example: eaque
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: szynwkxeobxdmnknlln
+                  example: rfxxxlxilkblyovgbnhaj
                 email:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: mathilde.fay@example.net
+                  example: renner.gertrude@example.org
                 city_id:
                   type: integer
                   description: ''
-                  example: 20
+                  example: 1
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: znuatdyopzucwm
+                  example: mnojsd
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: lmpsle
+                  example: xbvlqzyfi
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-27T17:48:24'
+                  example: '2024-06-29T20:17:41'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: cqd
+                  example: vmwomfivx
                 phones:
                   type: string
                   description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
-                  example: kgkjb
+                  example: fpozxjtbseisasxjll
               required:
                 - city_id
                 - first_name
@@ -155,11 +155,11 @@ paths:
                 identifier_number:
                   type: string
                   description: ''
-                  example: ipsa
+                  example: unde
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ev
+                  example: pfygpgx
                 city_id:
                   type: integer
                   description: ''
@@ -167,23 +167,23 @@ paths:
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: gybqjndoizeeytrkrhvov
+                  example: ndyltzygonvma
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: gzqiaczmdncepqrfxumo
+                  example: xfyewlpkpteampbg
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-27T17:48:24'
+                  example: '2024-06-29T20:17:41'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: qozkxresh
+                  example: em
                 phones:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: shpeqcaazi
+                  example: ibltg
               required:
                 - city_id
                 - first_name
@@ -208,7 +208,7 @@ paths:
                 patient_id:
                   type: string
                   description: ''
-                  example: maiores
+                  example: sed
               required:
                 - patient_id
       security: []
@@ -321,59 +321,59 @@ paths:
                 current_medications:
                   type: string
                   description: "'patient_visit_id' => 'required|exists:patient_visits,id',."
-                  example: dolores
+                  example: aut
                 height_cm:
                   type: number
                   description: ''
-                  example: 6798677.0
+                  example: 15936.414
                 weight_kg:
                   type: number
                   description: ''
-                  example: 20304971.619
+                  example: 8210555.6
                 allergies:
                   type: string
                   description: ''
-                  example: nostrum
+                  example: modi
                 reason_for_visit:
                   type: string
                   description: ''
-                  example: voluptatem
+                  example: rem
                 blood_pressure:
                   type: string
                   description: ''
-                  example: mollitia
+                  example: sed
                 heart_rate:
                   type: number
                   description: ''
-                  example: 90.3039
+                  example: 2290.518631
                 temperature:
                   type: number
                   description: ''
-                  example: 5590.0
+                  example: 37214239.558177
                 respiratory_rate:
                   type: number
                   description: ''
-                  example: 45.01
+                  example: 0.98643
                 oxygen_saturation:
                   type: number
                   description: ''
-                  example: 578.0
+                  example: 208.2362859
                 past_medical_history:
                   type: string
                   description: ''
-                  example: odit
+                  example: excepturi
                 family_medical_history:
                   type: string
                   description: ''
-                  example: laborum
+                  example: et
                 immunization_history:
                   type: string
                   description: ''
-                  example: ratione
+                  example: dolor
                 doctors_notes:
                   type: string
                   description: ''
-                  example: odit
+                  example: sunt
                 diagnosis_ids:
                   type: object
                   description: ''
@@ -382,11 +382,11 @@ paths:
                 custom_diagnosis:
                   type: string
                   description: ''
-                  example: vel
+                  example: perferendis
                 next_appointment:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-27T17:48:24'
+                  example: '2024-06-29T20:17:42'
       security: []
   /api/consultation/get-consultation-data:
     post:
@@ -417,7 +417,7 @@ paths:
                 patient_visit_id:
                   type: string
                   description: ''
-                  example: assumenda
+                  example: quod
               required:
                 - patient_visit_id
       security: []
@@ -448,7 +448,7 @@ paths:
         in: path
         name: patient_visit_id
         description: 'The ID of the patient visit.'
-        example: earum
+        example: voluptas
         required: true
         schema:
           type: string
@@ -495,6 +495,27 @@ paths:
         - Endpoints
       security: []
   '/api/patient-investigations/patient-investigations/{consultation_id}/investigations':
+    get:
+      summary: 'PATIENT INVESTIGATIONS :: List'
+      operationId: pATIENTINVESTIGATIONSList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
     post:
       summary: 'PATIENT INVESTIGATIONS :: Store'
       operationId: pATIENTINVESTIGATIONSStore
@@ -517,16 +538,6 @@ paths:
                   items:
                     type: string
       security: []
-    parameters:
-      -
-        in: path
-        name: consultation_id
-        description: 'The ID of the consultation.'
-        example: quod
-        required: true
-        schema:
-          type: string
-  '/api/patient-investigations/patient-investigations/{consultation_id}/investigations/{investigation_id}':
     put:
       summary: 'PATIENT INVESTIGATIONS :: Update'
       operationId: pATIENTINVESTIGATIONSUpdate
@@ -535,38 +546,321 @@ paths:
       responses: {  }
       tags:
         - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  description: ''
-                  example: non
-                results:
-                  type: string
-                  description: ''
-                  example: a
-              required:
-                - status
       security: []
     parameters:
       -
         in: path
         name: consultation_id
         description: 'The ID of the consultation.'
-        example: magni
+        example: facere
         required: true
         schema:
           type: string
+  /api/suppliers/list:
+    post:
+      summary: 'SUPPLIERS :: List suppliers'
+      operationId: sUPPLIERSListSuppliers
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/suppliers/create:
+    post:
+      summary: 'SUPPLIERS :: Create supplier'
+      operationId: sUPPLIERSCreateSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/suppliers/view/{id}':
+    post:
+      summary: 'SUPPLIERS :: View supplier'
+      operationId: sUPPLIERSViewSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
       -
         in: path
-        name: investigation_id
-        description: 'The ID of the investigation.'
+        name: id
+        description: 'The ID of the view.'
+        example: sapiente
+        required: true
+        schema:
+          type: string
+  '/api/suppliers/update/{id}':
+    post:
+      summary: 'SUPPLIERS :: Update supplier'
+      operationId: sUPPLIERSUpdateSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: qui
+        required: true
+        schema:
+          type: string
+  '/api/suppliers/delete/{id}':
+    post:
+      summary: 'SUPPLIERS :: Delete supplier'
+      operationId: sUPPLIERSDeleteSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: sunt
+        required: true
+        schema:
+          type: string
+  /api/brands/list:
+    post:
+      summary: 'BRANDS :: List brands'
+      operationId: bRANDSListBrands
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/brands/create:
+    post:
+      summary: 'BRANDS :: Create brand'
+      operationId: bRANDSCreateBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/brands/view/{id}':
+    post:
+      summary: 'BRANDS :: View brand'
+      operationId: bRANDSViewBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
+        example: quo
+        required: true
+        schema:
+          type: string
+  '/api/brands/update/{id}':
+    post:
+      summary: 'BRANDS :: Update brand'
+      operationId: bRANDSUpdateBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: unde
+        required: true
+        schema:
+          type: string
+  '/api/brands/delete/{id}':
+    post:
+      summary: 'BRANDS :: Delete brand'
+      operationId: bRANDSDeleteBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: voluptatem
+        required: true
+        schema:
+          type: string
+  /api/drugs/list:
+    post:
+      summary: 'DRUGS :: List drugs'
+      operationId: dRUGSListDrugs
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/drugs/create:
+    post:
+      summary: 'DRUGS :: Create drug'
+      operationId: dRUGSCreateDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/drugs/view/{id}':
+    post:
+      summary: 'DRUGS :: View drug'
+      operationId: dRUGSViewDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
         example: enim
+        required: true
+        schema:
+          type: string
+  '/api/drugs/update/{id}':
+    post:
+      summary: 'DRUGS :: Update drug'
+      operationId: dRUGSUpdateDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: repellendus
+        required: true
+        schema:
+          type: string
+  '/api/drugs/delete/{id}':
+    post:
+      summary: 'DRUGS :: Delete drug'
+      operationId: dRUGSDeleteDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: officiis
+        required: true
+        schema:
+          type: string
+  /api/batches/list:
+    post:
+      summary: 'BATCHES :: List batches'
+      operationId: bATCHESListBatches
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/batches/create:
+    post:
+      summary: 'BATCHES :: Create batch'
+      operationId: bATCHESCreateBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/batches/view/{id}':
+    post:
+      summary: 'BATCHES :: View batch'
+      operationId: bATCHESViewBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
+        example: necessitatibus
+        required: true
+        schema:
+          type: string
+  '/api/batches/update/{id}':
+    post:
+      summary: 'BATCHES :: Update batch'
+      operationId: bATCHESUpdateBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: necessitatibus
+        required: true
+        schema:
+          type: string
+  '/api/batches/delete/{id}':
+    post:
+      summary: 'BATCHES :: Delete batch'
+      operationId: bATCHESDeleteBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: aut
         required: true
         schema:
           type: string
@@ -589,7 +883,7 @@ paths:
                 phone_number:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: 'y'
+                  example: pzetmgrfl
               required:
                 - phone_number
       security: []
@@ -598,7 +892,7 @@ paths:
         in: path
         name: person_id
         description: 'The ID of the person.'
-        example: facilis
+        example: perferendis
         required: true
         schema:
           type: string

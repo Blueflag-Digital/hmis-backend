@@ -158,7 +158,7 @@ endpoints:
           'person_type_id' => 'required|integer|exists:person_types,id',
           'city_id' => 'required|integer|exists:cities,id',.
         required: false
-        example: facilis
+        example: eaque
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -167,7 +167,7 @@ endpoints:
         name: blood_group
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: szynwkxeobxdmnknlln
+        example: rfxxxlxilkblyovgbnhaj
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -176,7 +176,7 @@ endpoints:
         name: email
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: mathilde.fay@example.net
+        example: renner.gertrude@example.org
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -185,7 +185,7 @@ endpoints:
         name: city_id
         description: ''
         required: true
-        example: 20
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -194,7 +194,7 @@ endpoints:
         name: first_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: znuatdyopzucwm
+        example: mnojsd
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -203,7 +203,7 @@ endpoints:
         name: last_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: lmpsle
+        example: xbvlqzyfi
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -212,7 +212,7 @@ endpoints:
         name: date_of_birth
         description: 'Must be a valid date.'
         required: false
-        example: '2024-06-27T17:48:24'
+        example: '2024-06-29T20:17:41'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -221,7 +221,7 @@ endpoints:
         name: gender
         description: 'Must not be greater than 10 characters.'
         required: false
-        example: cqd
+        example: vmwomfivx
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -230,21 +230,21 @@ endpoints:
         name: phones
         description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
         required: false
-        example: kgkjb
+        example: fpozxjtbseisasxjll
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      identifier_number: facilis
-      blood_group: szynwkxeobxdmnknlln
-      email: mathilde.fay@example.net
-      city_id: 20
-      first_name: znuatdyopzucwm
-      last_name: lmpsle
-      date_of_birth: '2024-06-27T17:48:24'
-      gender: cqd
-      phones: kgkjb
+      identifier_number: eaque
+      blood_group: rfxxxlxilkblyovgbnhaj
+      email: renner.gertrude@example.org
+      city_id: 1
+      first_name: mnojsd
+      last_name: xbvlqzyfi
+      date_of_birth: '2024-06-29T20:17:41'
+      gender: vmwomfivx
+      phones: fpozxjtbseisasxjll
     fileParameters: []
     responses: []
     responseFields: []
@@ -338,7 +338,7 @@ endpoints:
         name: identifier_number
         description: ''
         required: false
-        example: ipsa
+        example: unde
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -347,7 +347,7 @@ endpoints:
         name: blood_group
         description: 'Must not be greater than 255 characters.'
         required: false
-        example: ev
+        example: pfygpgx
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -365,7 +365,7 @@ endpoints:
         name: first_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: gybqjndoizeeytrkrhvov
+        example: ndyltzygonvma
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -374,7 +374,7 @@ endpoints:
         name: last_name
         description: 'Must not be greater than 100 characters.'
         required: true
-        example: gzqiaczmdncepqrfxumo
+        example: xfyewlpkpteampbg
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -383,7 +383,7 @@ endpoints:
         name: date_of_birth
         description: 'Must be a valid date.'
         required: false
-        example: '2024-06-27T17:48:24'
+        example: '2024-06-29T20:17:41'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -392,7 +392,7 @@ endpoints:
         name: gender
         description: 'Must not be greater than 10 characters.'
         required: false
-        example: qozkxresh
+        example: em
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -401,20 +401,20 @@ endpoints:
         name: phones
         description: 'Must not be greater than 20 characters.'
         required: false
-        example: shpeqcaazi
+        example: ibltg
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      identifier_number: ipsa
-      blood_group: ev
+      identifier_number: unde
+      blood_group: pfygpgx
       city_id: 2
-      first_name: gybqjndoizeeytrkrhvov
-      last_name: gzqiaczmdncepqrfxumo
-      date_of_birth: '2024-06-27T17:48:24'
-      gender: qozkxresh
-      phones: shpeqcaazi
+      first_name: ndyltzygonvma
+      last_name: xfyewlpkpteampbg
+      date_of_birth: '2024-06-29T20:17:41'
+      gender: em
+      phones: ibltg
     fileParameters: []
     responses: []
     responseFields: []
@@ -448,13 +448,13 @@ endpoints:
         name: patient_id
         description: ''
         required: true
-        example: maiores
+        example: sed
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      patient_id: maiores
+      patient_id: sed
     fileParameters: []
     responses: []
     responseFields: []
@@ -758,7 +758,7 @@ endpoints:
         name: current_medications
         description: "'patient_visit_id' => 'required|exists:patient_visits,id',."
         required: false
-        example: dolores
+        example: aut
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -767,7 +767,7 @@ endpoints:
         name: height_cm
         description: ''
         required: false
-        example: 6798677.0
+        example: 15936.414
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -776,7 +776,7 @@ endpoints:
         name: weight_kg
         description: ''
         required: false
-        example: 20304971.619
+        example: 8210555.6
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -785,7 +785,7 @@ endpoints:
         name: allergies
         description: ''
         required: false
-        example: nostrum
+        example: modi
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -794,7 +794,7 @@ endpoints:
         name: reason_for_visit
         description: ''
         required: false
-        example: voluptatem
+        example: rem
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -803,7 +803,7 @@ endpoints:
         name: blood_pressure
         description: ''
         required: false
-        example: mollitia
+        example: sed
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -812,7 +812,7 @@ endpoints:
         name: heart_rate
         description: ''
         required: false
-        example: 90.3039
+        example: 2290.518631
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -821,7 +821,7 @@ endpoints:
         name: temperature
         description: ''
         required: false
-        example: 5590.0
+        example: 37214239.558177
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -830,7 +830,7 @@ endpoints:
         name: respiratory_rate
         description: ''
         required: false
-        example: 45.01
+        example: 0.98643
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -839,7 +839,7 @@ endpoints:
         name: oxygen_saturation
         description: ''
         required: false
-        example: 578.0
+        example: 208.2362859
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -848,7 +848,7 @@ endpoints:
         name: past_medical_history
         description: ''
         required: false
-        example: odit
+        example: excepturi
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -857,7 +857,7 @@ endpoints:
         name: family_medical_history
         description: ''
         required: false
-        example: laborum
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -866,7 +866,7 @@ endpoints:
         name: immunization_history
         description: ''
         required: false
-        example: ratione
+        example: dolor
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -875,7 +875,7 @@ endpoints:
         name: doctors_notes
         description: ''
         required: false
-        example: odit
+        example: sunt
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -893,7 +893,7 @@ endpoints:
         name: custom_diagnosis
         description: ''
         required: false
-        example: vel
+        example: perferendis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -902,28 +902,28 @@ endpoints:
         name: next_appointment
         description: 'Must be a valid date.'
         required: false
-        example: '2024-06-27T17:48:24'
+        example: '2024-06-29T20:17:42'
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      current_medications: dolores
-      height_cm: 6798677.0
-      weight_kg: 20304971.619
-      allergies: nostrum
-      reason_for_visit: voluptatem
-      blood_pressure: mollitia
-      heart_rate: 90.3039
-      temperature: 5590.0
-      respiratory_rate: 45.01
-      oxygen_saturation: 578.0
-      past_medical_history: odit
-      family_medical_history: laborum
-      immunization_history: ratione
-      doctors_notes: odit
-      custom_diagnosis: vel
-      next_appointment: '2024-06-27T17:48:24'
+      current_medications: aut
+      height_cm: 15936.414
+      weight_kg: 8210555.6
+      allergies: modi
+      reason_for_visit: rem
+      blood_pressure: sed
+      heart_rate: 2290.518631
+      temperature: 37214239.558177
+      respiratory_rate: 0.98643
+      oxygen_saturation: 208.2362859
+      past_medical_history: excepturi
+      family_medical_history: et
+      immunization_history: dolor
+      doctors_notes: sunt
+      custom_diagnosis: perferendis
+      next_appointment: '2024-06-29T20:17:42'
     fileParameters: []
     responses: []
     responseFields: []
@@ -987,13 +987,13 @@ endpoints:
         name: patient_visit_id
         description: ''
         required: true
-        example: assumenda
+        example: quod
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      patient_visit_id: assumenda
+      patient_visit_id: quod
     fileParameters: []
     responses: []
     responseFields: []
@@ -1023,13 +1023,13 @@ endpoints:
         name: patient_visit_id
         description: 'The ID of the patient visit.'
         required: true
-        example: earum
+        example: voluptas
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      patient_visit_id: earum
+      patient_visit_id: voluptas
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1152,6 +1152,55 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - GET
+    uri: 'api/patient-investigations/patient-investigations/{consultation_id}/investigations'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'PATIENT INVESTIGATIONS :: List'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      consultation_id:
+        name: consultation_id
+        description: 'The ID of the consultation.'
+        required: true
+        example: facere
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      consultation_id: facere
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - POST
     uri: 'api/patient-investigations/patient-investigations/{consultation_id}/investigations'
     metadata:
@@ -1171,13 +1220,13 @@ endpoints:
         name: consultation_id
         description: 'The ID of the consultation.'
         required: true
-        example: quod
+        example: incidunt
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      consultation_id: quod
+      consultation_id: incidunt
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -1202,7 +1251,7 @@ endpoints:
   -
     httpMethods:
       - PUT
-    uri: 'api/patient-investigations/patient-investigations/{consultation_id}/investigations/{investigation_id}'
+    uri: 'api/patient-investigations/patient-investigations/{consultation_id}/investigations'
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -1220,14 +1269,465 @@ endpoints:
         name: consultation_id
         description: 'The ID of the consultation.'
         required: true
-        example: magni
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
-      investigation_id:
-        name: investigation_id
-        description: 'The ID of the investigation.'
+    cleanUrlParameters:
+      consultation_id: et
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/suppliers/list
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'SUPPLIERS :: List suppliers'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/suppliers/create
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'SUPPLIERS :: Create supplier'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/suppliers/view/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'SUPPLIERS :: View supplier'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the view.'
+        required: true
+        example: sapiente
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: sapiente
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/suppliers/update/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'SUPPLIERS :: Update supplier'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the update.'
+        required: true
+        example: qui
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: qui
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/suppliers/delete/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'SUPPLIERS :: Delete supplier'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the delete.'
+        required: true
+        example: sunt
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: sunt
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/brands/list
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BRANDS :: List brands'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/brands/create
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BRANDS :: Create brand'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/brands/view/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BRANDS :: View brand'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the view.'
+        required: true
+        example: quo
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: quo
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/brands/update/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BRANDS :: Update brand'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the update.'
+        required: true
+        example: unde
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: unde
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/brands/delete/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BRANDS :: Delete brand'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the delete.'
+        required: true
+        example: voluptatem
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: voluptatem
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/drugs/list
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'DRUGS :: List drugs'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/drugs/create
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'DRUGS :: Create drug'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/drugs/view/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'DRUGS :: View drug'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the view.'
         required: true
         example: enim
         type: string
@@ -1235,32 +1735,271 @@ endpoints:
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      consultation_id: magni
-      investigation_id: enim
+      id: enim
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      status:
-        name: status
-        description: ''
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/drugs/update/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'DRUGS :: Update drug'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the update.'
         required: true
-        example: non
+        example: repellendus
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
-      results:
-        name: results
-        description: ''
-        required: false
-        example: a
+    cleanUrlParameters:
+      id: repellendus
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/drugs/delete/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'DRUGS :: Delete drug'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the delete.'
+        required: true
+        example: officiis
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
-    cleanBodyParameters:
-      status: non
-      results: a
+    cleanUrlParameters:
+      id: officiis
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/batches/list
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BATCHES :: List batches'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/batches/create
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BATCHES :: Create batch'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/batches/view/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BATCHES :: View batch'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the view.'
+        required: true
+        example: necessitatibus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: necessitatibus
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/batches/update/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BATCHES :: Update batch'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the update.'
+        required: true
+        example: necessitatibus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: necessitatibus
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/batches/delete/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'BATCHES :: Delete batch'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the delete.'
+        required: true
+        example: aut
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: aut
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses: []
     responseFields: []
@@ -1290,13 +2029,13 @@ endpoints:
         name: person_id
         description: 'The ID of the person.'
         required: true
-        example: facilis
+        example: perferendis
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanUrlParameters:
-      person_id: facilis
+      person_id: perferendis
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -1304,13 +2043,13 @@ endpoints:
         name: phone_number
         description: 'Must not be greater than 20 characters.'
         required: true
-        example: 'y'
+        example: pzetmgrfl
         type: string
         enumValues: []
         exampleWasSpecified: false
         custom: []
     cleanBodyParameters:
-      phone_number: 'y'
+      phone_number: pzetmgrfl
     fileParameters: []
     responses: []
     responseFields: []
