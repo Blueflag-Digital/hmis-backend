@@ -13,34 +13,36 @@ class PatientInvestigationController extends Controller
 
     public function store(Request $request, $consultation_id)
     {
-        // $request->validate([
-        //     'investigation_ids' => 'required|array',
-        //     'investigation_ids.*' => 'exists:investigations,id',
-        // ]);
+        $request->validate([
+            'investigation_ids' => 'required|array',
+            'investigation_ids.*' => 'exists:investigations,id',
+        ]);
 
-        // $investigationIds = [];
-        // foreach ($request->investigations as $investigation) {
-        //     $investigationIds[] = $investigation['id'];
-        // }
 
-        // info($investigationIds);
-
-        $consultation = Consultation::findOrFail($consultation_id);
-        $investigations = [];
-
-        foreach ($request->investigations as $investigation) {
-            $investigations[$investigation['id']] = [
-                'results' => $investigation['results'],
-                'status' => 'ordered',
-                'created_at' => now(),
-            ];
+        $investigationIds = [];
+        foreach ($request->investigation_ids as $investigation) {
+            $investigationIds[] = $investigation;
         }
+        $consultation = Consultation::findOrFail($consultation_id);
+        // $investigations = [];
+        // foreach ($request->investigations as $investigation) {
+        //     $investigations[$investigation['id']] = [
+        //         'results' => $investigation['results'],
+        //         'status' => 'ordered',
+        //         'created_at' => now(),
+        //     ];
+        // }
 
         // $results = json_encode($investigations);
         // info($results);
 
+        // $investigationIds = [];
+        // foreach ($request->investigation_ids as $investigation) {
+        //     $investigationIds[] = $investigation['id'];
+        // }
+        // $consultation = Consultation::findOrFail($consultation_id);
 
-        $consultation->investigations()->sync($investigations);
+        $consultation->investigations()->sync($investigationIds);
 
         return response()->json(['message' => 'Investigations added to consultation successfully'], 201);
     }
@@ -59,19 +61,18 @@ class PatientInvestigationController extends Controller
     /**
      * PATIENT INVESTIGATIONS :: Update
      */
-    public function updateInvestigation(Request $request, $consultation_id, $investigation_id)
+    public function updateInvestigation(Request $request, $consultation_id)
     {
-        $request->validate([
-            'status' => 'required|string',
-            'results' => 'nullable|string',
-        ]);
-
+        $investigationData = $request->investigations;
         $consultation = Consultation::findOrFail($consultation_id);
-        $consultation->investigations()->updateExistingPivot($investigation_id, [
-            'status' => $request->status,
-            'results' => $request->results,
-            'updated_at' => now(),
-        ]);
+
+        foreach ($investigationData as $investigation) {
+            $consultation->investigations()->updateExistingPivot($investigation['id'], [
+                'status' => 'completed', // Assuming a single status for all investigations
+                'results' => $investigation['results'], // Specific results for each investigation
+                'updated_at' => now(),
+            ]);
+        }
 
         return response()->json(['message' => 'Investigation updated successfully'], 200);
     }

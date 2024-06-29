@@ -13,16 +13,7 @@ use Illuminate\Http\Request;
 class PatientController extends Controller
 {
 
-    //reusable functions
-    function getInitials($firstName, $lastName)
-    {
-        $firstInitial = isset($firstName) ? strtoupper($firstName[0]) : '';
-        $lastInitial = isset($lastName) ? strtoupper($lastName[0]) : '';
-        return $firstInitial . $lastInitial;
-    }
 
-
-    //end reusbale code
 
     /**
      * PATIENTS :: List
@@ -51,22 +42,10 @@ class PatientController extends Controller
 
         try {
             $data['totalCount'] = Patient::count();
-            $paginatedData = Patient::paginate($limit, ['*'], 'page', $pageNo);
+            $paginatedData = Patient::latest()->paginate($limit, ['*'], 'page', $pageNo);
             $patients = $paginatedData->getCollection()->map(function ($patient) {
-
-                return [
-                    'id' => $patient->id,
-                    'initials' => isset($patient->person)  ?  $this->getInitials($patient->person->first_name, $patient->person->last_name)  : "",
-                    'name' =>  isset($patient->person) ? $patient->person->first_name . " " . $patient->person->last_name : "",
-                    'dob' => isset($patient->person) ? $patient->person->date_of_birth : "",
-                    'gender' => isset($patient->person) ? $patient->person->gender : "",
-                    'phone' => isset($patient->person) ? $patient->person->phone : " ",
-                    'email' => isset($patient->person) ? $patient->person->email : "",
-                    'blood_group' => isset($patient->person) ? $patient->person->blood_group : "",
-                    'national_id' => isset($patient->person) ? $patient->person->identifier_number : "",
-                    // 'national_id' => isset($patient->person) ? "23656524" : "",
-                    'city' => isset($patient->person) && isset($patient->person->city) ? $patient->person->city->name : null,
-                ];
+                $dataToReturn = $patient->patientData();
+                return $dataToReturn;
             });
             $paginatedData->setCollection($patients);
             $data['patients'] = $paginatedData;
@@ -82,6 +61,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             // 'user_id' => 'nullable|string|max:255|unique:people',
             // 'person_type_id' => 'required|integer|exists:person_types,id',
@@ -98,82 +78,85 @@ class PatientController extends Controller
             'phones' => 'nullable|max:20',
         ]);
 
-        $phone = "";
+        $data['status'] = false;
+        $data['message'] = "";
 
-        if (!empty($validatedData['phones'])) {
-            $phone  = $validatedData['phones'][0];
-        }
+        try {
+            //phone number validation
+            $allPhones = [];
+            if (!empty($validatedData['phones'])) {
+                $validatedData['phones'] = array_filter($validatedData['phones'], function ($value) {
+                    return $value !== NULL;
+                });
 
-
-
-        $person = new Person();
-        $person->user_id = null;
-        $person->person_type_id = 1;
-        $person->city_id = $validatedData['city_id'];
-        $person->first_name = $validatedData['first_name'];
-        $person->last_name = $validatedData['last_name'];
-        $person->date_of_birth = $validatedData['date_of_birth'];
-        $person->gender = $validatedData['gender'];
-        $person->phone = null;
-        $person->identifier_number = $validatedData['identifier_number'];
-        $person->email = $validatedData['email'];
-        $person->blood_group = $validatedData['blood_group'];
-        $person->save();
-
-        // if (!empty($validatedData['phones'])) {
-        //     foreach ($validatedData['phones'] as $phoneNumber) {
-        //         $phone = new Phone();
-        //         $phone->person_id = $person->id;
-        //         $phone->phone_number = $phoneNumber; // Use the current phone number in the loop
-        //         $phone->save();
-        //     }
-        // }
-
-        $formattedPhones = [];
-        if (!empty($validatedData['Phones'])) {
-             foreach ($validatedData['phones'] as $phone) {
-                // Transform phone numbers starting with '07' to '254'
-                if (strpos($phone, '07') === 0) {
-                    $phone = '254' . substr($phone, 1);
+                foreach ($validatedData['phones'] as $newPhoneNumber) {
+                    // Validate phone number format
+                    if (!preg_match('/^(2547||07)\d{8}$/', $newPhoneNumber)) {
+                        throw new \Exception("{$newPhoneNumber} is invalid. It must start with '254' or '07' and be followed by 8 digits.");
+                    }
+                    if (strpos($newPhoneNumber, '07') === 0) {
+                        $newPhoneNumber = '254' . substr($newPhoneNumber, 1);
+                    }
+                    //check phones table if this phone number exists
+                    if ($number = Phone::where('phone_number', $newPhoneNumber)->exists()) {
+                        throw new \Exception("Phone Number already exists", 1);
+                    }
+                    $allPhones[] =  $newPhoneNumber;
                 }
+            }
 
-                // Validate phone number format
-                if (!preg_match('/^254\d{9}$/', $phone)) {
-                    throw new \Exception("{$phone} is invalid for email: {$validatedData['Email']}.It must start with '254' or '07' and be followed by 9 digits.");
+
+            // //add email
+            // if (!empty($validatedData['email_addresses'])) {
+            //     foreach ($validatedData['email_addresses'] as $email_address) {
+            //         $email = new Email();
+            //         $email->person_id = $person->id;
+            //         $email->email_address = $email_address; // Use the current email address in the loop
+            //         $email->save();
+            //     }
+            // }
+
+
+            $person = new Person();
+            $person->user_id = null;
+            $person->person_type_id = 1;
+            $person->city_id = $validatedData['city_id'];
+            $person->first_name = $validatedData['first_name'];
+            $person->last_name = $validatedData['last_name'];
+            $person->date_of_birth = $validatedData['date_of_birth'];
+            $person->gender = $validatedData['gender'];
+            $person->identifier_number = $validatedData['identifier_number'];
+            $person->email = $validatedData['email'];
+            $person->blood_group = $validatedData['blood_group'];
+            $person->save();
+
+            if ($person) {
+                //Store this person as a patient
+                $patient = new Patient();
+                $patient->person_id = $person->id;
+                $patient->save();
+
+                if (!empty($allPhones)) {
+                    $person->phone = $allPhones[0];;
+                    $person->update();
+                    //store the patients phone numbers
+                    foreach ($allPhones as $phoneNumber) {
+                        $phone = new Phone;
+                        $phone->person_id = $person->id;
+                        $phone->phone_number = $phoneNumber;
+                        $phone->save();
+                    }
                 }
-                $formattedPhones[] = $phone;
-
-                $phone = new Phone();
-                $phone->person_id = $person->id;
-                $phone->phone_number = $phone; // Use the current phone number in the loop
-                $phone->save();
             }
-            //update phone
-            $person->phone = $formattedPhones[0];
-            $person->update();
 
+            $data['status'] = true;
+            $data['message'] = "Patient created successfully";
+        } catch (\Throwable $th) {
+            // info($th->getMessage());
+            $data['message'] = $th->getMessage();
         }
 
-
-
-
-        if (!empty($validatedData['email_addresses'])) {
-            foreach ($validatedData['email_addresses'] as $email_address) {
-                $email = new Email();
-                $email->person_id = $person->id;
-                $email->email_address = $email_address; // Use the current email address in the loop
-                $email->save();
-            }
-        }
-
-        $patient = new Patient();
-        $patient->person_id = $person->id;
-        $patient->save();
-
-        return response()->json([
-            'message' => 'Patient created successfully',
-            'patient' => $patient,
-        ], 201);
+        return response()->json($data);
     }
 
     public function bulkUpload(Request $request)
@@ -210,25 +193,25 @@ class PatientController extends Controller
                     }
                 }
 
+                // Validate phone number format
                 $phone = null;
                 if (!empty($validatedData['Phone'])) {
                     $phone = $validatedData['Phone'];
-                    // Transform phone numbers starting with '07' to '254'
+
+                    if (!preg_match('/^(2547||07)\d{8}$/', $phone)) {
+                        throw new \Exception("{$phone} is invalid. It must start with '254' or '07', followed by 8 digits.");
+                    }
+
                     if (strpos($phone, '07') === 0) {
                         $phone = '254' . substr($phone, 1);
                     }
 
-                    // Validate phone number format
-                    if (!preg_match('/^254\d{9}$/', $phone)) {
-                        throw new \Exception("{$phone} is invalid for email: {$validatedData['Email']}.It must start with '254' or '07' and be followed by 9 digits.");
-                    }
-
+                    $phone = $phone;
                 }
 
 
                 //save the data if the patient is not in the system
-                if (!$personExists = Person::where('email', $validatedData['Email'])
-                    ->orWhere('phone', $validatedData['Phone'])->first()) {
+                if (!$personExists = Person::where('email', $validatedData['Email'])->first()) {
 
                     $person = new Person();
                     $person->user_id = null;
@@ -247,7 +230,14 @@ class PatientController extends Controller
                     $patient = new Patient();
                     $patient->person_id = $person->id;
                     $patient->save();
+
+                    $newPhone = new Phone;
+                    $newPhone->phone_number = $phone;
+                    $newPhone->person_id = $person->id;
+                    $newPhone->save();
                 } else {
+
+                    //patient already exists in the system
                     $personExists->user_id = null;
                     $personExists->person_type_id = 1;
                     $personExists->first_name = $validatedData['First Name'];
@@ -260,25 +250,20 @@ class PatientController extends Controller
                     $personExists->blood_group = $validatedData['Blood Group'];
                     $personExists->identifier_number = $validatedData['National ID'];
                     $personExists->update();
+                    if ($personExists) {
 
-                    // //update phone table as well
-                    // if(!$phone = Phone::where('person_id',$personExists->id)->first() ){
-                    //     $phone = new Phone;
-                    //     $phone->phone_number = $phone;
-                    //     $phone->person_id = $personExists->id;
-                    //     $phone->save();
-                    // }else{
-                    //     $phone->phone_number = $phone; // Use the new phone number from validated data
-                    //     $phone->update();
-                    // }
-
-
+                        $existingPhones = Phone::where('person_id', $personExists->id)->get();
+                        if ($existingPhones->count() > 0) {
+                            foreach ($existingPhones as $existingPhone) {
+                                $existingPhone->delete();
+                            }
+                        }
+                        $newPhone = new Phone;
+                        $newPhone->phone_number = $phone;
+                        $newPhone->person_id = $personExists->id;
+                        $newPhone->save();
+                    }
                 }
-
-
-
-
-
             }
             $data['status'] = true;
         } catch (\Throwable $th) {
@@ -287,55 +272,32 @@ class PatientController extends Controller
         return response()->json($data);
     }
 
-
-
     /**
      * Display the specified resource.
      */
     public function show(Request $request)
     {
-        $patientData = [
-            'id' => null,
-            'name' => "",
-            'dob' => "",
-            'gender' => "",
-            'phone' => " ",
-            'email' => "",
-            'blood_group' => "",
-            'national_id' => "",
-            'city' => null,
-            'first_name' => "",
-            'last_name' => ""
+
+        $data = [
+            'status' => false,
+            'data' => [],
         ];
-        $person = Patient::find($request->patient_id);
 
-        $patient = Person::find($person->person_id);
-        $phones = Phone::where('person_id', $patient->id)->pluck('phone_number')->toArray();
-
-        if ($patient) {
-            // If the patient exists, populate the response array
-            $patientData = [
-                'id' => $patient->id,
-                'name' => $patient->first_name . " " . $patient->last_name,
-                'dob' => $patient->date_of_birth,
-                'gender' => $patient->gender,
-                'phone' => $patient->phone,
-                'email' => $patient->email,
-                'blood_group' => $patient->blood_group,
-                'city' => $patient->city ? $patient->city->name : null,
-                'city_id' => $patient->city ? $patient->city->id : null,
-                'first_name' =>  $patient->first_name,
-                'last_name' => $patient->last_name,
-                'national_id' =>  $patient->identifier_number
-            ];
+        try {
+            $patient = Patient::find($request->patient_id);
+            if (!$patient) {
+                throw new \Exception("Patient does not exist", 1);
+            }
+            $person = Person::find($patient->person_id);
+            if (!$person) {
+                throw new \Exception("Person does not exist", 1);
+            }
+            $data['data'] = $person->personData();
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            // info($th->getMessage());
         }
-
-
-
-        return response()->json([
-            'patient' => $patientData,
-            'phones' => $phones,
-        ]);
+        return response()->json($data);
     }
 
     /**
@@ -361,6 +323,28 @@ class PatientController extends Controller
         ];
 
         try {
+
+            $validatedData['phones'] = array_filter($validatedData['phones'], function ($value) {
+                return $value !== NULL;
+            });
+
+            // $formattedDate = "";
+            // if (!empty($validatedData['date_of_birth'])) {
+
+            //     if (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $validatedData['date_of_birth'])) {
+            //         // Create a DateTime object and format it to Y-m-d
+            //         $dateTime = DateTime::createFromFormat('d/m/Y', $validatedData['date_of_birth']);
+            //         if ($dateTime) {
+            //             $formattedDate = $dateTime->format('Y-m-d');
+            //         } else {
+            //             throw new \Exception("Date of Birth {$validatedData['date_of_birth']} is invalid.");
+            //         }
+            //     } else {
+            //         throw new \Exception("Date of Birth {$validatedData['date_of_birth']} is not in the correct format. use format (d/m/Y).");
+            //     }
+            // }
+
+
             $patient = Patient::find($request->id);
             //find the person
             $person = Person::find($patient->person_id);
@@ -385,9 +369,7 @@ class PatientController extends Controller
             $person->blood_group = $validatedData['blood_group'];
             $person->save();
 
-            $validatedData['phones'] = array_filter($validatedData['phones'], function ($value) {
-                        return $value !== NULL;
-                    });
+
 
             if (!empty($validatedData['phones'])) {
                 $formattedPhones = [];
@@ -401,16 +383,14 @@ class PatientController extends Controller
                 // Insert new phone numbers
                 foreach ($validatedData['phones'] as $newPhoneNumber) {
                     // Transform phone numbers starting with '07' to '254'
+                    if (!preg_match('/^(2547|07)\d{8}$/', $newPhoneNumber)) {
+                        throw new \Exception("{$newPhoneNumber} is invalid. It must start with '254' or '07' and be followed by 8 digits.");
+                    }
                     if (strpos($newPhoneNumber, '07') === 0) {
                         $newPhoneNumber = '254' . substr($newPhoneNumber, 1);
                     }
-                    // Validate phone number format
-                    if (!preg_match('/^254\d{9}$/', $newPhoneNumber)) {
-                        throw new \Exception("{$newPhoneNumber} is not valid.It must start with '254' or '07' and be followed by 9 digits.");
-                    }
 
-                    $formattedPhones[] = $newPhoneNumber ;
-
+                    $formattedPhones[] = $newPhoneNumber;
                     $newPhone = new Phone();
                     $newPhone->person_id = $person->id;
                     $newPhone->phone_number = $newPhoneNumber; // Use the new phone number from validated data
@@ -418,8 +398,8 @@ class PatientController extends Controller
                 }
                 $person->phone = $formattedPhones[0];
                 $person->update();
-            }else{
-                //delet every phone number if it comes empty
+            } else {
+                //delete every phone number if it comes empty
                 $existingPhones = Phone::where('person_id', $person->id)->get();
                 if ($existingPhones->count() > 0) {
                     foreach ($existingPhones as $existingPhone) {

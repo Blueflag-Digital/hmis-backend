@@ -15,4 +15,9 @@ class Phone extends Model
     {
         return $this->belongsTo(Person::class);
     }
+
+    public function phoneNumber()
+    {
+        return $this->phone_number;
+    }
 }

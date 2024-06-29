@@ -78,7 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(PatientInvestigationController::class)->prefix('patient-investigations')->group(function () {
         Route::get('patient-investigations/{consultation_id}/investigations', 'index');
         Route::post('patient-investigations/{consultation_id}/investigations', 'store');
-        Route::put('patient-investigations/{consultation_id}/investigations/{investigation_id}', 'updateInvestigation');
+        Route::put('patient-investigations/{consultation_id}/investigations', 'updateInvestigation');
     });
 
     Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
