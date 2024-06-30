@@ -16,11 +16,26 @@ class Batch extends Model
 
     public function drug()
     {
-        return $this->belongsTo(Drug::class);
+        return $this->belongsTo(Drug::class, 'drug_id');
     }
 
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+
+    public function batchData()
+    {
+        return [
+            'id' => $this->id,
+            'drug' => isset($this->drug) ? $this->drug->drugData() : null,
+            'quantity_received' => $this->quantity_received,
+            'quantity_available' => $this->quantity_available,
+            'lpo' => $this->lpo,
+            'buying_price' => $this->buying_price,
+            'selling_price' => $this->selling_price,
+            'pack_size_id' => $this->pack_size_id
+        ];
     }
 }
