@@ -10,9 +10,33 @@ class BatchController extends Controller
     /**
      * BATCHES :: List batches
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Batch::with(['drug', 'supplier'])->get(), 200);
+
+        $pageNo = $request->pageNo;
+        $limit = $request->limit;
+
+         $data = [
+            'data' => [],
+            'status' => false,
+        ];
+
+
+        try {
+            $data['totalCount'] = Batch::count();
+            $paginatedData = Batch::latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $batches = $paginatedData->getCollection()->map(function ($batch) {
+                return $batch->batchData();
+            });
+            $paginatedData->setCollection($batches);
+            $data['data'] = $paginatedData;
+            return response()->json($data,200);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+         return response()->json($data,500);
+
+        // return response()->json(Batch::with(['drug', 'supplier'])->get(), 200);
     }
 
     /**
@@ -38,7 +62,12 @@ class BatchController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $batch = Batch::findOrFail($id);
+
+        if(empty($request->supplier_id)){
+            $request['supplier_id'] = $batch->supplier_id;
+        }
         $batch->update($request->all());
         return response()->json($batch, 200);
     }

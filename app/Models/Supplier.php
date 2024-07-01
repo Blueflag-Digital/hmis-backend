@@ -24,6 +24,8 @@ class Supplier extends Model
         ];
     }
 
+
+
     public function  supplierData()
     {
         return [

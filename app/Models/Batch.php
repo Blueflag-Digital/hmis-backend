@@ -30,6 +30,7 @@ class Batch extends Model
         return [
             'id' => $this->id,
             'drug' => isset($this->drug) ? $this->drug->drugData() : null,
+            'supplier' => isset($this->supplier) ? $this->supplier->supplierData2() : null,
             'quantity_received' => $this->quantity_received,
             'quantity_available' => $this->quantity_available,
             'lpo' => $this->lpo,
