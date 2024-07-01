@@ -17,6 +17,13 @@ class Supplier extends Model
         return $this->hasMany(Batch::class,);
     }
 
+    public function supplierData2(){
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
+    }
+
     public function  supplierData()
     {
         return [

@@ -19,7 +19,23 @@ class SupplierController extends Controller
 
         $data['status'] = false;
         $data['data'] = [];
+
+
+         if($request->value){
+
+            $data['data'] = Supplier::get()->map(function($supplier){
+                return $supplier->supplierData2();
+            });
+            $data['status'] = true;
+
+            // just load the suppliers id and name
+             return response()->json($data, 200);
+        }
         $data['count'] = 0;
+
+
+
+
 
         try {
             $paginatedData = Supplier::latest()->paginate($limit, ['*'], 'page', $pageNo);
@@ -69,7 +85,7 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        $supplier = Supplier::findOrFail($id);
+        $supplier = Supplier::findOrFail($id)->supplierData();
         return response()->json($supplier, 200);
     }
 
