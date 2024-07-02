@@ -42,6 +42,9 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $brand = Brand::findOrFail($id);
+
+
+
         $brand->update($request->all());
         return response()->json($brand, 200);
     }
@@ -55,4 +58,3 @@ class BrandController extends Controller
         return response()->json(null, 204);
     }
 }
-

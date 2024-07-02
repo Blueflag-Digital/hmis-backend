@@ -63,6 +63,10 @@ class PatientInvestigationController extends Controller
      */
     public function updateInvestigation(Request $request, $consultation_id)
     {
+        $investigations = $request->all();
+
+        info($investigations);
+
         $investigationData = $request->investigations;
         $consultation = Consultation::findOrFail($consultation_id);
 

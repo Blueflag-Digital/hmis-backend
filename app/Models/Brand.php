@@ -10,4 +10,18 @@ class Brand extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+
+    public function drugs()
+    {
+        return $this->hasMany(Drug::class);
+    }
+
+
+    public function brandData()
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
 }
