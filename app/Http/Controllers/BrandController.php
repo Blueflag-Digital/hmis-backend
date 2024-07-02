@@ -10,8 +10,11 @@ class BrandController extends Controller
     /**
      * BRANDS :: List brands
      */
-    public function index()
+    public function index(Request $request)
     {
+        // $brands = Brand::get()->map(function($brand){
+        //     return $brand->brandData();
+        // })
         return response()->json(Brand::all(), 200);
     }
 
