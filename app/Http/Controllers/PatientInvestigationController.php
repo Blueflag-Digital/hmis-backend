@@ -3,47 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\Investigation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PatientInvestigationController extends Controller
 {
+
+    /**
+     * PATIENT DOWNLOAD HMIS DOCUMENT :: Store
+     */
+
+     public function download(Request $request)
+    {
+        $consultation_id = $request->consultationId;
+        $investigation_id = $request->investigationId;
+
+        $consultation = Consultation::with('investigations')->findOrFail($consultation_id);
+        $filteredInvestigation = $consultation->investigations->where('id', $investigation_id)->first();
+
+
+
+        $filePath = $filteredInvestigation->pivot->file_path;
+        $fullpath = asset($filePath);
+        return response()->json(['file_path' => $fullpath],200);
+
+
+    }
     /**
      * PATIENT INVESTIGATIONS :: Store
      */
 
+
     public function store(Request $request, $consultation_id)
     {
-        $request->validate([
-            'investigation_ids' => 'required|array',
-            'investigation_ids.*' => 'exists:investigations,id',
-        ]);
+
+        // Validate the request
+        // $request->validate([
+        //     'investigation_ids' => 'required|array',
+        //     'investigation_ids.*.id' => 'required|exists:investigations,id',
+        //     'investigation_ids.*.results' => 'required|string',
+        //     'investigation_ids.*.file' => 'nullable|file',
+        // ]);
 
 
-        $investigationIds = [];
-        foreach ($request->investigation_ids as $investigation) {
-            $investigationIds[] = $investigation;
-        }
         $consultation = Consultation::findOrFail($consultation_id);
-        // $investigations = [];
-        // foreach ($request->investigations as $investigation) {
-        //     $investigations[$investigation['id']] = [
-        //         'results' => $investigation['results'],
-        //         'status' => 'ordered',
-        //         'created_at' => now(),
-        //     ];
-        // }
 
-        // $results = json_encode($investigations);
-        // info($results);
+        $syncData = [];
+        foreach ($request->investigations as $investigation) {
+            $investigationData = [
+                'results' => $investigation['results'],
+            ];
 
-        // $investigationIds = [];
-        // foreach ($request->investigation_ids as $investigation) {
-        //     $investigationIds[] = $investigation['id'];
-        // }
-        // $consultation = Consultation::findOrFail($consultation_id);
+            // Save the file if it exists
+            if (isset($investigation['file']) && $investigation['file']->isValid()) {
 
-        $consultation->investigations()->sync($investigationIds);
+                $filenamewithext = $investigation['file']->getClientOriginalName();
+                $filename = pathinfo($filenamewithext, PATHINFO_FILENAME);
+                $ext = $investigation['file']->getClientOriginalExtension();
+                $filenametostore = $filename . '_' . time() . '.' . $ext;
+                $path = $investigation['file']->storeAs('public/hmis_files', $filenametostore); // Ensure 'public/hmis_files' matches your filesystem disk setup
+                $filePath = Storage::url($path);
+                // $filePath = $investigation['file']->store('investigation_files');
+                $investigationData['file_path'] = $filePath;
+            }
 
+            $syncData[$investigation['id']] = $investigationData;
+        }
+
+        // Sync the investigations with additional pivot data
+        $consultation->investigations()->sync($syncData);
         return response()->json(['message' => 'Investigations added to consultation successfully'], 201);
     }
 
