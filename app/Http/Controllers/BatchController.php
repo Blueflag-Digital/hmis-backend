@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Batch;
+use App\Models\Drug;
 use Illuminate\Http\Request;
 
 class BatchController extends Controller
@@ -82,5 +83,31 @@ class BatchController extends Controller
     {
         Batch::destroy($id);
         return response()->json(null, 204);
+    }
+
+    /**
+     * BATCHES :: Get Available Drugs
+     */
+    public function availableDrugs()
+    {
+        $drugs = Drug::with(['brands' => function($query) {
+            $query->whereHas('batches', function($query) {
+                $query->where('quantity_available', '>', 0);
+            });
+        }])->get();
+
+        $response = $drugs->map(function($drug) {
+            return [
+                'drug_name' => $drug->name,
+                'brands' => $drug->brands->map(function($brand) {
+                    return [
+                        'brand_name' => $brand->name,
+                        'quantity_available' => $brand->batches->sum('quantity_available'),
+                    ];
+                })
+            ];
+        });
+
+        return response()->json($response);
     }
 }

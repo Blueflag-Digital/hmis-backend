@@ -11,9 +11,9 @@ class Drug extends Model
 
     protected $fillable = ['brand_id', 'name'];
 
-    public function brand()
+    public function brands()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->hasMany(Brand::class);
     }
 
     public function drugData2()

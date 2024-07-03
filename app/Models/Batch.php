@@ -19,6 +19,11 @@ class Batch extends Model
         return $this->belongsTo(Drug::class, 'drug_id');
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');

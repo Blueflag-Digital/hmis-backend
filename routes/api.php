@@ -8,12 +8,14 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DiagnosisCodeController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\InvestigationController;
+use App\Http\Controllers\PackSizeController;
 use App\Http\Controllers\PatientInvestigationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UnitOfMeasureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -122,6 +124,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('view/{id}', 'show');
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
+        Route::get('available-drugs', 'availableDrugs');
     });
 
     // People routes
@@ -129,4 +132,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('people/{person_id}/phones', [PhoneController::class, 'index']);
         Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
     });
+
+    Route::apiResource('pack-sizes', PackSizeController::class);
+    Route::apiResource('units-of-measure', UnitOfMeasureController::class);
 });

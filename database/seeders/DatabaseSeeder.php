@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             DepartmentsTableSeeder::class,
             DiagnosisCodesTableSeeder::class,
             InvestigationsTableSeeder::class,
+            PackSizesTableSeeder::class,
+            UnitsOfMeasuresTableSeeder::class,
         ]);
 
 

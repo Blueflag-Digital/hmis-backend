@@ -12,9 +12,14 @@ class Brand extends Model
     protected $fillable = ['name'];
 
 
-    public function drugs()
+    public function drug()
     {
-        return $this->hasMany(Drug::class);
+        return $this->belongsTo(Drug::class);
+    }
+
+    public function batches()
+    {
+        return $this->hasMany(Batch::class);
     }
 
 
