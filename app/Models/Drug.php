@@ -16,10 +16,20 @@ class Drug extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function drugData2()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
+
     public function drugData()
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
+            'brand' => isset($this->brand) ?  $this->brand->brandData() : null,
         ];
     }
 }
