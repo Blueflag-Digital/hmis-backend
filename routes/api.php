@@ -85,9 +85,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('patient-investigations/{consultation_id}/investigations', 'index');
         Route::post('patient-investigations/{consultation_id}/investigations', 'store');
         Route::put('patient-investigations/{consultation_id}/investigations', 'updateInvestigation');
+        Route::post('patient-investigations/{consultation_id}/investigations/delete', 'destroy');
         Route::post('download-file', 'download');
 
     });
+
+
 
     Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
         Route::post('diagnosis-codes', 'index');

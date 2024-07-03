@@ -21,12 +21,14 @@ class PatientInvestigationController extends Controller
 
         $consultation = Consultation::with('investigations')->findOrFail($consultation_id);
         $filteredInvestigation = $consultation->investigations->where('id', $investigation_id)->first();
-
-
-
         $filePath = $filteredInvestigation->pivot->file_path;
-        $fullpath = asset($filePath);
-        return response()->json(['file_path' => $fullpath],200);
+        if($filePath){
+            $fullpath = asset($filePath);
+            return response()->json(['file_path' => $fullpath],200);
+        }else{
+            return response()->json(['file_path' => null],);
+        }
+
 
 
     }
@@ -37,18 +39,7 @@ class PatientInvestigationController extends Controller
 
     public function store(Request $request, $consultation_id)
     {
-
-        // Validate the request
-        // $request->validate([
-        //     'investigation_ids' => 'required|array',
-        //     'investigation_ids.*.id' => 'required|exists:investigations,id',
-        //     'investigation_ids.*.results' => 'required|string',
-        //     'investigation_ids.*.file' => 'nullable|file',
-        // ]);
-
-
         $consultation = Consultation::findOrFail($consultation_id);
-
         $syncData = [];
         foreach ($request->investigations as $investigation) {
             $investigationData = [
@@ -64,7 +55,6 @@ class PatientInvestigationController extends Controller
                 $filenametostore = $filename . '_' . time() . '.' . $ext;
                 $path = $investigation['file']->storeAs('public/hmis_files', $filenametostore); // Ensure 'public/hmis_files' matches your filesystem disk setup
                 $filePath = Storage::url($path);
-                // $filePath = $investigation['file']->store('investigation_files');
                 $investigationData['file_path'] = $filePath;
             }
 
@@ -92,10 +82,6 @@ class PatientInvestigationController extends Controller
      */
     public function updateInvestigation(Request $request, $consultation_id)
     {
-        $investigations = $request->all();
-
-        info($investigations);
-
         $investigationData = $request->investigations;
         $consultation = Consultation::findOrFail($consultation_id);
 
@@ -109,4 +95,23 @@ class PatientInvestigationController extends Controller
 
         return response()->json(['message' => 'Investigation updated successfully'], 200);
     }
+
+    /**
+     * DELETE PATIENT INVESTIGATION
+     */
+    public function destroy(Request $request,$consultation_id){
+
+        $investigation_id = $request->investigationId;
+
+        $consultation = Consultation::with('investigations')->findOrFail($consultation_id);
+        $filteredInvestigation = $consultation->investigations->where('id', $investigation_id)->first();
+
+        if ($filteredInvestigation) {
+            $filteredInvestigation->delete();
+            return response()->json(['message' => 'Investigation deleted successfully'], 204);
+        } else {
+            return response()->json(['message' => 'Investigation not found'], 404);
+        }
+    }
+
 }
