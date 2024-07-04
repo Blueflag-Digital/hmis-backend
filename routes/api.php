@@ -113,6 +113,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('delete/{id}', 'destroy');
     });
 
+
+
+
+
     Route::controller(DrugController::class)->prefix('drugs')->group(function () {
         Route::post('list', 'index');
         Route::post('create', 'store');
@@ -120,6 +124,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
     });
+
+
 
     Route::controller(BatchController::class)->prefix('batches')->group(function () {
         Route::post('list', 'index');

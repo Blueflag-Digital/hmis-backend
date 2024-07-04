@@ -12,10 +12,12 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        // $brands = Brand::get()->map(function($brand){
-        //     return $brand->brandData();
-        // })
-        return response()->json(Brand::all(), 200);
+        $brands = Brand::get()->map(function($brand){
+            return $brand->brandData();
+        });
+
+
+        return response()->json($brands, 200);
     }
 
     /**
@@ -23,6 +25,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+
         $brand = Brand::create($request->all());
         return response()->json($brand, 201);
     }
@@ -32,8 +35,9 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $brand = Brand::findOrFail($id);
-        return response()->json($brand, 200);
+        $data = Brand::findOrFail($id);
+        inf($data);
+        return response()->json($data->brandData(), 200);
     }
 
     /**

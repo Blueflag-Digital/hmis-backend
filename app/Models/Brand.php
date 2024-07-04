@@ -9,7 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','drug_id'];
 
 
     public function drug()
@@ -27,6 +27,7 @@ class Brand extends Model
     {
         return [
             'name' => $this->name,
+            'drug' => isset($this->drug) ? $this->drug->drugData2() :null,
         ];
     }
 }

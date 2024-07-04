@@ -15,18 +15,28 @@ class DrugController extends Controller
         $pageNo = $request->pageNo ?? 1;
         $limit = $request->limit ?? 10;
 
-        if ($request->value) {
-            //fetch all patients
-            return Drug::get()->map(function ($drug) {
-                return $drug->drugData();
-            });
-        }
+
 
         $data = [
             'data' => [],
             'status' => false,
             'totalCount' =>  0,
         ];
+
+        if ($request->value) {
+            //fetch all patients
+            try {
+                 $data['data'] =  Drug::get()->map(function ($drug) {
+                    return $drug->drugData2();
+                });
+                $data['status'] = true;
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            return response()->json($data);
+
+        }
+
 
         try {
             $data['totalCount'] = Drug::count();
