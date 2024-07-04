@@ -12,7 +12,7 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $brands = Brand::get()->map(function($brand){
+        $brands = Brand::get()->map(function ($brand) {
             return $brand->brandData();
         });
 
@@ -36,7 +36,6 @@ class BrandController extends Controller
     public function show($id)
     {
         $data = Brand::findOrFail($id);
-        inf($data);
         return response()->json($data->brandData(), 200);
     }
 
@@ -46,8 +45,9 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $brand = Brand::findOrFail($id);
-
-
+        if (empty($request->brand_id)) {
+            $request['drug_id'] = $brand->drug_id;
+        }
 
         $brand->update($request->all());
         return response()->json($brand, 200);

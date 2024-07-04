@@ -9,7 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','drug_id'];
+    protected $fillable = ['name', 'drug_id'];
 
 
     public function drug()
@@ -22,12 +22,26 @@ class Brand extends Model
         return $this->hasMany(Batch::class);
     }
 
+    public function brandData2()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'batches' => isset($this->batches) ? $this->batches->map(function ($batch) {
+                return $batch->batchData();
+            }) : [],
+        ];
+    }
 
     public function brandData()
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
-            'drug' => isset($this->drug) ? $this->drug->drugData2() :null,
+            'drug' => isset($this->drug) ? $this->drug->drugData2() : null,
+            'batches' => isset($this->batches) ? $this->batches->map(function ($batch) {
+                return $batch->batchData();
+            }) : [],
         ];
     }
 }

@@ -29,7 +29,6 @@ class Drug extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'brand' => isset($this->brand) ?  $this->brand->brandData() : null,
         ];
     }
 }

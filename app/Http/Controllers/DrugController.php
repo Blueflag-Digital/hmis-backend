@@ -26,7 +26,7 @@ class DrugController extends Controller
         if ($request->value) {
             //fetch all patients
             try {
-                 $data['data'] =  Drug::get()->map(function ($drug) {
+                $data['data'] =  Drug::get()->map(function ($drug) {
                     return $drug->drugData2();
                 });
                 $data['status'] = true;
@@ -34,7 +34,6 @@ class DrugController extends Controller
                 //throw $th;
             }
             return response()->json($data);
-
         }
 
 
@@ -68,8 +67,16 @@ class DrugController extends Controller
      */
     public function show($id)
     {
-        $drug = Drug::with('brand')->findOrFail($id);
-        return response()->json($drug, 200);
+        $drug = Drug::findOrFail($id);
+        $data['drug'] = $drug->drugData();
+        $data['brands'] = isset($drug->brands) ?  $drug->brands->map(function ($brand) {
+            $allData['data'] =  $brand->brandData2();
+            $allData['batches'] = isset($brand->batches) ? $brand->batches->map(function ($batch) {
+                return $batch->batchData();
+            }) : [];
+            return $allData;
+        }) : [];
+        return response()->json($data, 200);
     }
 
     /**
