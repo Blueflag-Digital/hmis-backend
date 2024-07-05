@@ -39,7 +39,6 @@ class BrandController extends Controller
             $paginatedData = Brand::latest()->paginate($limit, ['*'], 'page', $pageNo);
             $brands = $paginatedData->getCollection()->map(function ($brand) {
                 return $brand->brandData();
-
             });
             $paginatedData->setCollection($brands);
             $data['data'] = $paginatedData;
@@ -49,11 +48,6 @@ class BrandController extends Controller
              info($th->getMessage());
              return response()->json($data, 500);
         }
-
-        // $brands = Brand::get()->map(function ($brand) {
-        //     return $brand->brandData();
-        // });
-
 
 
     }
