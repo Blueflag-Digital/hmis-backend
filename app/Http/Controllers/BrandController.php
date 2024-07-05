@@ -12,9 +12,14 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
+
+        $pageNo = $request->pageNo ?? 1;
+        $limit = $request->limit ?? 10;
+
         $data = [
             'status'=>false,
             'data' => [],
+            'totalCount'=> 0
         ];
         if($request->value){
             try {
@@ -28,12 +33,29 @@ class BrandController extends Controller
             return response()->json($data);
 
         }
-        $brands = Brand::get()->map(function ($brand) {
-            return $brand->brandData();
-        });
+
+        try {
+            $data['totalCount'] = Brand::count();
+            $paginatedData = Brand::latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $brands = $paginatedData->getCollection()->map(function ($brand) {
+                return $brand->brandData();
+
+            });
+            $paginatedData->setCollection($brands);
+            $data['data'] = $paginatedData;
+            $data['status'] = true;
+             return response()->json($data, 200);
+        } catch (\Throwable $th) {
+             info($th->getMessage());
+             return response()->json($data, 500);
+        }
+
+        // $brands = Brand::get()->map(function ($brand) {
+        //     return $brand->brandData();
+        // });
 
 
-        return response()->json($brands, 200);
+
     }
 
     /**
