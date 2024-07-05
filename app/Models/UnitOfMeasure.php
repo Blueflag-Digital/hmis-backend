@@ -10,4 +10,11 @@ class UnitOfMeasure extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function unitData(){
+        return [
+            'id'=>$this->id,
+            'name'=> $this->name
+        ];
+    }
 }

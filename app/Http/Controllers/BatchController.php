@@ -45,6 +45,7 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+        info($request->all());
         $batch = Batch::create($request->all());
         return response()->json($batch, 201);
     }
@@ -54,8 +55,8 @@ class BatchController extends Controller
      */
     public function show($id)
     {
-        $batch = Batch::with(['drug', 'supplier'])->findOrFail($id);
-        return response()->json($batch, 200);
+        $batch = Batch::findOrFail($id);
+        return response()->json($batch->batchData(), 200);
     }
 
     /**
@@ -69,8 +70,14 @@ class BatchController extends Controller
         if (empty($request->supplier_id)) {
             $request['supplier_id'] = $batch->supplier_id;
         }
-        if (empty($request->drug_id)) {
-            $request['drug_id'] = $batch->drug_id;
+        if (empty($request->brand_id)) {
+            $request['brand_id'] = $batch->brand_id;
+        }
+        if (empty($request->unit_of_measure_id)) {
+            $request['unit_of_measure_id'] = $batch->unit_of_measure_id;
+        }
+        if (empty($request->pack_size_id)) {
+            $request['pack_size_id'] = $batch->pack_size_id;
         }
         $batch->update($request->all());
         return response()->json($batch, 200);

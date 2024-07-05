@@ -12,6 +12,22 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
+        $data = [
+            'status'=>false,
+            'data' => [],
+        ];
+        if($request->value){
+            try {
+                $data['data'] = Brand::get()->map(function($brand){
+                    return $brand->brandData3();
+                });
+                $data['status'] = true;
+            } catch (\Throwable $th) {
+                info($th->getMessage());
+            }
+            return response()->json($data);
+
+        }
         $brands = Brand::get()->map(function ($brand) {
             return $brand->brandData();
         });

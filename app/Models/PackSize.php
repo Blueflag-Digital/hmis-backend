@@ -10,4 +10,13 @@ class PackSize extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function packSizeData(){
+        return [
+            'id'=>$this->id,
+            'name'=> $this->name
+        ];
+    }
+
+
 }

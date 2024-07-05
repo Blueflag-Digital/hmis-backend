@@ -22,6 +22,14 @@ class Brand extends Model
         return $this->hasMany(Batch::class);
     }
 
+     public function brandData3()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
+
     public function brandData2()
     {
         return [
