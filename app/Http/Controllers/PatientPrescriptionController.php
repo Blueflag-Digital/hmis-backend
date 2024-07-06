@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\PatientPrescription;
+use Illuminate\Http\Request;
+
+class PatientPrescriptionController extends Controller
+{
+    /**
+     * PATIENT PRESCRIPTIONS :: List all patient prescriptions
+     */
+    public function index()
+    {
+        $prescriptions = PatientPrescription::all();
+        return response()->json($prescriptions, 200);
+    }
+
+    /**
+     * PATIENT PRESCRIPTIONS :: Store a new patient prescription
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'consultation_id' => 'required|exists:consultations,id',
+            'batch_id' => 'required|exists:batches,id',
+            'dosage' => 'nullable|string',
+            'number_dispensed' => 'nullable|integer',
+            'results' => 'nullable|string',
+        ]);
+
+        $patientPrescription = PatientPrescription::create($request->all());
+
+        return response()->json($patientPrescription, 201);
+    }
+
+    /**
+     * PATIENT PRESCRIPTIONS :: Show a specific patient prescription
+     */
+    public function show(PatientPrescription $patientPrescription)
+    {
+        return response()->json($patientPrescription, 200);
+    }
+
+    /**
+     * PATIENT PRESCRIPTIONS :: Update a specific patient prescription
+     */
+    public function update(Request $request, PatientPrescription $patientPrescription)
+    {
+        $request->validate([
+            'consultation_id' => 'required|exists:consultations,id',
+            'batch_id' => 'required|exists:batches,id',
+            'dosage' => 'nullable|string',
+            'number_dispensed' => 'nullable|integer',
+            'results' => 'nullable|string',
+        ]);
+
+        $patientPrescription->update($request->all());
+
+        return response()->json($patientPrescription, 200);
+    }
+
+    /**
+     * PATIENT PRESCRIPTIONS :: Delete a specific patient prescription
+     */
+    public function destroy(PatientPrescription $patientPrescription)
+    {
+        $patientPrescription->delete();
+
+        return response()->json(null, 204);
+    }
+}

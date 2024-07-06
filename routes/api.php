@@ -11,6 +11,7 @@ use App\Http\Controllers\InvestigationController;
 use App\Http\Controllers\PackSizeController;
 use App\Http\Controllers\PatientInvestigationController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PatientPrescriptionController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
@@ -144,4 +145,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('pack-sizes', PackSizeController::class);
     Route::apiResource('units-of-measure', UnitOfMeasureController::class);
+
+    Route::apiResource('patient-prescriptions', PatientPrescriptionController::class);
+
 });
