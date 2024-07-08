@@ -16,22 +16,69 @@ class PatientPrescriptionController extends Controller
         return response()->json($prescriptions, 200);
     }
 
+    public function getSpecificPrescription(Request $request, $consultationId)
+    {
+
+        $pageNo = $request->pageNo ?? 1;
+        $limit = $request->limit ?? 10;
+
+        info([$limit, $pageNo]);
+
+        $data = [
+            'data' => [],
+            'status' => false,
+        ];
+
+
+        try {
+            $data['totalCount'] = PatientPrescription::where('consultation_id', $consultationId)->count();
+            $prescriptions = PatientPrescription::where('consultation_id', $consultationId)->latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $batches = $prescriptions->getCollection()->map(function ($prescription) {
+                return $prescription->prescriptionData();
+            });
+            $prescriptions->setCollection($batches);
+            $data['data'] = $prescriptions;
+            $data['status'] = true;
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data, 500);
+    }
+
     /**
      * PATIENT PRESCRIPTIONS :: Store a new patient prescription
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'consultation_id' => 'required|exists:consultations,id',
-            'batch_id' => 'required|exists:batches,id',
-            'dosage' => 'nullable|string',
-            'number_dispensed' => 'nullable|integer',
-            'results' => 'nullable|string',
-        ]);
 
-        $patientPrescription = PatientPrescription::create($request->all());
+        $consultation_id = $request->consultation_id;
 
-        return response()->json($patientPrescription, 201);
+        // $request->validate([
+        //     'consultation_id' => 'required|exists:consultations,id',
+        //     'batch_id' => 'required|exists:batches,id',
+        //     'dosage' => 'nullable|string',
+        //     'number_dispensed' => 'nullable',
+        //     'results' => 'nullable|string',
+        // ]);
+
+        $rows = json_decode($request['rows'], true);
+        try {
+            foreach ($rows as $row) {
+                PatientPrescription::create([
+                    'consultation_id' => $consultation_id,
+                    'drug_id' => $row['drugId'],
+                    'dosage' => $row['dosage'],
+                    'noDispensed' => $row['noDispensed']
+                ]);
+            }
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+        // $patientPrescription = PatientPrescription::create($request->all());
+
+        return response()->json([], 201);
     }
 
     /**

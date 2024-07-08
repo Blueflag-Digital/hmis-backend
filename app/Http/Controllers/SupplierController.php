@@ -21,15 +21,15 @@ class SupplierController extends Controller
         $data['data'] = [];
 
 
-         if($request->value){
+        if ($request->value) {
 
-            $data['data'] = Supplier::get()->map(function($supplier){
+            $data['data'] = Supplier::get()->map(function ($supplier) {
                 return $supplier->supplierData2();
             });
             $data['status'] = true;
 
             // just load the suppliers id and name
-             return response()->json($data, 200);
+            return response()->json($data, 200);
         }
         $data['count'] = 0;
 
@@ -52,6 +52,28 @@ class SupplierController extends Controller
             info($th->getMessage());
         }
         return response()->json($data, 500);
+    }
+
+    /**
+     * SUPPLIERS :: Seearch suppliers
+     */
+
+
+    public function  search(Request $request)
+    {
+        $search  = $request->search;
+        $data['data'] = [];
+        $data['status'] = false;
+        try {
+            $data['data']  = Supplier::where('name', 'like', '%' . $search . '%')->get()->map(function ($supplier) {
+                return $supplier->supplierData();
+            });
+            info($data['data']);
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 
     /**

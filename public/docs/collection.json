@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Hospital Management System API Docs",
-        "_postman_id": "1200ebe2-eea1-4922-8e6f-b94eb3e50c28",
+        "_postman_id": "e960e90d-7505-4e48-aa21-4ca0615a5ee6",
         "description": "Hospital Management System API Docs",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -173,7 +173,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"eaque\",\"blood_group\":\"rfxxxlxilkblyovgbnhaj\",\"email\":\"renner.gertrude@example.org\",\"city_id\":1,\"first_name\":\"mnojsd\",\"last_name\":\"xbvlqzyfi\",\"date_of_birth\":\"2024-06-29T20:17:41\",\"gender\":\"vmwomfivx\",\"phones\":\"fpozxjtbseisasxjll\"}"
+                            "raw": "{\"identifier_number\":\"eum\",\"blood_group\":\"pnodffncob\",\"email\":\"quigley.mertie@example.org\",\"city_id\":5,\"first_name\":\"kshngjyupevebjvufo\",\"last_name\":\"uuqnwyfsvrgxw\",\"date_of_birth\":\"2024-07-06T15:47:52\",\"gender\":\"ueaihlpkg\",\"phones\":\"vwojsbdlbom\"}"
                         },
                         "description": "",
                         "auth": {
@@ -260,7 +260,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"identifier_number\":\"unde\",\"blood_group\":\"pfygpgx\",\"city_id\":2,\"first_name\":\"ndyltzygonvma\",\"last_name\":\"xfyewlpkpteampbg\",\"date_of_birth\":\"2024-06-29T20:17:41\",\"gender\":\"em\",\"phones\":\"ibltg\"}"
+                            "raw": "{\"identifier_number\":\"nam\",\"blood_group\":\"narahgzokbstbyjynoagqkgy\",\"city_id\":5,\"first_name\":\"fwjq\",\"last_name\":\"komxzvnqnpmeojfrk\",\"date_of_birth\":\"2024-07-06T15:47:52\",\"gender\":\"pxrsl\",\"phones\":\"gdi\"}"
                         },
                         "description": "",
                         "auth": {
@@ -291,7 +291,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_id\":\"sed\"}"
+                            "raw": "{\"patient_id\":\"maxime\"}"
                         },
                         "description": "",
                         "auth": {
@@ -574,7 +574,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"current_medications\":\"aut\",\"height_cm\":15936.414,\"weight_kg\":8210555.6,\"allergies\":\"modi\",\"reason_for_visit\":\"rem\",\"blood_pressure\":\"sed\",\"heart_rate\":2290.518631,\"temperature\":37214239.55817727,\"respiratory_rate\":0.98643,\"oxygen_saturation\":208.2362859,\"past_medical_history\":\"excepturi\",\"family_medical_history\":\"et\",\"immunization_history\":\"dolor\",\"doctors_notes\":\"sunt\",\"custom_diagnosis\":\"perferendis\",\"next_appointment\":\"2024-06-29T20:17:42\"}"
+                            "raw": "{\"current_medications\":\"recusandae\",\"height_cm\":143.77,\"weight_kg\":8.06422,\"allergies\":\"ducimus\",\"reason_for_visit\":\"incidunt\",\"blood_pressure\":\"ipsam\",\"heart_rate\":58622.44396,\"temperature\":2662.946,\"respiratory_rate\":565893.811832,\"oxygen_saturation\":187.492239,\"past_medical_history\":\"natus\",\"family_medical_history\":\"sunt\",\"immunization_history\":\"ut\",\"doctors_notes\":\"optio\",\"custom_diagnosis\":\"repellat\",\"next_appointment\":\"2024-07-06T15:47:53\"}"
                         },
                         "description": "",
                         "auth": {
@@ -633,7 +633,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"patient_visit_id\":\"quod\"}"
+                            "raw": "{\"patient_visit_id\":\"magni\"}"
                         },
                         "description": "",
                         "auth": {
@@ -654,7 +654,7 @@
                                 {
                                     "id": "patient_visit_id",
                                     "key": "patient_visit_id",
-                                    "value": "voluptas",
+                                    "value": "modi",
                                     "description": "The ID of the patient visit."
                                 }
                             ]
@@ -814,7 +814,7 @@
                                 {
                                     "id": "consultation_id",
                                     "key": "consultation_id",
-                                    "value": "facere",
+                                    "value": "dolorem",
                                     "description": "The ID of the consultation."
                                 }
                             ]
@@ -870,7 +870,7 @@
                                 {
                                     "id": "consultation_id",
                                     "key": "consultation_id",
-                                    "value": "incidunt",
+                                    "value": "id",
                                     "description": "The ID of the consultation."
                                 }
                             ]
@@ -886,10 +886,7 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "[]"
-                        },
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"
@@ -909,12 +906,76 @@
                                 {
                                     "id": "consultation_id",
                                     "key": "consultation_id",
-                                    "value": "et",
+                                    "value": "fugiat",
                                     "description": "The ID of the consultation."
                                 }
                             ]
                         },
                         "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DELETE PATIENT INVESTIGATION",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-investigations\/patient-investigations\/:consultation_id\/investigations\/delete",
+                            "variable": [
+                                {
+                                    "id": "consultation_id",
+                                    "key": "consultation_id",
+                                    "value": "ea",
+                                    "description": "The ID of the consultation."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PATIENT DOWNLOAD HMIS DOCUMENT :: Store",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-investigations\/download-file",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-investigations\/download-file"
+                        },
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",
@@ -1001,7 +1062,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sapiente",
+                                    "value": "in",
                                     "description": "The ID of the view."
                                 }
                             ]
@@ -1037,7 +1098,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "qui",
+                                    "value": "temporibus",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -1073,7 +1134,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sunt",
+                                    "value": "et",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -1165,7 +1226,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "quo",
+                                    "value": "ut",
                                     "description": "The ID of the view."
                                 }
                             ]
@@ -1201,7 +1262,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "unde",
+                                    "value": "nobis",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -1237,7 +1298,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
+                                    "value": "libero",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -1329,7 +1390,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "enim",
+                                    "value": "quas",
                                     "description": "The ID of the view."
                                 }
                             ]
@@ -1365,7 +1426,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "repellendus",
+                                    "value": "necessitatibus",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -1401,7 +1462,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "officiis",
+                                    "value": "ratione",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -1493,7 +1554,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "necessitatibus",
+                                    "value": "voluptas",
                                     "description": "The ID of the view."
                                 }
                             ]
@@ -1529,7 +1590,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "necessitatibus",
+                                    "value": "ut",
                                     "description": "The ID of the update."
                                 }
                             ]
@@ -1565,7 +1626,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "aut",
+                                    "value": "corporis",
                                     "description": "The ID of the delete."
                                 }
                             ]
@@ -1590,6 +1651,54 @@
                     "response": []
                 },
                 {
+                    "name": "BATCHES :: Get Available Drugs",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/batches\/available-drugs",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/batches\/available-drugs"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
                     "name": "PHONES :: Store",
                     "request": {
                         "url": {
@@ -1601,7 +1710,7 @@
                                 {
                                     "id": "person_id",
                                     "key": "person_id",
-                                    "value": "perferendis",
+                                    "value": "dolorem",
                                     "description": "The ID of the person."
                                 }
                             ]
@@ -1619,8 +1728,635 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"phone_number\":\"pzetmgrfl\"}"
+                            "raw": "{\"phone_number\":\"qyt\"}"
                         },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PACK SIZES :: List pack sizes",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pack-sizes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/pack-sizes"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PACK SIZES :: Create a new pack size",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pack-sizes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/pack-sizes"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"jceztprontjbtacgkceowz\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PACK SIZES :: Show a specific pack size",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pack-sizes\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/pack-sizes\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "beatae",
+                                    "description": "The ID of the pack size."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PACK SIZES :: Update a specific pack size",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pack-sizes\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/pack-sizes\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "libero",
+                                    "description": "The ID of the pack size."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"wd\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PACK SIZES :: Delete a specific pack size",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/pack-sizes\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/pack-sizes\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "asperiores",
+                                    "description": "The ID of the pack size."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "UNITS OF MEASURE :: List units of measure",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/units-of-measure",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/units-of-measure"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "UNITS OF MEASURE :: Create a new unit of measure",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/units-of-measure",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/units-of-measure"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"dlseigishzcpyanadgg\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "UNITS OF MEASURE :: Show a specific unit of measure",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/units-of-measure\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/units-of-measure\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "aspernatur",
+                                    "description": "The ID of the units of measure."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "UNITS OF MEASURE :: Update a specific unit of measure",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/units-of-measure\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/units-of-measure\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "vel",
+                                    "description": "The ID of the units of measure."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"mqtgxhoofqlkjfv\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "UNITS OF MEASURE :: Delete a specific unit of measure",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/units-of-measure\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/units-of-measure\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "ut",
+                                    "description": "The ID of the units of measure."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PATIENT PRESCRIPTIONS :: List all patient prescriptions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-prescriptions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-prescriptions"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PATIENT PRESCRIPTIONS :: Store a new patient prescription",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-prescriptions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-prescriptions"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PATIENT PRESCRIPTIONS :: Show a specific patient prescription",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-prescriptions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-prescriptions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "15",
+                                    "description": "The ID of the patient prescription."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PATIENT PRESCRIPTIONS :: Update a specific patient prescription",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-prescriptions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-prescriptions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "15",
+                                    "description": "The ID of the patient prescription."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"consultation_id\":\"et\",\"batch_id\":\"accusantium\",\"dosage\":\"atque\",\"number_dispensed\":7,\"results\":\"consectetur\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PATIENT PRESCRIPTIONS :: Delete a specific patient prescription",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/patient-prescriptions\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/patient-prescriptions\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "15",
+                                    "description": "The ID of the patient prescription."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
                         "description": "",
                         "auth": {
                             "type": "noauth"

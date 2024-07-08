@@ -78,39 +78,39 @@ paths:
                 identifier_number:
                   type: string
                   description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',."
-                  example: eaque
+                  example: eum
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: rfxxxlxilkblyovgbnhaj
+                  example: pnodffncob
                 email:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: renner.gertrude@example.org
+                  example: quigley.mertie@example.org
                 city_id:
                   type: integer
                   description: ''
-                  example: 1
+                  example: 5
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: mnojsd
+                  example: kshngjyupevebjvufo
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: xbvlqzyfi
+                  example: uuqnwyfsvrgxw
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-29T20:17:41'
+                  example: '2024-07-06T15:47:52'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: vmwomfivx
+                  example: ueaihlpkg
                 phones:
                   type: string
                   description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
-                  example: fpozxjtbseisasxjll
+                  example: vwojsbdlbom
               required:
                 - city_id
                 - first_name
@@ -155,35 +155,35 @@ paths:
                 identifier_number:
                   type: string
                   description: ''
-                  example: unde
+                  example: nam
                 blood_group:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: pfygpgx
+                  example: narahgzokbstbyjynoagqkgy
                 city_id:
                   type: integer
                   description: ''
-                  example: 2
+                  example: 5
                 first_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: ndyltzygonvma
+                  example: fwjq
                 last_name:
                   type: string
                   description: 'Must not be greater than 100 characters.'
-                  example: xfyewlpkpteampbg
+                  example: komxzvnqnpmeojfrk
                 date_of_birth:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-29T20:17:41'
+                  example: '2024-07-06T15:47:52'
                 gender:
                   type: string
                   description: 'Must not be greater than 10 characters.'
-                  example: em
+                  example: pxrsl
                 phones:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: ibltg
+                  example: gdi
               required:
                 - city_id
                 - first_name
@@ -208,7 +208,7 @@ paths:
                 patient_id:
                   type: string
                   description: ''
-                  example: sed
+                  example: maxime
               required:
                 - patient_id
       security: []
@@ -321,59 +321,59 @@ paths:
                 current_medications:
                   type: string
                   description: "'patient_visit_id' => 'required|exists:patient_visits,id',."
-                  example: aut
+                  example: recusandae
                 height_cm:
                   type: number
                   description: ''
-                  example: 15936.414
+                  example: 143.77
                 weight_kg:
                   type: number
                   description: ''
-                  example: 8210555.6
+                  example: 8.06422
                 allergies:
                   type: string
                   description: ''
-                  example: modi
+                  example: ducimus
                 reason_for_visit:
                   type: string
                   description: ''
-                  example: rem
+                  example: incidunt
                 blood_pressure:
                   type: string
                   description: ''
-                  example: sed
+                  example: ipsam
                 heart_rate:
                   type: number
                   description: ''
-                  example: 2290.518631
+                  example: 58622.44396
                 temperature:
                   type: number
                   description: ''
-                  example: 37214239.558177
+                  example: 2662.946
                 respiratory_rate:
                   type: number
                   description: ''
-                  example: 0.98643
+                  example: 565893.811832
                 oxygen_saturation:
                   type: number
                   description: ''
-                  example: 208.2362859
+                  example: 187.492239
                 past_medical_history:
                   type: string
                   description: ''
-                  example: excepturi
+                  example: natus
                 family_medical_history:
                   type: string
                   description: ''
-                  example: et
+                  example: sunt
                 immunization_history:
                   type: string
                   description: ''
-                  example: dolor
+                  example: ut
                 doctors_notes:
                   type: string
                   description: ''
-                  example: sunt
+                  example: optio
                 diagnosis_ids:
                   type: object
                   description: ''
@@ -382,11 +382,11 @@ paths:
                 custom_diagnosis:
                   type: string
                   description: ''
-                  example: perferendis
+                  example: repellat
                 next_appointment:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2024-06-29T20:17:42'
+                  example: '2024-07-06T15:47:53'
       security: []
   /api/consultation/get-consultation-data:
     post:
@@ -417,7 +417,7 @@ paths:
                 patient_visit_id:
                   type: string
                   description: ''
-                  example: quod
+                  example: magni
               required:
                 - patient_visit_id
       security: []
@@ -448,7 +448,7 @@ paths:
         in: path
         name: patient_visit_id
         description: 'The ID of the patient visit.'
-        example: voluptas
+        example: modi
         required: true
         schema:
           type: string
@@ -524,19 +524,6 @@ paths:
       responses: {  }
       tags:
         - Endpoints
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                investigation_ids:
-                  type: array
-                  description: ''
-                  example: null
-                  items:
-                    type: string
       security: []
     put:
       summary: 'PATIENT INVESTIGATIONS :: Update'
@@ -552,10 +539,39 @@ paths:
         in: path
         name: consultation_id
         description: 'The ID of the consultation.'
-        example: facere
+        example: dolorem
         required: true
         schema:
           type: string
+  '/api/patient-investigations/patient-investigations/{consultation_id}/investigations/delete':
+    post:
+      summary: 'DELETE PATIENT INVESTIGATION'
+      operationId: dELETEPATIENTINVESTIGATION
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: consultation_id
+        description: 'The ID of the consultation.'
+        example: ea
+        required: true
+        schema:
+          type: string
+  /api/patient-investigations/download-file:
+    post:
+      summary: 'PATIENT DOWNLOAD HMIS DOCUMENT :: Store'
+      operationId: pATIENTDOWNLOADHMISDOCUMENTStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
   /api/suppliers/list:
     post:
       summary: 'SUPPLIERS :: List suppliers'
@@ -591,7 +607,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the view.'
-        example: sapiente
+        example: in
         required: true
         schema:
           type: string
@@ -610,7 +626,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: qui
+        example: temporibus
         required: true
         schema:
           type: string
@@ -629,7 +645,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: sunt
+        example: et
         required: true
         schema:
           type: string
@@ -668,7 +684,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the view.'
-        example: quo
+        example: ut
         required: true
         schema:
           type: string
@@ -687,7 +703,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: unde
+        example: nobis
         required: true
         schema:
           type: string
@@ -706,7 +722,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: voluptatem
+        example: libero
         required: true
         schema:
           type: string
@@ -745,7 +761,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the view.'
-        example: enim
+        example: quas
         required: true
         schema:
           type: string
@@ -764,7 +780,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: repellendus
+        example: necessitatibus
         required: true
         schema:
           type: string
@@ -783,7 +799,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: officiis
+        example: ratione
         required: true
         schema:
           type: string
@@ -822,7 +838,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the view.'
-        example: necessitatibus
+        example: voluptas
         required: true
         schema:
           type: string
@@ -841,7 +857,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the update.'
-        example: necessitatibus
+        example: ut
         required: true
         schema:
           type: string
@@ -860,10 +876,32 @@ paths:
         in: path
         name: id
         description: 'The ID of the delete.'
-        example: aut
+        example: corporis
         required: true
         schema:
           type: string
+  /api/batches/available-drugs:
+    get:
+      summary: 'BATCHES :: Get Available Drugs'
+      operationId: bATCHESGetAvailableDrugs
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
   '/api/people/people/{person_id}/phones':
     post:
       summary: 'PHONES :: Store'
@@ -883,7 +921,7 @@ paths:
                 phone_number:
                   type: string
                   description: 'Must not be greater than 20 characters.'
-                  example: pzetmgrfl
+                  example: qyt
               required:
                 - phone_number
       security: []
@@ -892,10 +930,332 @@ paths:
         in: path
         name: person_id
         description: 'The ID of the person.'
-        example: perferendis
+        example: dolorem
         required: true
         schema:
           type: string
+  /api/pack-sizes:
+    get:
+      summary: 'PACK SIZES :: List pack sizes'
+      operationId: pACKSIZESListPackSizes
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'PACK SIZES :: Create a new pack size'
+      operationId: pACKSIZESCreateANewPackSize
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: jceztprontjbtacgkceowz
+              required:
+                - name
+      security: []
+  '/api/pack-sizes/{id}':
+    get:
+      summary: 'PACK SIZES :: Show a specific pack size'
+      operationId: pACKSIZESShowASpecificPackSize
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'PACK SIZES :: Update a specific pack size'
+      operationId: pACKSIZESUpdateASpecificPackSize
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: wd
+              required:
+                - name
+      security: []
+    delete:
+      summary: 'PACK SIZES :: Delete a specific pack size'
+      operationId: pACKSIZESDeleteASpecificPackSize
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the pack size.'
+        example: beatae
+        required: true
+        schema:
+          type: string
+  /api/units-of-measure:
+    get:
+      summary: 'UNITS OF MEASURE :: List units of measure'
+      operationId: uNITSOFMEASUREListUnitsOfMeasure
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'UNITS OF MEASURE :: Create a new unit of measure'
+      operationId: uNITSOFMEASURECreateANewUnitOfMeasure
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: dlseigishzcpyanadgg
+              required:
+                - name
+      security: []
+  '/api/units-of-measure/{id}':
+    get:
+      summary: 'UNITS OF MEASURE :: Show a specific unit of measure'
+      operationId: uNITSOFMEASUREShowASpecificUnitOfMeasure
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'UNITS OF MEASURE :: Update a specific unit of measure'
+      operationId: uNITSOFMEASUREUpdateASpecificUnitOfMeasure
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: mqtgxhoofqlkjfv
+              required:
+                - name
+      security: []
+    delete:
+      summary: 'UNITS OF MEASURE :: Delete a specific unit of measure'
+      operationId: uNITSOFMEASUREDeleteASpecificUnitOfMeasure
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the units of measure.'
+        example: aspernatur
+        required: true
+        schema:
+          type: string
+  /api/patient-prescriptions:
+    get:
+      summary: 'PATIENT PRESCRIPTIONS :: List all patient prescriptions'
+      operationId: pATIENTPRESCRIPTIONSListAllPatientPrescriptions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'PATIENT PRESCRIPTIONS :: Store a new patient prescription'
+      operationId: pATIENTPRESCRIPTIONSStoreANewPatientPrescription
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/patient-prescriptions/{id}':
+    get:
+      summary: 'PATIENT PRESCRIPTIONS :: Show a specific patient prescription'
+      operationId: pATIENTPRESCRIPTIONSShowASpecificPatientPrescription
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'PATIENT PRESCRIPTIONS :: Update a specific patient prescription'
+      operationId: pATIENTPRESCRIPTIONSUpdateASpecificPatientPrescription
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                consultation_id:
+                  type: string
+                  description: ''
+                  example: et
+                batch_id:
+                  type: string
+                  description: ''
+                  example: accusantium
+                dosage:
+                  type: string
+                  description: ''
+                  example: atque
+                number_dispensed:
+                  type: integer
+                  description: ''
+                  example: 7
+                results:
+                  type: string
+                  description: ''
+                  example: consectetur
+              required:
+                - consultation_id
+                - batch_id
+      security: []
+    delete:
+      summary: 'PATIENT PRESCRIPTIONS :: Delete a specific patient prescription'
+      operationId: pATIENTPRESCRIPTIONSDeleteASpecificPatientPrescription
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the patient prescription.'
+        example: 15
+        required: true
+        schema:
+          type: integer
 tags:
   -
     name: Endpoints

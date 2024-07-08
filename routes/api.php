@@ -88,7 +88,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('patient-investigations/{consultation_id}/investigations', 'updateInvestigation');
         Route::post('patient-investigations/{consultation_id}/investigations/delete', 'destroy');
         Route::post('download-file', 'download');
-
     });
 
 
@@ -104,6 +103,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('view/{id}', 'show');
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
+        Route::post('search-supplier', 'search');
     });
 
     Route::controller(BrandController::class)->prefix('brands')->group(function () {
@@ -112,6 +112,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('view/{id}', 'show');
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
+        Route::post('search-brands', 'search');
     });
 
 
@@ -124,6 +125,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('view/{id}', 'show');
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
+        Route::post('search-drugs', 'search');
     });
 
 
@@ -135,6 +137,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
         Route::get('available-drugs', 'availableDrugs');
+        Route::post('search-batches', 'search');
     });
 
     // People routes
@@ -147,5 +150,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('units-of-measure', UnitOfMeasureController::class);
 
     Route::apiResource('patient-prescriptions', PatientPrescriptionController::class);
-
+    Route::post('patient-prescriptions/consultations/{consultationId}', [PatientPrescriptionController::class, 'getSpecificPrescription']);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Drug;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,27 @@ class DrugController extends Controller
     }
 
     /**
+     * DRUGS :: Search drugs
+     */
+
+    public function search(Request $request)
+    {
+        $search  = $request->search;
+        $data['data'] = [];
+        $data['status'] = false;
+        try {
+            $data['data']  = Drug::where('name', 'like', '%' . $search . '%')->get()->map(function ($drug) {
+                return $drug->drugData();
+            });
+            info($data['data']);
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
+    }
+
+    /**
      * DRUGS :: Create drug
      */
     public function store(Request $request)
@@ -86,11 +108,6 @@ class DrugController extends Controller
     {
 
         $drug = Drug::findOrFail($id);
-
-        if (empty($request->brand_id)) {
-            $request['brand_id'] = $drug->brand_id;
-        }
-
         $drug->update($request->all());
         return response()->json($drug, 200);
     }
@@ -100,6 +117,8 @@ class DrugController extends Controller
      */
     public function destroy($id)
     {
+
+        //delete 
         Drug::destroy($id);
         return response()->json(null, 204);
     }

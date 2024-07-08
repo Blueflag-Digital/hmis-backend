@@ -35,8 +35,14 @@ class Patient extends Model
         return $firstInitial . $lastInitial;
     }
 
+    public function getAge()
+    {
+        return '12';
+    }
+
 
     //end reusbale code
+
 
 
     public function patientData()
@@ -45,6 +51,7 @@ class Patient extends Model
             'id' => $this->id,
             'initials' => isset($this->person)  ?  $this->getInitials()  : "",
             'name' =>  isset($this->person) ? $this->person->first_name . " " . $this->person->last_name : "",
+            'age' => $this->getAge(),
             'dob' => isset($this->person) ? Carbon::parse($this->person->date_of_birth)->format('d/m/Y') : "",
             'gender' => isset($this->person) ? $this->person->gender : "",
             'phone' => isset($this->person) ? $this->person->phone : " ",

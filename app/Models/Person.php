@@ -43,11 +43,19 @@ class Person extends Model
     }
 
 
+    public function getAge()
+    {
+        return '12';
+    }
+
+
+
     public function personData()
     {
         return [
             'id' => $this->id,
             'name' => $this->first_name . " " . $this->last_name,
+            'age' => $this->getAge(),
             'dob' => Carbon::parse($this->date_of_birth)->format('d/m/Y'),
             'gender' => $this->gender,
             'phones' => $this->personPhone(),

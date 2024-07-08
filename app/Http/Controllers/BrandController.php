@@ -17,13 +17,13 @@ class BrandController extends Controller
         $limit = $request->limit ?? 10;
 
         $data = [
-            'status'=>false,
+            'status' => false,
             'data' => [],
-            'totalCount'=> 0
+            'totalCount' => 0
         ];
-        if($request->value){
+        if ($request->value) {
             try {
-                $data['data'] = Brand::get()->map(function($brand){
+                $data['data'] = Brand::get()->map(function ($brand) {
                     return $brand->brandData3();
                 });
                 $data['status'] = true;
@@ -31,7 +31,6 @@ class BrandController extends Controller
                 info($th->getMessage());
             }
             return response()->json($data);
-
         }
 
         try {
@@ -43,14 +42,36 @@ class BrandController extends Controller
             $paginatedData->setCollection($brands);
             $data['data'] = $paginatedData;
             $data['status'] = true;
-             return response()->json($data, 200);
+            return response()->json($data, 200);
         } catch (\Throwable $th) {
-             info($th->getMessage());
-             return response()->json($data, 500);
+            info($th->getMessage());
+            return response()->json($data, 500);
         }
-
-
     }
+
+    /**
+     * BRANDS :: Search brands
+     */
+
+
+    public function search(Request $request)
+    {
+        $search  = $request->search;
+        $data['data'] = [];
+        $data['status'] = false;
+        try {
+            $data['data']  = Brand::where('name', 'like', '%' . $search . '%')->get()->map(function ($brand) {
+                return $brand->brandData();
+            });
+            info($data['data']);
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
+    }
+
+
 
     /**
      * BRANDS :: Create brand

@@ -14,8 +14,8 @@ class BatchController extends Controller
     public function index(Request $request)
     {
 
-        $pageNo = $request->pageNo;
-        $limit = $request->limit;
+        $pageNo = $request->pageNo ?? 1;
+        $limit = $request->limit ?? 10;
 
         $data = [
             'data' => [],
@@ -40,12 +40,29 @@ class BatchController extends Controller
         // return response()->json(Batch::with(['drug', 'supplier'])->get(), 200);
     }
 
+    public function search(Request $request){
+        $search = $request->search;
+        $data['data'] = [];
+        $data['status'] = false;
+        try {
+            $data['data']  = Batch::where('name', 'like', '%' . $search . '%')->get()->map(function ($batch) {
+                return $batch->batchData();
+            });
+        
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
+
+
+    }
+
     /**
      * BATCHES :: Create batch
      */
     public function store(Request $request)
     {
-        info($request->all());
         $batch = Batch::create($request->all());
         return response()->json($batch, 201);
     }
@@ -97,17 +114,50 @@ class BatchController extends Controller
      */
     public function availableDrugs()
     {
-        $drugs = Drug::with(['brands' => function($query) {
-            $query->whereHas('batches', function($query) {
+
+
+        // $response = $drugs->map(function ($drug) {
+        //     return [
+        //         'id' => $drug->id,
+        //         'drug_name' => $drug->name,
+        //         'brands' => $drug->brands->map(function ($brand) {
+        //             return [
+        //                 'id' => $brand->id,
+        //                 'brand_name' => $brand->name,
+        //                 'quantity_available' => $brand->batches->sum('quantity_available'),
+        //             ];
+        //         })
+        //     ];
+        // });
+
+        // $drugs = Drug::whereHas('brands', function ($query) {
+        //     $query->whereHas('batches', function ($query) {
+        //         $query->where('quantity_available', '>', 0);
+        //     });
+        // })->get();
+
+        // $drugss = Drug::whereHas('brands', function ($query) {
+        //     $query->whereHas('batches', function ($query) {
+        //         $query->where('quantity_available', '>', 0);
+        //     });
+        // });
+
+
+        // info($drugss->count());
+
+        $drugs = Drug::with(['brands' => function ($query) {
+            $query->whereHas('batches', function ($query) {
                 $query->where('quantity_available', '>', 0);
             });
         }])->get();
 
-        $response = $drugs->map(function($drug) {
+        $response = $drugs->map(function ($drug) {
             return [
+                'id' => $drug->id,
                 'drug_name' => $drug->name,
-                'brands' => $drug->brands->map(function($brand) {
+                'brands' => $drug->brands->map(function ($brand) {
                     return [
+                        'id' => $brand->id,
                         'brand_name' => $brand->name,
                         'quantity_available' => $brand->batches->sum('quantity_available'),
                     ];
