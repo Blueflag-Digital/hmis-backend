@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Patient Report</title>
+    <title>Patient Report : </title>
     <style>
         /* CSS for table styling */
         table {
@@ -24,7 +24,9 @@
 </head>
 
 <body>
-    <h1>Patients Report as from </h1>
+    <h1>Patients Report as from {{ $data['startDate']->format('d/m/Y') }} to {{ $data['endDate']->format('d/m/Y') }}
+    </h1>
+    <h3>Total Patients : {{ $count }} </h3>
     <table class="table table-bordered">
         <thead>
             <tr>
