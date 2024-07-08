@@ -7,6 +7,7 @@ use App\Models\Email;
 use App\Models\Patient;
 use App\Models\Person;
 use App\Models\Phone;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -125,6 +126,7 @@ class PatientController extends Controller
             $person->identifier_number = $validatedData['identifier_number'];
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
+            $person->place_of_work = $request->place_of_work ? $request->place_of_work : null;
             $person->save();
 
             if ($person) {
@@ -309,10 +311,12 @@ class PatientController extends Controller
             'city_id' => 'required|integer',
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
-            'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|max:10',
             'phones' => 'nullable|max:20',
+            'date_of_birth' => 'nullable|date'
         ]);
+
+        info($validatedData);
 
         $data = [
             'status' => false,
@@ -353,6 +357,10 @@ class PatientController extends Controller
                 $validatedData['email']  = $request->email;
             }
 
+
+
+            $validatedData['date_of_birth'] = Carbon::parse($request->date_of_birth)->format('Y-m-d');
+
             $person->user_id = null;
             $person->person_type_id = 1;
             $person->city_id = $validatedData['city_id'];
@@ -364,6 +372,7 @@ class PatientController extends Controller
             $person->identifier_number = $validatedData['identifier_number'];
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
+            $person->place_of_work = $request->place_of_work ? $request->place_of_work : null;
             $person->save();
 
 

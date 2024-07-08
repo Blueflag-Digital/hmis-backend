@@ -37,7 +37,7 @@ class Patient extends Model
 
     public function getAge()
     {
-        return '12';
+        return isset($this->person) ?  Carbon::parse($this->person->date_of_birth)->age . " years" : "";
     }
 
 
@@ -58,6 +58,7 @@ class Patient extends Model
             'email' => isset($this->person) ? $this->person->email : "",
             'blood_group' => isset($this->person) ? $this->person->blood_group : "",
             'national_id' => isset($this->person) ? $this->person->identifier_number : "",
+            'work_place' => isset($this->person) ? $this->person->place_of_work : "",
             // 'national_id' => isset($this->person) ? "23656524" : "",
             'city' => isset($this->person) && isset($this->person->city) ? $this->person->city->name : null,
         ];

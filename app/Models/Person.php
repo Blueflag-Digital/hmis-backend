@@ -45,7 +45,7 @@ class Person extends Model
 
     public function getAge()
     {
-        return '12';
+        return Carbon::parse($this->date_of_birth)->age . " years";
     }
 
 
@@ -65,7 +65,8 @@ class Person extends Model
             'city_id' => $this->city ? $this->city->id : null,
             'first_name' =>  $this->first_name,
             'last_name' => $this->last_name,
-            'national_id' =>  $this->identifier_number
+            'national_id' =>  $this->identifier_number,
+            'place_of_work' => $this->place_of_work
         ];
     }
 }
