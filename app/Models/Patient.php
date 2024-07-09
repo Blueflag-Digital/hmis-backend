@@ -61,6 +61,7 @@ class Patient extends Model
             'work_place' => isset($this->person) ? $this->person->place_of_work : "",
             // 'national_id' => isset($this->person) ? "23656524" : "",
             'city' => isset($this->person) && isset($this->person->city) ? $this->person->city->name : null,
+            'date_added' => isset($this->created_at) ? Carbon::parse($this->created_at)->format('d/m/Y') : "",
         ];
     }
 }

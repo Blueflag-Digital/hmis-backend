@@ -168,7 +168,12 @@ class PatientController extends Controller
 
         try {
             foreach ($datas as $key => $validatedData) {
-
+                //remove the first row if email is 'test@gmail.com
+                if(isset($validatedData['Email']) && $validatedData['Email'] === 'test@gmail.com'){
+                     unset($datas[$key]);
+                }
+            }
+            foreach ($datas as $key => $validatedData) {
                 $formattedDate = "";
                 if (!empty($validatedData['DOB'])) {
 

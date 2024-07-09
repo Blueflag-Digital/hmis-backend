@@ -37,6 +37,7 @@
                 <th>Gender</th>
                 <th>D.O.B</th>
                 <th>Age</th>
+                <th>Date Added</th>
             </tr>
         </thead>
         <tbody>
@@ -50,8 +51,9 @@
                     <td>{{ $patient['email'] }}</td>
                     <td>{{ $patient['phone'] }}</td>
                     <td>{{ $patient['gender'] }}</td>
-                    <td>{{ $patient['age'] }}</td>
                     <td>{{ $patient['dob'] }}</td>
+                    <td>{{ $patient['age'] }}</td>
+                    <td>{{ $patient['date_added'] }}</td>
                 </tr>
             @endforeach
         </tbody>
