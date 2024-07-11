@@ -40,6 +40,10 @@ class ReportsController extends Controller
             $patients = $paginatedData->map(function ($patient) {
                 return $patient->patientData();
             });
+
+            info($data['startDate']->format('d/m/Y'));
+            info($data['endDate']->format('d/m/Y'));
+
             if ($patients->count() > 0) {
                 $pdf = app('dompdf.wrapper');
                 $pdf->loadView('reports.patients', compact('patients', 'count', 'data'));
