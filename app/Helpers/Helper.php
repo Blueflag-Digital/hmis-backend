@@ -23,7 +23,6 @@ class Helper
                 $data['status'] = true;
             }
         } catch (\Throwable $th) {
-            info($data);
             $data['message'] = $th->getMessage();
         }
 

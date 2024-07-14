@@ -16,8 +16,10 @@ use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitOfMeasureController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -152,10 +154,33 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //reports
 
-     Route::prefix('reports')->group(function () {
+    Route::prefix('reports')->group(function () {
         Route::post('load-patients-report', [ReportsController::class, 'patientsReport']);
         // Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
     });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UsersController::class, 'index']);
+        Route::post('/', [UsersController::class, 'store']);
+        Route::get('/{userId}', [UsersController::class, 'show']);
+        Route::post('/update', [UsersController::class, 'update']);
+        Route::post('/delete', [UsersController::class, 'delete']);
+    });
+
+
+
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [RolesController::class, 'index']);
+        Route::post('/', [RolesController::class, 'store']);
+        Route::post('/update', [RolesController::class, 'update']);
+        Route::post('/delete', [RolesController::class, 'delete']);
+    });
+
+
+
+
+
+
 
     Route::apiResource('patient-prescriptions', PatientPrescriptionController::class);
     Route::post('patient-prescriptions/consultations/{consultationId}', [PatientPrescriptionController::class, 'getSpecificPrescription']);
