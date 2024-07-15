@@ -4,14 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesPermissionsController extends Controller
 {
-    public function index(Request $request){
-        info($request->user());
+    public function index(Request $request)
+    {
+        $data['status'] = false;
+        try {
+            $data['data'] = Permission::get();
+        } catch (\Throwable $th) {
+            $data['message'] = $th->getMessage();
+        }
+
+        return response()->json($data);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $permissions = $request->all();
         $data['status'] = false;
         try {
@@ -20,16 +30,41 @@ class RolesPermissionsController extends Controller
                 $exists = Permission::where('name', $value)->exists();
 
                 if (!$exists) {
-                     info($value);
-                    Permission::create(['name' => $value,'guard_name' => 'web']);
+                    Permission::create(['name' => $value, 'guard_name' => 'web']);
                 }
             }
-             $data['status'] = true;
+            $data['status'] = true;
         } catch (\Throwable $th) {
-           info($th->getMessage());
+            info($th->getMessage());
         }
 
         return response()->json($data);
+    }
 
+    public function updateRolePermissions(Request $request)
+    {
+        $data['status'] = false;
+        try {
+            $roleId = $request->roleId;
+            $selectedPermissions = $request->selectedPermissions;
+
+            if (!$role = Role::find($roleId)) {
+                throw new \Exception("Role not found", 1);
+            }
+            $validPermissions = Permission::whereIn('name', $selectedPermissions)->where('guard_name', 'web')->pluck('name')->toArray();
+
+            if (empty($validPermissions)) {
+                throw new \Exception('No valid permissions found');
+            }
+
+
+            $role->syncPermissions($selectedPermissions);
+            $data['status'] = true;
+            $data['message'] = 'Permissions updated successfully.';
+        } catch (\Throwable $th) {
+            $data['message'] =  $th->getMessage();
+        }
+
+        return response()->json($data);
     }
 }

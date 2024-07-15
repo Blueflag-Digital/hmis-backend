@@ -44,8 +44,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/add', 'store');
         Route::post('/show', 'show');
         Route::post('/update', 'update');
-        Route::post('/delete', 'destroy');
+        Route::post('/update-role-permissions', 'updateRolePermissions');
+
+        // Route::post('/delete', 'destroy');
     });
+
 
 
 
