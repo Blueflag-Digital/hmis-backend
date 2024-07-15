@@ -17,6 +17,7 @@ use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\RolesPermissionsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitOfMeasureController;
 use App\Http\Controllers\UsersController;
@@ -36,6 +37,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+
+    Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/add', 'store');
+        Route::post('/show', 'show');
+        Route::post('/update', 'update');
+        Route::post('/delete', 'destroy');
+    });
+
+
 
     Route::controller(PatientController::class)->prefix('patients')->group(function () {
         Route::post('/', 'index');

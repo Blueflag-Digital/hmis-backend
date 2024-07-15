@@ -33,6 +33,27 @@ class RolesController extends Controller
 
         return response()->json($data);
     }
+
+    public function update(Request $request)
+    {
+        $data['status'] = false;
+        $role_id = $request->role_id;
+        try {
+            if(!$role = Role::find($role_id)){
+                throw new \Exception("role Not found", 1);
+
+            }
+            $role->update([
+                'name' => $request->name,
+            ]);
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            $data['message'] = $th->getMessage();
+        }
+
+        return response()->json($data);
+    }
+
     public function delete(Request $request)
     {
         $data['status'] = false;
