@@ -8,11 +8,32 @@ use Spatie\Permission\Models\Role;
 
 class RolesPermissionsController extends Controller
 {
-    public function index(Request $request)
+    public function getRolePermissions($roleId){
+         $data['status'] = false;
+        try {
+            $role = Role::find($roleId);
+            $data['permissions'] = $role ? $role->permissions->pluck('name') : collect();
+            $data['role'] = $role;
+
+           $data['status'] = true;
+        } catch (\Throwable $th) {
+            $data['message'] = $th->getMessage();
+        }
+
+        return response()->json($data);
+    }
+    public function getUserPermissions(Request $request)
     {
         $data['status'] = false;
         try {
-            $data['data'] = Permission::get();
+
+            $user = $request->user();
+            $role = $user->roles->first();
+            $permissions = $role ? $role->permissions->pluck('name') : collect();
+
+            $data['role'] = $role;
+            $data['permissions'] = $permissions;
+           $data['status'] = true;
         } catch (\Throwable $th) {
             $data['message'] = $th->getMessage();
         }
@@ -20,7 +41,7 @@ class RolesPermissionsController extends Controller
         return response()->json($data);
     }
 
-    public function update(Request $request)
+    public function updatePermissions(Request $request)
     {
         $permissions = $request->all();
         $data['status'] = false;
@@ -31,6 +52,24 @@ class RolesPermissionsController extends Controller
 
                 if (!$exists) {
                     Permission::create(['name' => $value, 'guard_name' => 'web']);
+                }
+            }
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+        return response()->json($data);
+    }
+    public function updateRoles(Request $request){
+        $roles = $request->all();
+        $data['status'] = false;
+        try {
+
+            foreach ($roles['roles'] as $key => $value) {
+                $exists = Role::where('name', $value)->exists();
+                if (!$exists) {
+                    Role::create(['name' => $value, 'guard_name' => 'web']);
                 }
             }
             $data['status'] = true;

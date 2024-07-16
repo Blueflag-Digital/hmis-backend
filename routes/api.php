@@ -40,14 +40,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {
-        Route::get('/', 'index');
+        Route::get('get-role-permissions/{roleId}','getRolePermissions');
+        Route::get('/get-user-permissions', 'getUserPermissions');
+        Route::post('/update-permissions', 'updatePermissions');
+        Route::post('update-roles','updateRoles');
         Route::post('/add', 'store');
         Route::post('/show', 'show');
-        Route::post('/update', 'update');
+
         Route::post('/update-role-permissions', 'updateRolePermissions');
 
         // Route::post('/delete', 'destroy');
     });
+
+
 
 
 
