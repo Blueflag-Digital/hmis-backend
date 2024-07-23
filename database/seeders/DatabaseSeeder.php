@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             InvestigationsTableSeeder::class,
             PackSizesTableSeeder::class,
             UnitsOfMeasuresTableSeeder::class,
+            WorkPlacesTableSeeder::class
         ]);
 
 

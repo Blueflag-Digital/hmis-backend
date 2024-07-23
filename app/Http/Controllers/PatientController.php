@@ -76,6 +76,8 @@ class PatientController extends Controller
             'phones' => 'nullable|max:20',
         ]);
 
+        $place_of_work_id = $request->place_of_work_id ?? 0 ;
+
         $data['status'] = false;
         $data['message'] = "";
 
@@ -127,6 +129,7 @@ class PatientController extends Controller
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
             $person->place_of_work = $request->place_of_work ? $request->place_of_work : null;
+            $person->work_place_id = $place_of_work_id;
             $person->save();
 
             if ($person) {

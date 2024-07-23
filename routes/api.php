@@ -22,6 +22,7 @@ use App\Http\Controllers\RolesPermissionsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitOfMeasureController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\WorkPlacesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::apiResource('hospitals', HospitalsController::class);
+    Route::apiResource('work-places', WorkPlacesController::class);
 
 
     Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {

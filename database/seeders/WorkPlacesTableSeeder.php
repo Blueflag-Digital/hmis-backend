@@ -14,7 +14,12 @@ class WorkPlacesTableSeeder extends Seeder
     public function run(): void
     {
         WorkPlace::create([
-            'name' => 'Victori Court'
+            'name' => 'Lake Turkana Wind Power',
+            'description' => 'The Lake Turkana Wind Power (LTWP) Project. is a wind farm that supplies renewable energy to Kenya'
+        ]);
+        WorkPlace::create([
+            'name' => 'Lake Turkana Wind Power 2',
+            'description' => 'The Lake Turkana Wind Power 2 (LTWP) Project. is a wind farm that supplies renewable energy to Kenya'
         ]);
     }
 }

@@ -12,7 +12,7 @@ class Person extends Model
 
     protected $fillable = [
         'user_id', 'person_type_id', 'city_id', 'first_name', 'last_name',
-        'date_of_birth', 'gender', 'identifier_number'
+        'date_of_birth', 'gender', 'identifier_number','work_place_id'
     ];
 
     public function patients()
