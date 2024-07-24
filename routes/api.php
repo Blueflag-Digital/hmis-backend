@@ -16,6 +16,7 @@ use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\HospitalsController;
+use App\Http\Controllers\ReportDataController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RolesPermissionsController;
@@ -182,7 +183,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('reports')->group(function () {
         Route::post('load-patients-report', [ReportsController::class, 'patientsReport']);
         // Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
+        Route::get('report-data', [ReportDataController::class, 'getReportData']);
     });
+
+
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UsersController::class, 'index']);
