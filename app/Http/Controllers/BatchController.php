@@ -40,7 +40,8 @@ class BatchController extends Controller
         // return response()->json(Batch::with(['drug', 'supplier'])->get(), 200);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $search = $request->search;
         $data['data'] = [];
         $data['status'] = false;
@@ -48,14 +49,12 @@ class BatchController extends Controller
             $data['data']  = Batch::where('name', 'like', '%' . $search . '%')->get()->map(function ($batch) {
                 return $batch->batchData();
             });
-        
+
             $data['status'] = true;
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
         return response()->json($data);
-
-
     }
 
     /**
@@ -63,6 +62,7 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+        info($request->all());
         $batch = Batch::create($request->all());
         return response()->json($batch, 201);
     }

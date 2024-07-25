@@ -46,10 +46,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {
-        Route::get('get-role-permissions/{roleId}','getRolePermissions');
+        Route::get('get-role-permissions/{roleId}', 'getRolePermissions');
         Route::get('/get-user-permissions', 'getUserPermissions');
         Route::post('/update-permissions', 'updatePermissions');
-        Route::post('update-roles','updateRoles');
+        Route::post('update-roles', 'updateRoles');
         Route::post('/add', 'store');
         Route::post('/show', 'show');
 
@@ -183,7 +183,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('reports')->group(function () {
         Route::post('load-patients-report', [ReportsController::class, 'patientsReport']);
         // Route::post('people/{person_id}/phones', [PhoneController::class, 'store']);
-        Route::get('report-data', [ReportDataController::class, 'getReportData']);
+        Route::post('report-data', [ReportDataController::class, 'getReportData']);
     });
 
 

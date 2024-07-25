@@ -61,9 +61,6 @@ class PatientController extends Controller
     {
 
         $validatedData = $request->validate([
-            // 'user_id' => 'nullable|string|max:255|unique:people',
-            // 'person_type_id' => 'required|integer|exists:person_types,id',
-            // 'city_id' => 'required|integer|exists:cities,id',
             'identifier_number' => 'string',
             'blood_group' => 'nullable|string|max:255',
             'email' => 'nullable|string|max:255|unique:people',
@@ -72,11 +69,10 @@ class PatientController extends Controller
             'last_name' => 'required|string|max:100',
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|string|max:10',
-            // 'phone' => 'nullable|string|max:20|unique:phones,phone_number',
             'phones' => 'nullable|max:20',
         ]);
 
-        $place_of_work_id = $request->place_of_work_id ?? 0 ;
+        $place_of_work_id = $request->place_of_work_id ?? null;
 
         $data['status'] = false;
         $data['message'] = "";
@@ -128,7 +124,6 @@ class PatientController extends Controller
             $person->identifier_number = $validatedData['identifier_number'];
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
-            $person->place_of_work = $request->place_of_work ? $request->place_of_work : null;
             $person->work_place_id = $place_of_work_id;
             $person->save();
 
@@ -172,8 +167,9 @@ class PatientController extends Controller
         try {
             foreach ($datas as $key => $validatedData) {
                 //remove the first row if email is 'test@gmail.com
-                if(isset($validatedData['Email']) && $validatedData['Email'] === 'test@gmail.com'){
-                     unset($datas[$key]);
+                if (isset($validatedData['Email']) && $validatedData['Email'] === 'test@gmail.com') {
+                    info("email exists");
+                    unset($datas[$key]);
                 }
             }
             foreach ($datas as $key => $validatedData) {
@@ -219,7 +215,6 @@ class PatientController extends Controller
 
                 //save the data if the patient is not in the system
                 if (!$personExists = Person::where('email', $validatedData['Email'])->first()) {
-
                     $person = new Person();
                     $person->user_id = null;
                     $person->person_type_id = 1;
@@ -324,7 +319,7 @@ class PatientController extends Controller
             'date_of_birth' => 'nullable|date'
         ]);
 
-        info($validatedData);
+        // info($validatedData);
 
         $data = [
             'status' => false,
@@ -380,7 +375,7 @@ class PatientController extends Controller
             $person->identifier_number = $validatedData['identifier_number'];
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
-            $person->place_of_work = $request->place_of_work ? $request->place_of_work : null;
+            $person->work_place_id = $request->place_of_work_id ?? null;
             $person->save();
 
 

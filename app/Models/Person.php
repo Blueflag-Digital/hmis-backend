@@ -12,7 +12,7 @@ class Person extends Model
 
     protected $fillable = [
         'user_id', 'person_type_id', 'city_id', 'first_name', 'last_name',
-        'date_of_birth', 'gender', 'identifier_number','work_place_id'
+        'date_of_birth', 'gender', 'identifier_number', 'work_place_id'
     ];
 
     public function patients()
@@ -32,6 +32,11 @@ class Person extends Model
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function workPlace()
+    {
+        return $this->belongsTo(WorkPlace::class, 'work_place_id');
     }
 
     public function personPhone()
@@ -66,7 +71,9 @@ class Person extends Model
             'first_name' =>  $this->first_name,
             'last_name' => $this->last_name,
             'national_id' =>  $this->identifier_number,
-            'place_of_work' => $this->place_of_work
+            // 'place_of_work' => $this->place_of_work,
+            'work_place_id' => $this->work_place_id,
+            'place_of_work' => isset($this->work_place_id) ?  $this->workPlace->name : ""
         ];
     }
 }

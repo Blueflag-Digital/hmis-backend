@@ -22,7 +22,6 @@ class PatientPrescriptionController extends Controller
         $pageNo = $request->pageNo ?? 1;
         $limit = $request->limit ?? 10;
 
-        info([$limit, $pageNo]);
 
         $data = [
             'data' => [],
@@ -62,14 +61,19 @@ class PatientPrescriptionController extends Controller
         //     'results' => 'nullable|string',
         // ]);
 
+
+
+
         $rows = json_decode($request['rows'], true);
+        info($rows);
+
         try {
             foreach ($rows as $row) {
                 PatientPrescription::create([
                     'consultation_id' => $consultation_id,
-                    'drug_id' => $row['drugId'],
+                    'drug_id' => $row['drugId'], // should be changed to batch id check to confirm
                     'dosage' => $row['dosage'],
-                    'noDispensed' => $row['noDispensed']
+                    'number_dispensed' => $row['noDispensed']
                 ]);
             }
         } catch (\Throwable $th) {

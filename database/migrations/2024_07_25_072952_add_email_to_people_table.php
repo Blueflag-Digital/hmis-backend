@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->foreignId('work_place_id')->after('identifier_number')->on('people')->nullable()->onDelete('cascade');
+            $table->string('email')->unique()->nullable()->after('phone');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->dropColumn('work_place_id');
+            $table->dropColumn('email');
         });
     }
 };

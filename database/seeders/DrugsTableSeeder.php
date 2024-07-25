@@ -13,7 +13,7 @@ class DrugsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Drug::create(['brand_id' => 1, 'name' => 'Drug 1']);
-        Drug::create(['brand_id' => 2, 'name' => 'Drug 2']);
+        Drug::create(['name' => 'Drug 1']);
+        Drug::create(['name' => 'Drug 2']);
     }
 }

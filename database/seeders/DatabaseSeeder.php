@@ -24,12 +24,5 @@ class DatabaseSeeder extends Seeder
             UnitsOfMeasuresTableSeeder::class,
             WorkPlacesTableSeeder::class
         ]);
-
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        //     'password' => Hash::make(12345678),
-        // ]);
     }
 }

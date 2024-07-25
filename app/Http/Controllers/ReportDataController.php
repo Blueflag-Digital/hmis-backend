@@ -13,8 +13,8 @@ class ReportDataController extends Controller
      */
     public function getReportData(Request $request)
     {
-        $startDate = $request->query('start_date');
-        $endDate = $request->query('end_date');
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
 
         if (!$startDate || !$endDate) {
             return response()->json(['error' => 'start_date and end_date are required'], 400);
