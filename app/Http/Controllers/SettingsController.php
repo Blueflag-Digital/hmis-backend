@@ -13,7 +13,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = DB::table('settings')->get()->map(function($setting){
+        $settings = Setting::get()->map(function($setting){
             return $setting->settingsData();
         });
         return response()->json(['data'=>$settings]);
