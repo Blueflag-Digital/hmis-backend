@@ -20,6 +20,7 @@ use App\Http\Controllers\ReportDataController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RolesPermissionsController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitOfMeasureController;
 use App\Http\Controllers\UsersController;
@@ -54,12 +55,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/show', 'show');
 
         Route::post('/update-role-permissions', 'updateRolePermissions');
-
-        // Route::post('/delete', 'destroy');
     });
 
-
-
+    Route::controller(SettingsController::class)->prefix('settings')->group(function () {
+       Route::put('{id}', 'update');
+    });
 
 
 
