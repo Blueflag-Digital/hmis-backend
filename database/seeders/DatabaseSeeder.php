@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            UsersTableSeeder::class,
-            DepartmentsTableSeeder::class,
-            DiagnosisCodesTableSeeder::class,
-            InvestigationsTableSeeder::class,
-            PackSizesTableSeeder::class,
-            UnitsOfMeasuresTableSeeder::class,
-            WorkPlacesTableSeeder::class
+            // UsersTableSeeder::class,
+            // DepartmentsTableSeeder::class,
+            // DiagnosisCodesTableSeeder::class,
+            // InvestigationsTableSeeder::class,
+            // PackSizesTableSeeder::class,
+            // UnitsOfMeasuresTableSeeder::class,
+            // WorkPlacesTableSeeder::class,
+            SettingsTableSeeder::class
         ]);
     }
 }

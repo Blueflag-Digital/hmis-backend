@@ -58,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::controller(SettingsController::class)->prefix('settings')->group(function () {
+       Route::get('/', 'index');
        Route::put('{id}', 'update');
     });
 
