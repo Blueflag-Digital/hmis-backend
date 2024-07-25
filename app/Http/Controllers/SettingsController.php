@@ -60,7 +60,7 @@ class SettingsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-         DB::table('settings')->where('id', $id)->update(['value' => $request->value]);
+         DB::table('settings')->where('id', $id)->update(['value' => $request->dataValue]);
         return response()->json(['message' => 'Setting updated successfully']);
     }
 
