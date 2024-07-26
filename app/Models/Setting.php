@@ -14,6 +14,7 @@ class Setting extends Model
     public function settingsData(){
         return [
             'id'=> $this->id,
+            'slug'=> $this->slug,
             'name' => $this->name,
             'description'=> $this->description,
             'value'=> $this->value
