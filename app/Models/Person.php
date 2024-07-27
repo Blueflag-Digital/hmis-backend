@@ -71,9 +71,11 @@ class Person extends Model
             'first_name' =>  $this->first_name,
             'last_name' => $this->last_name,
             'national_id' =>  $this->identifier_number,
-            // 'place_of_work' => $this->place_of_work,
             'work_place_id' => $this->work_place_id,
-            'place_of_work' => isset($this->work_place_id) ?  $this->workPlace->name : ""
+            'place_of_work' => isset($this->work_place_id) ?  $this->workPlace->name : "",
+            'insurance_card_number' => $this->insurance_card_number,
+            'med_insurance_card_number' => $this->med_Insurance_card_number
         ];
     }
 }
+

@@ -74,6 +74,10 @@ class PatientController extends Controller
 
         $place_of_work_id = $request->place_of_work_id ?? null;
 
+        $insuranceCard = $request->insurance_card_number ?? null;
+        $medInsuranceCard = $request->med_Insurance_card_number ?? null;
+
+
         $data['status'] = false;
         $data['message'] = "";
 
@@ -125,6 +129,8 @@ class PatientController extends Controller
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
             $person->work_place_id = $place_of_work_id;
+            $person->insurance_card_number = $insuranceCard;
+            $person->med_Insurance_card_number = $medInsuranceCard;
             $person->save();
 
             if ($person) {
@@ -320,6 +326,9 @@ class PatientController extends Controller
         ]);
 
         // info($validatedData);
+        $insuranceCard = $request->insurance_card_number ?? null;
+        $medInsuranceCard = $request->med_Insurance_card_number ?? null;
+
 
         $data = [
             'status' => false,
@@ -376,9 +385,9 @@ class PatientController extends Controller
             $person->email = $validatedData['email'];
             $person->blood_group = $validatedData['blood_group'];
             $person->work_place_id = $request->place_of_work_id ?? null;
+            $person->insurance_card_number = $insuranceCard;
+            $person->med_Insurance_card_number = $medInsuranceCard;
             $person->save();
-
-
 
             if (!empty($validatedData['phones'])) {
                 $formattedPhones = [];
