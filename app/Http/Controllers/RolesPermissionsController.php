@@ -8,14 +8,15 @@ use Spatie\Permission\Models\Role;
 
 class RolesPermissionsController extends Controller
 {
-    public function getRolePermissions($roleId){
-         $data['status'] = false;
+    public function getRolePermissions($roleId)
+    {
+        $data['status'] = false;
         try {
             $role = Role::find($roleId);
             $data['permissions'] = $role ? $role->permissions->pluck('name') : collect();
             $data['role'] = $role;
 
-           $data['status'] = true;
+            $data['status'] = true;
         } catch (\Throwable $th) {
             $data['message'] = $th->getMessage();
         }
@@ -24,16 +25,26 @@ class RolesPermissionsController extends Controller
     }
     public function getUserPermissions(Request $request)
     {
-        $data['status'] = false;
+
+        $data = [
+            'status' => false,
+            'rolesAndPermissions' => [],
+        ];
+
         try {
 
             $user = $request->user();
-            $role = $user->roles->first();
-            $permissions = $role ? $role->permissions->pluck('name') : collect();
+            $roles = $user->roles;
 
-            $data['role'] = $role;
-            $data['permissions'] = $permissions;
-           $data['status'] = true;
+            foreach ($roles as $role) {
+                $permissions = $role->permissions->pluck('name')->toArray();
+                $data['rolesAndPermissions'][] = [
+                    'role_id' => $role->id,
+                    'role' => $role->name,
+                    'permissions' => $permissions
+                ];
+            }
+            $data['status'] = true;
         } catch (\Throwable $th) {
             $data['message'] = $th->getMessage();
         }
@@ -61,7 +72,8 @@ class RolesPermissionsController extends Controller
 
         return response()->json($data);
     }
-    public function updateRoles(Request $request){
+    public function updateRoles(Request $request)
+    {
         $roles = $request->all();
         $data['status'] = false;
         try {

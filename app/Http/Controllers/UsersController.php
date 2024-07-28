@@ -17,6 +17,8 @@ class UsersController extends Controller
         $pageNo = $request->pageNo ?? 1;
         $limit = $request->limit ?? 10;
 
+        info($request->all());
+
         $data = [
             'data' => [],
             'count' => 0,
@@ -44,6 +46,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data['status'] = false;
+        $selectedRoles = $request->selected_roles;
+
 
         try {
 
@@ -60,15 +64,16 @@ class UsersController extends Controller
                     'phone' => $phone['phoneNumber'],
                     'password' => Hash::make($request->password),
                 ]);
-                $role = Role::where('id', $request->role_id)->first();
-                // info($role->guard_name);
-                $user->assignRole($role);
+
+                $roles = Role::whereIn('id', $selectedRoles)->get();
+                $user->syncRoles($roles);
 
                 $data['status'] = true;
             } else {
                 throw new \Exception("Please use another email", 1);
             }
         } catch (\Throwable $th) {
+            info($th->getMessage());
             $data['message'] = $th->getMessage();
         }
         return response()->json($data);
@@ -108,12 +113,10 @@ class UsersController extends Controller
                 'password' => $request->password ? Hash::make($request->password) : $user->password,
                 'phone' => $phone['phoneNumber'],
             ]);
-            $role = $user->getRoleById($request->role_id);
-            if (!$role) {
-                throw new \Exception('Role does not exist', 1);
-            }
-            // Remove existing roles and assign the new role
-            $user->syncRoles([$role]);
+            $selectedRoles = $request->selected_roles;
+            $roles = Role::whereIn('id', $selectedRoles)->get();
+            $user->syncRoles($roles);
+
             $data['status'] = true;
         } catch (\Throwable $th) {
             $data['message'] = $th->getMessage();
@@ -137,6 +140,4 @@ class UsersController extends Controller
         }
         return response()->json($data);
     }
-
-
 }

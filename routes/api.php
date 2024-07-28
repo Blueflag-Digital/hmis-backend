@@ -58,8 +58,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::controller(SettingsController::class)->prefix('settings')->group(function () {
-       Route::get('/', 'index');
-       Route::put('{id}', 'update');
+        Route::get('/', 'index');
+        Route::put('{id}', 'update');
     });
 
 
@@ -190,7 +190,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::prefix('users')->group(function () {
-        Route::get('/', [UsersController::class, 'index']);
+        Route::post('/get-users', [UsersController::class, 'index']);
         Route::post('/', [UsersController::class, 'store']);
         Route::get('/{userId}', [UsersController::class, 'show']);
         Route::post('/update', [UsersController::class, 'update']);
