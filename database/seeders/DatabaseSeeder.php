@@ -22,8 +22,10 @@ class DatabaseSeeder extends Seeder
             // InvestigationsTableSeeder::class,
             // PackSizesTableSeeder::class,
             // UnitsOfMeasuresTableSeeder::class,
-            // WorkPlacesTableSeeder::class,
-            SettingsTableSeeder::class
+            WorkPlacesTableSeeder::class,
+            SettingsTableSeeder::class,
+            PaymentTableSeeder::class,
+            SubscriptionTableSeeder::class
         ]);
     }
 }
