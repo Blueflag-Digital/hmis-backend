@@ -19,8 +19,8 @@ class Hospital extends Model
         return $this->hasMany(Payment::class);
     }
 
-    public function user(){
-        return $this->belongsTo(User::class,'user_id');
+    public function users(){
+        return $this->hasMany(User::class);
     }
 
 
@@ -30,7 +30,7 @@ class Hospital extends Model
             'slug'=>$this->slug,
             'location' => $this->location,
             'contact'=> $this->contact,
-            'admin_name' => isset($this->user) ? $this->user->name : "",
+            'admin_name' => isset($this->users) && ($this->users->isNotEmpty() )  ? $this->users->first()->name : "",
             'date_paid' => isset($this->payments)  && ($this->payments->isNotEmpty() ) ? $this->payments()->latest()->first()->created_at->diffForHumans()  : "",
             'subscription_status' => isset($this->subscription) && $this->subscription->status === 'true' ? true  : false,
         ];

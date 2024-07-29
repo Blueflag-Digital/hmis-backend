@@ -22,6 +22,11 @@ class Patient extends Model
         return $this->hasMany(PatientVisit::class);
     }
 
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class,'hospital_id');
+    }
+
 
 
     //reusable functions

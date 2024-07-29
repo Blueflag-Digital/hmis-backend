@@ -17,7 +17,6 @@ class UsersController extends Controller
         $pageNo = $request->pageNo ?? 1;
         $limit = $request->limit ?? 10;
 
-        info($request->all());
 
         $data = [
             'data' => [],
@@ -25,10 +24,11 @@ class UsersController extends Controller
             'status' => false,
         ];
 
+        $hospital = $request->user()->getHospital();
 
         try {
-            $data['totalCount'] = User::count();
-            $paginatedData = User::latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $data['totalCount'] = User::where('hospital_id',$hospital->id)->count();
+            $paginatedData = User::where('hospital_id',$hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
             $users = $paginatedData->getCollection()->map(function ($user) {
                 $dataToReturn = $user->userData();
                 return $dataToReturn;
@@ -49,7 +49,11 @@ class UsersController extends Controller
         $selectedRoles = $request->selected_roles;
 
 
+
         try {
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
 
             $phone = Helper::validPhone($request->phone);
             if (!$phone['status']) {
@@ -62,6 +66,7 @@ class UsersController extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'phone' => $phone['phoneNumber'],
+                    'hospital_id'=> $hospital->id,
                     'password' => Hash::make($request->password),
                 ]);
 

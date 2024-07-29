@@ -53,6 +53,11 @@ class Person extends Model
         return Carbon::parse($this->date_of_birth)->age . " years";
     }
 
+     public function hospital()
+    {
+        return $this->belongsTo(Hospital::class,'hospital_id');
+    }
+
 
 
     public function personData()

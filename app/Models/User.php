@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -23,7 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone'
+        'phone',
+        'hospital_id'
     ];
 
     /**
@@ -53,6 +55,16 @@ class User extends Authenticatable
     {
         return Role::find($roleId);
     }
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
+    }
+
+    public function getHospital()
+    {
+        return $this->hospital;
+    }
+
 
 
     public function userData()

@@ -19,9 +19,13 @@ class PatientController extends Controller
     public function index(Request $request)
     {
 
+         if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
         if ($request->value) {
             //fetch all patients
-            return Person::get()->map(function ($patient) {
+            return Person::where('hospital_id',$hospital->id)->get()->map(function ($patient) {
                 return [
                     'id' => $patient->id,
                     'name' =>   $patient->first_name . " " . $patient->last_name
@@ -39,8 +43,8 @@ class PatientController extends Controller
 
 
         try {
-            $data['totalCount'] = Patient::count();
-            $paginatedData = Patient::latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $data['totalCount'] = Patient::where('hospital_id',$hospital->id)->count();
+            $paginatedData = Patient::where('hospital_id',$hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
             $patients = $paginatedData->getCollection()->map(function ($patient) {
                 $dataToReturn = $patient->patientData();
                 return $dataToReturn;
@@ -82,6 +86,10 @@ class PatientController extends Controller
         $data['message'] = "";
 
         try {
+
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
             //phone number validation
             $allPhones = [];
             if (!empty($validatedData['phones'])) {
@@ -131,12 +139,14 @@ class PatientController extends Controller
             $person->work_place_id = $place_of_work_id;
             $person->insurance_card_number = $insuranceCard;
             $person->med_Insurance_card_number = $medInsuranceCard;
+            $person->hospital_id = $hospital->id;
             $person->save();
 
             if ($person) {
                 //Store this person as a patient
                 $patient = new Patient();
                 $patient->person_id = $person->id;
+                $patient->hospital_id = $hospital->id;
                 $patient->save();
 
                 if (!empty($allPhones)) {

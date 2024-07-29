@@ -56,10 +56,21 @@ class HospitalsController extends Controller
         $data['status'] = false;
         try {
 
+           $hospital = Hospital::create([
+                'hospital_name'=> $request->name,
+                'location'=> $request->location,
+                'slug'=> Str::slug($request->name),
+                'contact'=>$request->contact,
+                // 'user_id' => $user->id
+           ]);
+           if(!$hospital){
+             throw new \Exception("Hopsital not created", 1);
+           }
             $user = User::create([
                     'name' => $request->adminName,
                     'email' => $request->adminEmail,
                     'password' => Hash::make('12345678'),
+                    'hospital_id' => $hospital->id
                 ]);
 
             if(!$user){
@@ -70,20 +81,9 @@ class HospitalsController extends Controller
                 throw new \Exception("Role does not exist", 1);
             }
             $user->assignRole($role);
-            if(!Hospital::create([
-                'hospital_name'=> $request->name,
-                'location'=> $request->location,
-                'slug'=> Str::slug($request->name),
-                'contact'=>$request->contact,
-                'user_id' => $user->id
-            ])){
-                throw new \Exception("Hopsital not created", 1);
-            }
 
             $data['status'] = true;
             $data['message'] = 'Hospital Created Succeffully';
-
-
         } catch (\Throwable $th) {
             $data['message'] = $th->getMessage();
         }
