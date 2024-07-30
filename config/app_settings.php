@@ -2,8 +2,8 @@
 
 return [
     [
-        'name' => 'Show Suppliers Module',
-        'slug' => \Illuminate\Support\Str::slug('Enable Patient Portal'),
+        'name' => 'Enable Suppliers Menu',
+        'slug' => \Illuminate\Support\Str::slug('enable-suppliers-menu'),
         'value' => true,
         'description' => 'This setting enables the patient portal, allowing patients to access their medical records, schedule appointments, and communicate with their healthcare providers online. It is crucial to provide secure access and ensure that all patient data is protected in compliance with HIPAA regulations.',
         'created_at' => now(),

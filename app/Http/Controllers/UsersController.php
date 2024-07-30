@@ -99,8 +99,6 @@ class UsersController extends Controller
     {
         $data['status'] = false;
 
-
-
         try {
 
             $phone = Helper::validPhone($request->phone);

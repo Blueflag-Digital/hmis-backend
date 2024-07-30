@@ -27,6 +27,7 @@ class User extends Authenticatable
         'phone',
         'hospital_id'
     ];
+    protected $appends = ['user_data'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -67,6 +68,21 @@ class User extends Authenticatable
 
 
 
+    public function getUserDataAttribute()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'roles' => $this->getRoleNames(),
+            'hospital' => $this->getHospital(),
+            'password_lastChanged' =>$this->updated_at->diffForHumans()
+        ];
+    }
+
+
+
     public function userData()
     {
         return [
@@ -74,7 +90,8 @@ class User extends Authenticatable
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'roles' => $this->getRoleNames()
+            'roles' => $this->getRoleNames(),
+            'hospital' => $this->getHospital()
         ];
     }
 }

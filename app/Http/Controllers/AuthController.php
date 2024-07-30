@@ -55,7 +55,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'token' => $token,
-                'user' => $user,
+                'user' => $user->user_data,
             ], 200);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -73,5 +73,24 @@ class AuthController extends Controller
             info($th->getMessage());
         }
         return response()->json($data);
+    }
+    public function updatePassword(Request $request){
+        $data = [
+            'status'=>false,
+            'message' => "Failed to update password",
+            'last_changed' => ""
+        ];
+        $user = $request->user();
+        try {
+            $user->password = Hash::make($request->password);
+            $user->update();
+            $data['status'] = true;
+            $data['message'] = 'Success.Use the new password upon next login';
+            $data['last_changed'] = $user->updated_at->diffForHumans();
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
+
     }
 }

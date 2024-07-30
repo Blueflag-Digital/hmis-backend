@@ -41,6 +41,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::controller(AuthController::class)->group(function () {
+         Route::post('update-password','updatePassword');
+    });
+
+
 
     Route::apiResource('hospitals', HospitalsController::class);
     Route::apiResource('work-places', WorkPlacesController::class);
