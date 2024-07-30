@@ -51,6 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('work-places', WorkPlacesController::class);
 
 
+
     Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {
         Route::get('get-role-permissions/{roleId}', 'getRolePermissions');
         Route::get('/get-user-permissions', 'getUserPermissions');
@@ -61,6 +62,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('/update-role-permissions', 'updateRolePermissions');
     });
+
+    Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
+        Route::post('/', 'index');
+        Route::post('/store', 'store');
+    });
+
+    Route::controller(InvestigationController::class)->prefix('investigations')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/',  'store');
+    });
+
 
     Route::controller(SettingsController::class)->prefix('settings')->group(function () {
         Route::get('/', 'index');
@@ -94,9 +106,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'index');
     });
 
-    Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
-        Route::post('/', 'index');
-    });
+
 
 
     Route::controller(ConsultationController::class)->prefix('consultation')->group(function () {
@@ -114,7 +124,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('save-diagnosis', 'store');
     });
 
-    Route::get('investigations', [InvestigationController::class, 'index']);
+
+
+
 
 
     Route::controller(PatientInvestigationController::class)->prefix('patient-investigations')->group(function () {

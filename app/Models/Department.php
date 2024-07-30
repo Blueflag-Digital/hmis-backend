@@ -10,7 +10,7 @@ class Department extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name','hospital_id',
     ];
 
     public function visits()

@@ -10,9 +10,13 @@ class DepartmentController extends Controller
     /**
      * DEPARTMENTS :: List
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::all();
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
+        $departments = Department::where('hospital_id',$hospital->id)->all();
 
         return response()->json($departments);
     }
@@ -22,7 +26,27 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'status'=> false,
+            'message'=> 'Failed to add department',
+        ];
+
+        try {
+
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            Department::create([
+                'name' => $request->name,
+                'hospital_id'=> $hospital->id
+            ]);
+            $data['status'] = true;
+            $data['message'] = "Successfully added department";
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 
     /**
