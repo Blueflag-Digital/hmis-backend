@@ -29,4 +29,12 @@ class Investigation extends Model
         }
         return $code;
     }
+
+    public function investigationsData(){
+        return [
+            'id'=>$this->id,
+            'name' => $this->name,
+            'type' =>$this->type
+        ];
+    }
 }

@@ -66,11 +66,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(DepartmentController::class)->prefix('departments')->group(function () {
         Route::post('/', 'index');
         Route::post('/store', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
     });
 
     Route::controller(InvestigationController::class)->prefix('investigations')->group(function () {
         Route::get('/', 'index');
         Route::post('/',  'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
     });
 
 

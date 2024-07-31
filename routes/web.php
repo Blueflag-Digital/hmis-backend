@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\File;
 
 // Route::get('/', function () {
-//     return Hash::make('12345678');
+//     return view('welcome');
 // });
+
+Route::get('/{any}', function () {
+      return File::get(public_path('index.html'));
+})->where('any', '^(?!api).*$');

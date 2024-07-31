@@ -16,7 +16,9 @@ class DepartmentController extends Controller
             throw new \Exception("Hospital does not exist", 1);
         }
 
-        $departments = Department::where('hospital_id',$hospital->id)->get();
+        $departments = Department::where('hospital_id',$hospital->id)->latest()->get()->map(function($department){
+            return $department->departmentData();
+        });
 
         return response()->json($departments);
     }
@@ -60,16 +62,46 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request,  $id)
     {
-        //
+        $data = [
+            'status'=> false,
+            'message'=> 'Failed to update department',
+        ];
+
+        try {
+            if(!$dep =  Department::find($id)){
+                throw new \Exception("Departments does not exist", 1);
+            }
+            $dep->name = $request->name;
+            $dep->update();
+            $data['status'] = true;
+            $data['message'] = "Successfully updated department";
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Department $department)
+    public function destroy( $departmentId)
     {
-        //
+        $data =[
+            'status'=>false,
+            'message'=>'Failed to remove department'
+        ];
+        try {
+             if(!$dep =  Department::find($departmentId)){
+                throw new \Exception("Departments does not exist", 1);
+            }
+             $dep->delete();
+             $data['status'] = false;
+             $data['message'] =  'Successfully removed department';
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 }

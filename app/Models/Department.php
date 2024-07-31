@@ -17,4 +17,10 @@ class Department extends Model
     {
         return $this->hasMany(PatientVisit::class);
     }
+    public function departmentData(){
+        return[
+            'id'=> $this->id,
+            'name'=> $this->name
+        ];
+    }
 }

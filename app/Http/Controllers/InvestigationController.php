@@ -17,7 +17,9 @@ class InvestigationController extends Controller
             if(!$hospital = $request->user()->getHospital()){
                 throw new \Exception("Hospital does not exist", 1);
             }
-            $investigations = Investigation::where('hospital_id',$hospital->id)->all();
+            $investigations = Investigation::where('hospital_id',$hospital->id)->latest()->get()->map(function($investigation){
+                return $investigation->investigationsData();
+            });
             return response()->json($investigations, 200);
         } catch (\Throwable $th) {
             info($th->getMessage());
@@ -85,7 +87,24 @@ class InvestigationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = [
+            'status'=> false,
+            'message'=> 'Failed to update investigation',
+        ];
+
+        try {
+            if(!$inv = Investigation::find($id)){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $inv->name = $request->name;
+            $inv->type = $request->type;
+            $inv->update();
+            $data['status'] = true;
+            $data['message'] = "Successfully updated investigation";
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 
     /**
@@ -93,6 +112,20 @@ class InvestigationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $data = [
+            'status'=>false,
+            'message'=>'Failed to remove investigation'
+        ];
+        try {
+             if(!$investigation =  Investigation::find($id)){
+                throw new \Exception("investigation does not exist", 1);
+            }
+             $investigation->delete();
+             $data['status'] = false;
+             $data['message'] =  'Successfully removed investigation';
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 }

@@ -1,0 +1,1262 @@
+openapi: 3.0.3
+info:
+  title: 'Hospital Management System API Docs'
+  description: 'Hospital Management System API Docs'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/register:
+    post:
+      summary: ''
+      operationId: postApiRegister
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/login-user:
+    post:
+      summary: ''
+      operationId: postApiLoginUser
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/patients:
+    post:
+      summary: 'PATIENTS :: List'
+      operationId: pATIENTSList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patients/add:
+    post:
+      summary: 'PATIENTS :: Store'
+      operationId: pATIENTSStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier_number:
+                  type: string
+                  description: "'user_id' => 'nullable|string|max:255|unique:people',\n'person_type_id' => 'required|integer|exists:person_types,id',\n'city_id' => 'required|integer|exists:cities,id',."
+                  example: eum
+                blood_group:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: pnodffncob
+                email:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: quigley.mertie@example.org
+                city_id:
+                  type: integer
+                  description: ''
+                  example: 5
+                first_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: kshngjyupevebjvufo
+                last_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: uuqnwyfsvrgxw
+                date_of_birth:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2024-07-06T15:47:52'
+                gender:
+                  type: string
+                  description: 'Must not be greater than 10 characters.'
+                  example: ueaihlpkg
+                phones:
+                  type: string
+                  description: "'phone' => 'nullable|string|max:20|unique:phones,phone_number',. Must not be greater than 20 characters."
+                  example: vwojsbdlbom
+              required:
+                - city_id
+                - first_name
+                - last_name
+      security: []
+  /api/patients/show:
+    post:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patients/bulk-upload-patients:
+    post:
+      summary: ''
+      operationId: postApiPatientsBulkUploadPatients
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patients/update:
+    post:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                identifier_number:
+                  type: string
+                  description: ''
+                  example: nam
+                blood_group:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: narahgzokbstbyjynoagqkgy
+                city_id:
+                  type: integer
+                  description: ''
+                  example: 5
+                first_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: fwjq
+                last_name:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: komxzvnqnpmeojfrk
+                date_of_birth:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2024-07-06T15:47:52'
+                gender:
+                  type: string
+                  description: 'Must not be greater than 10 characters.'
+                  example: pxrsl
+                phones:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: gdi
+              required:
+                - city_id
+                - first_name
+                - last_name
+      security: []
+  /api/patients/delete:
+    post:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_id:
+                  type: string
+                  description: ''
+                  example: maxime
+              required:
+                - patient_id
+      security: []
+  /api/patient-visits:
+    post:
+      summary: 'PATIENT VISITS :: List'
+      operationId: pATIENTVISITSList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patient-visits/add:
+    post:
+      summary: 'PATIENT VISITS :: Store'
+      operationId: pATIENTVISITSStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/patient-visits/show:
+    post:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/logout-user:
+    post:
+      summary: ''
+      operationId: postApiLogoutUser
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/cities:
+    post:
+      summary: 'CITIES :: List'
+      operationId: cITIESList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/departments:
+    post:
+      summary: 'DEPARTMENTS :: List'
+      operationId: dEPARTMENTSList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation:
+    post:
+      summary: ''
+      operationId: postApiConsultation
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation/add:
+    post:
+      summary: 'CONSULTATION :: Store'
+      operationId: cONSULTATIONStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation/show:
+    post:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation/update:
+    post:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_medications:
+                  type: string
+                  description: "'patient_visit_id' => 'required|exists:patient_visits,id',."
+                  example: recusandae
+                height_cm:
+                  type: number
+                  description: ''
+                  example: 143.77
+                weight_kg:
+                  type: number
+                  description: ''
+                  example: 8.06422
+                allergies:
+                  type: string
+                  description: ''
+                  example: ducimus
+                reason_for_visit:
+                  type: string
+                  description: ''
+                  example: incidunt
+                blood_pressure:
+                  type: string
+                  description: ''
+                  example: ipsam
+                heart_rate:
+                  type: number
+                  description: ''
+                  example: 58622.44396
+                temperature:
+                  type: number
+                  description: ''
+                  example: 2662.946
+                respiratory_rate:
+                  type: number
+                  description: ''
+                  example: 565893.811832
+                oxygen_saturation:
+                  type: number
+                  description: ''
+                  example: 187.492239
+                past_medical_history:
+                  type: string
+                  description: ''
+                  example: natus
+                family_medical_history:
+                  type: string
+                  description: ''
+                  example: sunt
+                immunization_history:
+                  type: string
+                  description: ''
+                  example: ut
+                doctors_notes:
+                  type: string
+                  description: ''
+                  example: optio
+                diagnosis_ids:
+                  type: object
+                  description: ''
+                  example: null
+                  properties: {  }
+                custom_diagnosis:
+                  type: string
+                  description: ''
+                  example: repellat
+                next_appointment:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2024-07-06T15:47:53'
+      security: []
+  /api/consultation/get-consultation-data:
+    post:
+      summary: 'CONSULTATION :: Get consultation data.'
+      operationId: cONSULTATIONGetConsultationData
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/consultation/create-or-retrieve:
+    post:
+      summary: 'CONSULTATION :: Create a new consultation or return the existing consultation.'
+      operationId: cONSULTATIONCreateANewConsultationOrReturnTheExistingConsultation
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patient_visit_id:
+                  type: string
+                  description: ''
+                  example: magni
+              required:
+                - patient_visit_id
+      security: []
+  '/api/consultation/patient-details/{patient_visit_id}':
+    get:
+      summary: 'CONSULTATION :: Get Patient Details By Patient Visit Id'
+      operationId: cONSULTATIONGetPatientDetailsByPatientVisitId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: patient_visit_id
+        description: 'The ID of the patient visit.'
+        example: modi
+        required: true
+        schema:
+          type: string
+  /api/diagnosis/diagnosis-codes:
+    post:
+      summary: 'DIAGNOSIS CODES :: List'
+      operationId: dIAGNOSISCODESList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/diagnosis/save-diagnosis:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/investigations:
+    get:
+      summary: 'INVESTIGATIONS :: List'
+      operationId: iNVESTIGATIONSList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/patient-investigations/patient-investigations/{consultation_id}/investigations':
+    get:
+      summary: 'PATIENT INVESTIGATIONS :: List'
+      operationId: pATIENTINVESTIGATIONSList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'PATIENT INVESTIGATIONS :: Store'
+      operationId: pATIENTINVESTIGATIONSStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'PATIENT INVESTIGATIONS :: Update'
+      operationId: pATIENTINVESTIGATIONSUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: consultation_id
+        description: 'The ID of the consultation.'
+        example: dolorem
+        required: true
+        schema:
+          type: string
+  '/api/patient-investigations/patient-investigations/{consultation_id}/investigations/delete':
+    post:
+      summary: 'DELETE PATIENT INVESTIGATION'
+      operationId: dELETEPATIENTINVESTIGATION
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: consultation_id
+        description: 'The ID of the consultation.'
+        example: ea
+        required: true
+        schema:
+          type: string
+  /api/patient-investigations/download-file:
+    post:
+      summary: 'PATIENT DOWNLOAD HMIS DOCUMENT :: Store'
+      operationId: pATIENTDOWNLOADHMISDOCUMENTStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/suppliers/list:
+    post:
+      summary: 'SUPPLIERS :: List suppliers'
+      operationId: sUPPLIERSListSuppliers
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/suppliers/create:
+    post:
+      summary: 'SUPPLIERS :: Create supplier'
+      operationId: sUPPLIERSCreateSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/suppliers/view/{id}':
+    post:
+      summary: 'SUPPLIERS :: View supplier'
+      operationId: sUPPLIERSViewSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
+        example: in
+        required: true
+        schema:
+          type: string
+  '/api/suppliers/update/{id}':
+    post:
+      summary: 'SUPPLIERS :: Update supplier'
+      operationId: sUPPLIERSUpdateSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: temporibus
+        required: true
+        schema:
+          type: string
+  '/api/suppliers/delete/{id}':
+    post:
+      summary: 'SUPPLIERS :: Delete supplier'
+      operationId: sUPPLIERSDeleteSupplier
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: et
+        required: true
+        schema:
+          type: string
+  /api/brands/list:
+    post:
+      summary: 'BRANDS :: List brands'
+      operationId: bRANDSListBrands
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/brands/create:
+    post:
+      summary: 'BRANDS :: Create brand'
+      operationId: bRANDSCreateBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/brands/view/{id}':
+    post:
+      summary: 'BRANDS :: View brand'
+      operationId: bRANDSViewBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
+        example: ut
+        required: true
+        schema:
+          type: string
+  '/api/brands/update/{id}':
+    post:
+      summary: 'BRANDS :: Update brand'
+      operationId: bRANDSUpdateBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: nobis
+        required: true
+        schema:
+          type: string
+  '/api/brands/delete/{id}':
+    post:
+      summary: 'BRANDS :: Delete brand'
+      operationId: bRANDSDeleteBrand
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: libero
+        required: true
+        schema:
+          type: string
+  /api/drugs/list:
+    post:
+      summary: 'DRUGS :: List drugs'
+      operationId: dRUGSListDrugs
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/drugs/create:
+    post:
+      summary: 'DRUGS :: Create drug'
+      operationId: dRUGSCreateDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/drugs/view/{id}':
+    post:
+      summary: 'DRUGS :: View drug'
+      operationId: dRUGSViewDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
+        example: quas
+        required: true
+        schema:
+          type: string
+  '/api/drugs/update/{id}':
+    post:
+      summary: 'DRUGS :: Update drug'
+      operationId: dRUGSUpdateDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: necessitatibus
+        required: true
+        schema:
+          type: string
+  '/api/drugs/delete/{id}':
+    post:
+      summary: 'DRUGS :: Delete drug'
+      operationId: dRUGSDeleteDrug
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: ratione
+        required: true
+        schema:
+          type: string
+  /api/batches/list:
+    post:
+      summary: 'BATCHES :: List batches'
+      operationId: bATCHESListBatches
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/batches/create:
+    post:
+      summary: 'BATCHES :: Create batch'
+      operationId: bATCHESCreateBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/batches/view/{id}':
+    post:
+      summary: 'BATCHES :: View batch'
+      operationId: bATCHESViewBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the view.'
+        example: voluptas
+        required: true
+        schema:
+          type: string
+  '/api/batches/update/{id}':
+    post:
+      summary: 'BATCHES :: Update batch'
+      operationId: bATCHESUpdateBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: ut
+        required: true
+        schema:
+          type: string
+  '/api/batches/delete/{id}':
+    post:
+      summary: 'BATCHES :: Delete batch'
+      operationId: bATCHESDeleteBatch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: corporis
+        required: true
+        schema:
+          type: string
+  /api/batches/available-drugs:
+    get:
+      summary: 'BATCHES :: Get Available Drugs'
+      operationId: bATCHESGetAvailableDrugs
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/people/people/{person_id}/phones':
+    post:
+      summary: 'PHONES :: Store'
+      operationId: pHONESStore
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: qyt
+              required:
+                - phone_number
+      security: []
+    parameters:
+      -
+        in: path
+        name: person_id
+        description: 'The ID of the person.'
+        example: dolorem
+        required: true
+        schema:
+          type: string
+  /api/pack-sizes:
+    get:
+      summary: 'PACK SIZES :: List pack sizes'
+      operationId: pACKSIZESListPackSizes
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'PACK SIZES :: Create a new pack size'
+      operationId: pACKSIZESCreateANewPackSize
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: jceztprontjbtacgkceowz
+              required:
+                - name
+      security: []
+  '/api/pack-sizes/{id}':
+    get:
+      summary: 'PACK SIZES :: Show a specific pack size'
+      operationId: pACKSIZESShowASpecificPackSize
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'PACK SIZES :: Update a specific pack size'
+      operationId: pACKSIZESUpdateASpecificPackSize
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: wd
+              required:
+                - name
+      security: []
+    delete:
+      summary: 'PACK SIZES :: Delete a specific pack size'
+      operationId: pACKSIZESDeleteASpecificPackSize
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the pack size.'
+        example: beatae
+        required: true
+        schema:
+          type: string
+  /api/units-of-measure:
+    get:
+      summary: 'UNITS OF MEASURE :: List units of measure'
+      operationId: uNITSOFMEASUREListUnitsOfMeasure
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'UNITS OF MEASURE :: Create a new unit of measure'
+      operationId: uNITSOFMEASURECreateANewUnitOfMeasure
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: dlseigishzcpyanadgg
+              required:
+                - name
+      security: []
+  '/api/units-of-measure/{id}':
+    get:
+      summary: 'UNITS OF MEASURE :: Show a specific unit of measure'
+      operationId: uNITSOFMEASUREShowASpecificUnitOfMeasure
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'UNITS OF MEASURE :: Update a specific unit of measure'
+      operationId: uNITSOFMEASUREUpdateASpecificUnitOfMeasure
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: mqtgxhoofqlkjfv
+              required:
+                - name
+      security: []
+    delete:
+      summary: 'UNITS OF MEASURE :: Delete a specific unit of measure'
+      operationId: uNITSOFMEASUREDeleteASpecificUnitOfMeasure
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the units of measure.'
+        example: aspernatur
+        required: true
+        schema:
+          type: string
+  /api/patient-prescriptions:
+    get:
+      summary: 'PATIENT PRESCRIPTIONS :: List all patient prescriptions'
+      operationId: pATIENTPRESCRIPTIONSListAllPatientPrescriptions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'PATIENT PRESCRIPTIONS :: Store a new patient prescription'
+      operationId: pATIENTPRESCRIPTIONSStoreANewPatientPrescription
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/patient-prescriptions/{id}':
+    get:
+      summary: 'PATIENT PRESCRIPTIONS :: Show a specific patient prescription'
+      operationId: pATIENTPRESCRIPTIONSShowASpecificPatientPrescription
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'PATIENT PRESCRIPTIONS :: Update a specific patient prescription'
+      operationId: pATIENTPRESCRIPTIONSUpdateASpecificPatientPrescription
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                consultation_id:
+                  type: string
+                  description: ''
+                  example: et
+                batch_id:
+                  type: string
+                  description: ''
+                  example: accusantium
+                dosage:
+                  type: string
+                  description: ''
+                  example: atque
+                number_dispensed:
+                  type: integer
+                  description: ''
+                  example: 7
+                results:
+                  type: string
+                  description: ''
+                  example: consectetur
+              required:
+                - consultation_id
+                - batch_id
+      security: []
+    delete:
+      summary: 'PATIENT PRESCRIPTIONS :: Delete a specific patient prescription'
+      operationId: pATIENTPRESCRIPTIONSDeleteASpecificPatientPrescription
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the patient prescription.'
+        example: 15
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Endpoints
+    description: ''
