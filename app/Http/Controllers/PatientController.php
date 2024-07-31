@@ -147,6 +147,7 @@ class PatientController extends Controller
                 $patient = new Patient();
                 $patient->person_id = $person->id;
                 $patient->hospital_id = $hospital->id;
+                $patient->user_id = $request->user()->id;
                 $patient->save();
 
                 if (!empty($allPhones)) {

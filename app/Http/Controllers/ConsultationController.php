@@ -43,6 +43,11 @@ class ConsultationController extends Controller
      */
     public function store(Request $request)
     {
+
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
         $consultation = new Consultation();
         $consultation->patient_visit_id = $request->patient_visit_id;
         $consultation->height_cm = $request->height_cm;
@@ -63,6 +68,7 @@ class ConsultationController extends Controller
         $consultation->diagnosis_ids = $request->diagnosis_ids;
         $consultation->custom_diagnosis = $request->custom_diagnosis;
         $consultation->next_appointment = $request->next_appointment;
+        $consultation->hospital_id = $hospital->id;
 
         $consultation->save();
 
@@ -145,6 +151,10 @@ class ConsultationController extends Controller
             'patient_visit_id' => 'required|exists:patient_visits,id',
         ]);
 
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
 
         $consultation = Consultation::where('patient_visit_id', $validatedData['patient_visit_id'])->first();
 
@@ -158,6 +168,7 @@ class ConsultationController extends Controller
             // If no consultation exists, create a new one
             $consultation = new Consultation();
             $consultation->patient_visit_id = $validatedData['patient_visit_id'];
+            $consultation->hospital_id = $hospital->id;
             $consultation->save();
 
             return response()->json([

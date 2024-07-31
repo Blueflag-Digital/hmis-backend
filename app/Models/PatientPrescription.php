@@ -16,6 +16,7 @@ class PatientPrescription extends Model
         'dosage',
         'number_dispensed',
         'results',
+        'hospital_id'
     ];
 
     public function drug()

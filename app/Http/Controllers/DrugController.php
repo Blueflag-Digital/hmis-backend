@@ -18,6 +18,8 @@ class DrugController extends Controller
 
 
 
+
+
         $data = [
             'data' => [],
             'status' => false,
@@ -27,7 +29,12 @@ class DrugController extends Controller
         if ($request->value) {
             //fetch all patients
             try {
-                $data['data'] =  Drug::get()->map(function ($drug) {
+
+                if(!$hospital = $request->user()->getHospital()){
+                    throw new \Exception("Hospital does not exist", 1);
+                }
+
+                $data['data'] =  Drug::where('hospital_id',$hospital->id)->get()->map(function ($drug) {
                     return $drug->drugData2();
                 });
                 $data['status'] = true;
@@ -39,8 +46,12 @@ class DrugController extends Controller
 
 
         try {
-            $data['totalCount'] = Drug::count();
-            $paginatedData = Drug::latest()->paginate($limit, ['*'], 'page', $pageNo);
+
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $data['totalCount'] = Drug::where('hospital_id',$hospital->id)->count();
+            $paginatedData = Drug::where('hospital_id',$hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
             $drugs = $paginatedData->getCollection()->map(function ($drug) {
                 $dataToReturn = $drug->drugData();
                 return $dataToReturn;
@@ -64,7 +75,10 @@ class DrugController extends Controller
         $data['data'] = [];
         $data['status'] = false;
         try {
-            $data['data']  = Drug::where('name', 'like', '%' . $search . '%')->get()->map(function ($drug) {
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $data['data']  = Drug::where('hospital_id',$hospital->id)->where('name', 'like', '%' . $search . '%')->get()->map(function ($drug) {
                 return $drug->drugData();
             });
             info($data['data']);
@@ -80,16 +94,30 @@ class DrugController extends Controller
      */
     public function store(Request $request)
     {
-        $drug = Drug::create($request->all());
-        return response()->json($drug, 201);
+        try {
+                if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $drug = Drug::create([
+                'name' => $request->name,
+                'hospital_id' => $hospital->id,
+            ]);
+            return response()->json($drug, 201);
+        } catch (\Throwable $th) {
+             info($th->getMessage());
+        }
     }
 
     /**
      * DRUGS :: View drug
      */
-    public function show($id)
+    public function show(Request $request ,$id)
     {
-        $drug = Drug::findOrFail($id);
+
+        if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+        }
+        $drug = Drug::where('id',$id)->where('hospital_id',$hospital->id)->first();
         $data['drug'] = $drug->drugData();
         $data['brands'] = isset($drug->brands) ?  $drug->brands->map(function ($brand) {
             $allData['data'] =  $brand->brandData2();
@@ -106,7 +134,6 @@ class DrugController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $drug = Drug::findOrFail($id);
         $drug->update($request->all());
         return response()->json($drug, 200);
@@ -117,8 +144,7 @@ class DrugController extends Controller
      */
     public function destroy($id)
     {
-
-        //delete 
+        //delete
         Drug::destroy($id);
         return response()->json(null, 204);
     }

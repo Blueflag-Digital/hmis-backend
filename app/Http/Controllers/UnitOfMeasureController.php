@@ -10,9 +10,13 @@ class UnitOfMeasureController extends Controller
     /**
      * UNITS OF MEASURE :: List units of measure
      */
-    public function index()
+    public function index(Request $request)
     {
-        $unitsOfMeasure = UnitOfMeasure::all();
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
+        $unitsOfMeasure = UnitOfMeasure::where('hospital_id',$hospital->id)->get();
         return response()->json($unitsOfMeasure);
     }
 
@@ -24,7 +28,10 @@ class UnitOfMeasureController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
-
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+        $validatedData['hospital_id'] = $hospital->id;
         $unitOfMeasure = UnitOfMeasure::create($validatedData);
 
         return response()->json($unitOfMeasure, 201);

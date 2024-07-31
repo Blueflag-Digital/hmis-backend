@@ -9,7 +9,7 @@ class UnitOfMeasure extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','hospital_id'];
 
     public function unitData(){
         return [

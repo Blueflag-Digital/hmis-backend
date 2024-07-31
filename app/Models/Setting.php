@@ -10,6 +10,10 @@ class Setting extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function hospital(){
+        return $this->belongsTo(Hospital::class,'hospital_id');
+    }
+
 
     public function settingsData(){
         return [

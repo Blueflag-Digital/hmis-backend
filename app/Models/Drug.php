@@ -9,7 +9,7 @@ class Drug extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['brand_id', 'name'];
+    protected $fillable = ['brand_id', 'name','hospital_id'];
 
     public function brands()
     {

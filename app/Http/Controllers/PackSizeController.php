@@ -10,9 +10,13 @@ class PackSizeController extends Controller
     /**
      * PACK SIZES :: List pack sizes
      */
-    public function index()
+    public function index(Request $request)
     {
-        $packSizes = PackSize::all();
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
+        $packSizes = PackSize::where('hospital_id',$hospital->id)->get();
         return response()->json($packSizes);
     }
 
@@ -24,6 +28,11 @@ class PackSizeController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
+
+         if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+        $validatedData['hospital_id'] = $hospital->id;
 
         $packSize = PackSize::create($validatedData);
 

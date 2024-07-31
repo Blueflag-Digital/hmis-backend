@@ -11,7 +11,7 @@ class Batch extends Model
 
     protected $fillable = [
         'brand_id', 'quantity_received', 'quantity_available', 'supplier_id', 'lpo',
-        'buying_price', 'selling_price', 'pack_size_id', 'unit_of_measure_id'
+        'buying_price', 'selling_price', 'pack_size_id', 'unit_of_measure_id','hospital_id'
     ];
 
     public function drug()

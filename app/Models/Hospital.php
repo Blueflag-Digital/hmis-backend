@@ -23,6 +23,10 @@ class Hospital extends Model
         return $this->hasMany(User::class);
     }
 
+    public function settings(){
+        return $this->hasMany(Setting::class);
+    }
+
 
     public function hospitalData() {
         return [

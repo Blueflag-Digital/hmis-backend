@@ -21,7 +21,7 @@ class WorkPlacesController extends Controller
 
         try {
 
-            $data['data'] =  WorkPlace::where('hospital_id',$hospital->id)->get()->map(function($workPlace){
+            $data['data'] =  WorkPlace::where('hospital_id',$hospital->id)->latest()->get()->map(function($workPlace){
                 return $workPlace->workPlaceData();
             });
             $data['status'] = true;
@@ -56,6 +56,7 @@ class WorkPlacesController extends Controller
         try {
             WorkPlace::create([
                 'name' => $request->companyName,
+                'description' => $request->companyDesc,
                 'hospital_id' => $hospital->id
             ]);
             $data['status'] = true;
@@ -88,7 +89,25 @@ class WorkPlacesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = [
+            'status'=>false,
+            'message'=>'Failed to update Company'
+        ];
+        try {
+            if(!$workPlace = WorkPlace::find($id)){
+                throw new \Exception("Company not found", 1);
+            }
+            $workPlace->name = $request->companyName;
+            $workPlace->description = $request->companyDesc;
+            $workPlace->update();
+            $data['status'] = true;
+            $data['message'] = 'Successfully updated company';
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+        return response()->json($data);
+
     }
 
     /**
@@ -96,6 +115,20 @@ class WorkPlacesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $data = [
+            'status'=>false,
+            'message'=>'Failed to update Company'
+        ];
+        try {
+            if(!$workPlace = WorkPlace::find($id)){
+                throw new \Exception("Company not found", 1);
+            }
+            $workPlace->delete();
+            $data['status'] = true;
+            $data['message'] = 'Successfully removed company';
+        } catch (\Throwable $th) {
+             info($th->getMessage());
+        }
+         return response()->json($data);
     }
 }

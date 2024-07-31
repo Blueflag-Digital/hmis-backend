@@ -16,7 +16,7 @@ class DepartmentController extends Controller
             throw new \Exception("Hospital does not exist", 1);
         }
 
-        $departments = Department::where('hospital_id',$hospital->id)->all();
+        $departments = Department::where('hospital_id',$hospital->id)->get();
 
         return response()->json($departments);
     }
