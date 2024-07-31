@@ -19,7 +19,7 @@ class PatientController extends Controller
     public function index(Request $request)
     {
 
-         if(!$hospital = $request->user()->getHospital()){
+           if(!$hospital = $request->user()->getHospital()){
                 throw new \Exception("Hospital does not exist", 1);
             }
 

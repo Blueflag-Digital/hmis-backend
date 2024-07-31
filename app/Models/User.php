@@ -63,7 +63,16 @@ class User extends Authenticatable
 
     public function getHospital()
     {
-        return $this->hospital;
+        if ($this->hospital) {
+            return $this->hospital;
+        }
+        if($this->hasRole(Role::find(1))){
+            info('this is admin');
+             return null;
+        }
+        // Handle the case where there is no associated hospital
+        // You can return null, a default value, or handle it in a way that makes sense for your application
+
     }
 
 
