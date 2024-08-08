@@ -58,6 +58,10 @@ class Person extends Model
         return $this->belongsTo(Hospital::class,'hospital_id');
     }
 
+    public function getName(){
+        return $this->first_name . " " . $this->last_name;
+    }
+
 
 
     public function personData()

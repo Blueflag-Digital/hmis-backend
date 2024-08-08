@@ -16,6 +16,7 @@ use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\HospitalsController;
+use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ReportDataController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
@@ -43,6 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::controller(AuthController::class)->group(function () {
          Route::post('update-password','updatePassword');
+    });
+    Route::controller(LeaveController::class)->prefix('leave')->group(function(){
+        Route::post('sick-leave','generateSickLeavePDF');
     });
 
 

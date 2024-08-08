@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('unit_of_measures', function (Blueprint $table) {
-            $table->unsignedBigInteger('hospital_id')->after('name')->nullable();
+        Schema::table('leaves', function (Blueprint $table) {
+            $table->unsignedBigInteger('hospital_id')->after('user_id')->nullable();
             $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
         });
     }
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('unit_of_measures', function (Blueprint $table) {
+        Schema::table('leaves', function (Blueprint $table) {
             $table->dropForeign(['hospital_id']);
             $table->dropColumn('hospital_id');
         });
