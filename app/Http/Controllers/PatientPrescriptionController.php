@@ -55,6 +55,11 @@ class PatientPrescriptionController extends Controller
     {
         $consultation_id = $request->consultation_id;
         $rows = json_decode($request['rows'], true);
+        // info($request->all());
+        $data = [
+            'status'=>false,
+            'message' =>''
+        ];
 
         try {
             foreach ($rows as $row) {
@@ -87,6 +92,8 @@ class PatientPrescriptionController extends Controller
                             'dosage' => $row['dosage'],
                             'number_dispensed' => $row['noDispensed']
                         ]);
+                        $data['status'] = true;
+                        $data['message'] = 'Success';
                     } else {
                         // Handle the case where the available quantity is less than the dispensed quantity
                         throw new \Exception("Not enough quantity available in batch for brand ID: {$brand_id}");
@@ -98,10 +105,10 @@ class PatientPrescriptionController extends Controller
             }
         } catch (\Throwable $th) {
             info($th->getMessage());
-            return response()->json(['error' => $th->getMessage()], 400);
+            $data['message'] = $th->getMessage();
         }
 
-        return response()->json([], 201);
+        return response()->json($data);
     }
 
 
