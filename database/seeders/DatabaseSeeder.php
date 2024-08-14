@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             // SettingsTableSeeder::class,
             // PaymentTableSeeder::class,
             // SubscriptionTableSeeder::class
+            ProcedureSeeder::class
         ]);
     }
 }

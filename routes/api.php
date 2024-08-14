@@ -12,11 +12,13 @@ use App\Http\Controllers\PackSizeController;
 use App\Http\Controllers\PatientInvestigationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientPrescriptionController;
+use App\Http\Controllers\PatientProcedureController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\HospitalsController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\ReportDataController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
@@ -130,9 +132,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
         Route::post('diagnosis-codes', 'index');
         Route::post('save-diagnosis', 'store');
+        //getICD10Codes
+        Route::post('get-icd10-codes', 'getICD10Codes');
     });
 
-
+    Route::apiResource('procedures', ProcedureController::class);
+    Route::apiResource('patient-procedures', PatientProcedureController::class);
 
 
 
