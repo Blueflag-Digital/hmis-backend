@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            // UsersTableSeeder::class,
+            UsersTableSeeder::class,
             // CityTableSeeder::class,
             // DepartmentsTableSeeder::class,
-            DiagnosisCodesTableSeeder::class,
+            // DiagnosisCodesTableSeeder::class,
             // InvestigationsTableSeeder::class,
             // PackSizesTableSeeder::class,
             // UnitsOfMeasuresTableSeeder::class,
