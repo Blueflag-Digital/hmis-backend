@@ -48,9 +48,6 @@ class PackSizeController extends Controller
             return response()->json($packSize, 500);
         }
 
-
-
-
     }
 
     /**

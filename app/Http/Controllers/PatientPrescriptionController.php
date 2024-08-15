@@ -72,6 +72,8 @@ class PatientPrescriptionController extends Controller
 
                 $brand_id = $brand->id;
 
+
+
                 // Find the batch that corresponds to the brand_id and has enough quantity
                 $batch = Batch::where('brand_id', $brand_id)
                     ->where('quantity_available', '>', 0)
@@ -85,10 +87,13 @@ class PatientPrescriptionController extends Controller
                         $batch->quantity_available -= $row['noDispensed'];
                         $batch->save();
 
+                        // info();
+
                         // Create a patient prescription record
                         PatientPrescription::create([
                             'consultation_id' => $consultation_id,
                             'drug_id' => $row['drugId'], // Saving drug_id for tracking purposes
+                            'batch_id' => $batch['id'],
                             'dosage' => $row['dosage'],
                             'number_dispensed' => $row['noDispensed']
                         ]);

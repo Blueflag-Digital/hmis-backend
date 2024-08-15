@@ -16,7 +16,7 @@ class UnitOfMeasureController extends Controller
             throw new \Exception("Hospital does not exist", 1);
         }
 
-        $unitsOfMeasure = UnitOfMeasure::where('hospital_id',$hospital->id)->get();
+        $unitsOfMeasure = UnitOfMeasure::where('hospital_id',$hospital->id)->latest()->get();
         return response()->json($unitsOfMeasure);
     }
 
@@ -28,13 +28,18 @@ class UnitOfMeasureController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
-        if(!$hospital = $request->user()->getHospital()){
-            throw new \Exception("Hospital does not exist", 1);
+        $unitOfMeasure=null;
+        try {
+             if(!$hospital = $request->user()->getHospital()){
+                 throw new \Exception("Hospital does not exist", 1);
+            }
+            $validatedData['hospital_id'] = $hospital->id;
+            $unitOfMeasure = UnitOfMeasure::create($validatedData);
+            return response()->json($unitOfMeasure, 201);
+        } catch (\Throwable $th) {
+            return response()->json($unitOfMeasure, 500);
         }
-        $validatedData['hospital_id'] = $hospital->id;
-        $unitOfMeasure = UnitOfMeasure::create($validatedData);
 
-        return response()->json($unitOfMeasure, 201);
     }
 
     /**
