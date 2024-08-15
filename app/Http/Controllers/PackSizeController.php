@@ -16,7 +16,12 @@ class PackSizeController extends Controller
             throw new \Exception("Hospital does not exist", 1);
         }
 
-        $packSizes = PackSize::where('hospital_id',$hospital->id)->get();
+        $packSizes = PackSize::where('hospital_id',$hospital->id)->latest()->get()->map(function($packsize){
+            return [
+                'id'=>$packsize->id,
+                'name'=>$packsize->name
+            ];
+        });
         return response()->json($packSizes);
     }
 
@@ -29,14 +34,23 @@ class PackSizeController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-         if(!$hospital = $request->user()->getHospital()){
-            throw new \Exception("Hospital does not exist", 1);
+        $packSize = null;
+        try {
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $validatedData['hospital_id'] = $hospital->id;
+
+            $packSize = PackSize::create($validatedData);
+            return response()->json($packSize, 201);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+            return response()->json($packSize, 500);
         }
-        $validatedData['hospital_id'] = $hospital->id;
 
-        $packSize = PackSize::create($validatedData);
 
-        return response()->json($packSize, 201);
+
+
     }
 
     /**
