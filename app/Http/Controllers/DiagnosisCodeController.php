@@ -27,6 +27,8 @@ class DiagnosisCodeController extends Controller
         $clientId = env('ICD10_CLIENT_ID'); // Store this in your .env file
         $clientSecret = env('ICD10_CLIENT_SECRET'); // Store this in your .env file
 
+
+
         // Prepare the request with client credentials
         $response = Http::withHeaders([
             'Authorization' => 'Basic ' . base64_encode($clientId . ':' . $clientSecret)

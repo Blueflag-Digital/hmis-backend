@@ -45,18 +45,14 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::controller(AuthController::class)->group(function () {
-         Route::post('update-password','updatePassword');
+        Route::post('update-password', 'updatePassword');
     });
-    Route::controller(LeaveController::class)->prefix('leave')->group(function(){
-        Route::post('sick-leave','generateSickLeavePDF');
+    Route::controller(LeaveController::class)->prefix('leave')->group(function () {
+        Route::post('sick-leave', 'generateSickLeavePDF');
     });
-
-
 
     Route::apiResource('hospitals', HospitalsController::class);
     Route::apiResource('work-places', WorkPlacesController::class);
-
-
 
     Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {
         Route::get('get-role-permissions/{roleId}', 'getRolePermissions');
@@ -82,7 +78,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
     });
-
 
     Route::controller(SettingsController::class)->prefix('settings')->group(function () {
         Route::get('/', 'index');

@@ -57,11 +57,19 @@ class PatientPrescriptionController extends Controller
         $rows = json_decode($request['rows'], true);
         // info($request->all());
         $data = [
-            'status'=>false,
-            'message' =>''
+            'status' => false,
+            'message' => ''
         ];
 
+
+
+
         try {
+
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
             foreach ($rows as $row) {
                 // Get the brand_id from the brands table using the provided drug_id
                 $brand = Brand::where('drug_id', $row['drugId'])->first();
@@ -95,7 +103,8 @@ class PatientPrescriptionController extends Controller
                             'drug_id' => $row['drugId'], // Saving drug_id for tracking purposes
                             'batch_id' => $batch['id'],
                             'dosage' => $row['dosage'],
-                            'number_dispensed' => $row['noDispensed']
+                            'number_dispensed' => $row['noDispensed'],
+                            'hospital_id' => $hospital->id
                         ]);
                         $data['status'] = true;
                         $data['message'] = 'Success';
