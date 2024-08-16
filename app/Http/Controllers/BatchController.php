@@ -23,9 +23,15 @@ class BatchController extends Controller
         ];
 
 
+
         try {
-            $data['totalCount'] = Batch::count();
-            $paginatedData = Batch::latest()->paginate($limit, ['*'], 'page', $pageNo);
+
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            $data['totalCount'] = Batch::where('hospital_id', $hospital->id)->count();
+            $paginatedData = Batch::where('hospital_id', $hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
             $batches = $paginatedData->getCollection()->map(function ($batch) {
                 return $batch->batchData();
             });
@@ -46,7 +52,12 @@ class BatchController extends Controller
         $data['data'] = [];
         $data['status'] = false;
         try {
-            $data['data']  = Batch::where('name', 'like', '%' . $search . '%')->get()->map(function ($batch) {
+
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            $data['data']  = Batch::where('hospital_id', $hospital->id)->where('name', 'like', '%' . $search . '%')->get()->map(function ($batch) {
                 return $batch->batchData();
             });
 
@@ -63,8 +74,20 @@ class BatchController extends Controller
     public function store(Request $request)
     {
         info($request->all());
-        $batch = Batch::create($request->all());
-        return response()->json($batch, 201);
+        $batch  = null;
+        try {
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            $batch = Batch::create($request->all());
+            $batch->update([
+                'hospital_id' => $hospital->id
+            ]);
+            return response()->json($batch, 201);
+        } catch (\Throwable $th) {
+            return response()->json($batch, 500);
+        }
     }
 
     /**
