@@ -13,13 +13,25 @@ class DiagnosisCodeController extends Controller
      */
     public function index()
     {
-        $diagnosisCodes = DiagnosisCode::all();
+        $data = [
+            'status'=>true,
+            'data' =>[]
+        ];
+        try {
+            if (!$hospital = request()->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $data['data'] = DiagnosisCode::where('hospital_id',$hospital->id)->get()->map(function($diagnosis){
+                return $diagnosis->diagnosisData();
+            });
+            $data['status'] = true;
 
-        return response()->json($diagnosisCodes);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+        return response()->json($data);
     }
-
-
-
 
 
     public function getICD10Codes(Request $request)
@@ -85,14 +97,25 @@ class DiagnosisCodeController extends Controller
     {
         info($request->all());
         $data['status'] = false;
-        if (!empty($request->customDiagnosis)) {
-            //save the custom diagnosis
-            DiagnosisCode::create([
-                'diagnosis' =>  $request->customDiagnosis,
-                'code' => rand(123, 1000)
-            ]);
-            $data['status'] = true;
+
+        try {
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            if (!empty($request->customDiagnosis)) {
+                //save the custom diagnosis
+                DiagnosisCode::create([
+                    'diagnosis' =>  $request->customDiagnosis,
+                    'code' => rand(123, 1000),
+                    'hospital_id'=>$hospital->id
+                ]);
+                $data['status'] = true;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
+
         return response()->json($data);
     }
 

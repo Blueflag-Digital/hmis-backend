@@ -100,8 +100,11 @@ class ConsultationController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        info($id);
 
         $consultation = Consultation::findOrFail($id);
+
+        // info($request->all());
 
         $validatedData = $request->validate([
             // 'patient_visit_id' => 'required|exists:patient_visits,id',

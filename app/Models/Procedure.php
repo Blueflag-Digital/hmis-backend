@@ -15,4 +15,11 @@ class Procedure extends Model
     {
         return $this->hasMany(PatientProcedure::class);
     }
+
+    public function procedureData(){
+        return [
+            'id'=>$this->id,
+            'name'=>$this->name
+        ];
+    }
 }

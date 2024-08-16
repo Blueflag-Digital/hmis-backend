@@ -9,4 +9,12 @@ class DiagnosisCode extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function diagnosisData(){
+        return [
+            'id' => $this->id,
+            'code'=>$this->code,
+            'name'=>$this->diagnosis
+        ];
+    }
 }

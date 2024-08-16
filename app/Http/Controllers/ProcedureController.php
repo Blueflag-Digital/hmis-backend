@@ -8,10 +8,26 @@ use Illuminate\Http\Request;
 class ProcedureController extends Controller
 {
     // Display a listing of the resource.
-    public function index()
+    public function index(Request $request)
     {
-        $procedures = Procedure::all();
-        return response()->json($procedures);
+        $data = [
+            'status'=>false,
+            'data' =>[],
+        ];
+
+        try {
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $data['data'] = Procedure::where('hospital_id',$hospital->id)->get()->map(function($procedure){
+                return $procedure->procedureData();
+            });
+            $data['status'] = true;
+
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+        return response()->json($data);
     }
 
     // Store a newly created resource in storage.
@@ -21,9 +37,27 @@ class ProcedureController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $procedure = Procedure::create($validatedData);
+        $data = [
+            'status'=>false,
+        ];
 
-        return response()->json($procedure, 201);
+        try {
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            if(!$procedure = Procedure::create($validatedData)){
+                throw new \Exception("Failed to store Procedure", 1);
+            }
+            $procedure->update([
+                    'hospital_id' =>$hospital->id
+                ]);
+                $data['status'] = true;
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        return response()->json($data);
     }
 
     // Display the specified resource.
