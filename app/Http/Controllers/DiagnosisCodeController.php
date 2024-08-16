@@ -49,7 +49,7 @@ class DiagnosisCodeController extends Controller
                 'API-Version' => 'v2', // Set the appropriate API version
                 'Accept' => 'application/json',
                 'Accept-Language' => 'en',
-            ])->timeout(10)->get($baseUrl.'categories');
+            ])->timeout(10)->get($baseUrl);
 
             // Check if the response was successful
             if ($response->successful()) {
