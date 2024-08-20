@@ -44,7 +44,7 @@ class ConsultationController extends Controller
     public function store(Request $request)
     {
 
-        if(!$hospital = $request->user()->getHospital()){
+        if (!$hospital = $request->user()->getHospital()) {
             throw new \Exception("Hospital does not exist", 1);
         }
 
@@ -67,6 +67,7 @@ class ConsultationController extends Controller
         $consultation->doctors_notes = $request->doctors_notes;
         $consultation->diagnosis_ids = $request->diagnosis_ids;
         $consultation->custom_diagnosis = $request->custom_diagnosis;
+        $consultation->icd = $request->icd_diagnosis;
         $consultation->next_appointment = $request->next_appointment;
         $consultation->hospital_id = $hospital->id;
 
@@ -154,7 +155,7 @@ class ConsultationController extends Controller
             'patient_visit_id' => 'required|exists:patient_visits,id',
         ]);
 
-        if(!$hospital = $request->user()->getHospital()){
+        if (!$hospital = $request->user()->getHospital()) {
             throw new \Exception("Hospital does not exist", 1);
         }
 
