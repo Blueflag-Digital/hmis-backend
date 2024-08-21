@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Batch;
+use App\Models\Brand;
 use App\Models\Drug;
 use Illuminate\Http\Request;
 
@@ -80,12 +81,26 @@ class BatchController extends Controller
                 throw new \Exception("Hospital does not exist", 1);
             }
 
-            $batch = Batch::create($request->all());
-            $batch->update([
-                'hospital_id' => $hospital->id
+            $batchData = $request->all();
+            $batchData['hospital_id'] = $hospital->id;
+            $batchData['quantity_available'] = $batchData['quantity_received'];
+
+            $batch = Batch::create([
+                'brand_id' =>$batchData['brand_id'],
+                'quantity_received' =>$batchData['quantity_received'],
+                'supplier_id' =>$batchData['supplier_id'] ? $batchData['supplier_id'] : null,
+                'lpo' =>$batchData['lpo'],
+                'buying_price' =>$batchData['buying_price'],
+                'selling_price' =>$batchData['selling_price'],
+                'pack_size_id' =>$batchData['pack_size_id'],
+                'unit_of_measure_id' =>$batchData['unit_of_measure_id'],
+                'hospital_id' =>$batchData['hospital_id'],
+                'quantity_available' =>$batchData['quantity_available'],
             ]);
+           
             return response()->json($batch, 201);
         } catch (\Throwable $th) {
+            info($th->getMessage());
             return response()->json($batch, 500);
         }
     }
@@ -135,59 +150,36 @@ class BatchController extends Controller
     /**
      * BATCHES :: Get Available Drugs
      */
-    public function availableDrugs()
+    public function availableBrands()
     {
 
+        $data = [
+          'status'=>false,
+          'data' =>[]
+        ];
+        try {
+            if(!$hospital = request()->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $response = Brand::with(['drug','batches'])
+                            ->where('hospital_id',$hospital->id)
+                            ->whereHas('batches',function($query){
+                                $query->where('quantity_available', '>', 0);
+                            })->get();
 
-        // $response = $drugs->map(function ($drug) {
-        //     return [
-        //         'id' => $drug->id,
-        //         'drug_name' => $drug->name,
-        //         'brands' => $drug->brands->map(function ($brand) {
-        //             return [
-        //                 'id' => $brand->id,
-        //                 'brand_name' => $brand->name,
-        //                 'quantity_available' => $brand->batches->sum('quantity_available'),
-        //             ];
-        //         })
-        //     ];
-        // });
+            if(count($response) > 0 ){
+                $data['data'] = $response->map(function($brand){
+                    $brandData = $brand->brandData3();
+                    $brandData['drug_name'] = $brand->drug->name;
+                    $brandData['quantity_available'] = $brand->batches->sum('quantity_available');
+                    return $brandData;
+                });
+            }
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+           info($th->getMessage());
+        }
 
-        // $drugs = Drug::whereHas('brands', function ($query) {
-        //     $query->whereHas('batches', function ($query) {
-        //         $query->where('quantity_available', '>', 0);
-        //     });
-        // })->get();
-
-        // $drugss = Drug::whereHas('brands', function ($query) {
-        //     $query->whereHas('batches', function ($query) {
-        //         $query->where('quantity_available', '>', 0);
-        //     });
-        // });
-
-
-        // info($drugss->count());
-
-        $drugs = Drug::with(['brands' => function ($query) {
-            $query->whereHas('batches', function ($query) {
-                $query->where('quantity_available', '>', 0);
-            });
-        }])->get();
-
-        $response = $drugs->map(function ($drug) {
-            return [
-                'id' => $drug->id,
-                'drug_name' => $drug->name,
-                'brands' => $drug->brands->map(function ($brand) {
-                    return [
-                        'id' => $brand->id,
-                        'brand_name' => $brand->name,
-                        'quantity_available' => $brand->batches->sum('quantity_available'),
-                    ];
-                })
-            ];
-        });
-
-        return response()->json($response);
+        return response()->json($data);
     }
 }

@@ -15,11 +15,13 @@ class WorkPlacesController extends Controller
         $data['data']  = [];
         $data['status']  = false;
 
-         if(!$hospital = $request->user()->getHospital()){
-            throw new \Exception("Hospital does not exist", 1);
-        }
+
 
         try {
+
+            if(!$hospital = $request->user()->getHospital()){
+                throw new \Exception("Hospital does not exist", 1);
+            }
 
             $data['data'] =  WorkPlace::where('hospital_id',$hospital->id)->latest()->get()->map(function($workPlace){
                 return $workPlace->workPlaceData();

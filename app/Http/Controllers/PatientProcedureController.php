@@ -27,6 +27,7 @@ class PatientProcedureController extends Controller
             'status' =>false,
             'message'=>'Failed'
         ];
+
         try {
 
             if (!$hospital = $request->user()->getHospital()) {

@@ -9,7 +9,7 @@ class PatientProcedure extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['procedure_id', 'quantity', 'consultation_id'];
+    protected $fillable = ['procedure_id', 'quantity', 'consultation_id','description','hospital_id'];
 
     // Relationships
     public function procedure()

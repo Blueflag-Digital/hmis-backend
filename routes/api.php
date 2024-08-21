@@ -191,7 +191,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('view/{id}', 'show');
         Route::post('update/{id}', 'update');
         Route::post('delete/{id}', 'destroy');
-        Route::get('available-drugs', 'availableDrugs');
+        Route::get('available-brands', 'availableBrands');
         Route::post('search-batches', 'search');
     });
 
