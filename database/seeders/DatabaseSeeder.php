@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            // UsersTableSeeder::class,
+            UsersTableSeeder::class,
             // CityTableSeeder::class,
             // DepartmentsTableSeeder::class,
             DiagnosisCodesTableSeeder::class,
@@ -27,7 +25,7 @@ class DatabaseSeeder extends Seeder
             // SettingsTableSeeder::class,
             // PaymentTableSeeder::class,
             // SubscriptionTableSeeder::class
-            ProcedureSeeder::class
+            ProcedureSeeder::class,
         ]);
     }
 }

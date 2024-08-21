@@ -16,17 +16,17 @@ class DiagnosisCodesTableSeeder extends Seeder
         DiagnosisCode::create([
             'code' => 'DA25.Y',
             'diagnosis' => 'Acute gastrooesophageal ulcer',
-            'hospital_id' => 1
+            // 'hospital_id' => 1
         ]);
         DiagnosisCode::create([
             'code' => '1F42',
             'diagnosis' => 'Malaria due to Plasmodium malariae',
-            'hospital_id' => 1
+            // 'hospital_id' => 1
         ]);
         DiagnosisCode::create([
             'code' => '1E50.0',
             'diagnosis' => 'Acute hepatitis A',
-            'hospital_id' => 1
+            // 'hospital_id' => 1
         ]);
     }
 }

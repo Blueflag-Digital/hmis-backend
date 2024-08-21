@@ -23,9 +23,31 @@ class PatientProcedureController extends Controller
             'consultation_id' => 'required|exists:consultations,id',
         ]);
 
-        $patientProcedure = PatientProcedure::create($validatedData);
+        $data = [
+            'status' =>false,
+            'message'=>'Failed'
+        ];
+        try {
 
-        return response()->json($patientProcedure, 201);
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+            $patientProcedure = PatientProcedure::create([
+                'procedure_id' =>$request->procedure_id,
+                'consultation_id' => $request->consultation_id,
+                'quantity' => $request->quantity,
+                'description' =>$request->description,
+                'hospital_id'=> $hospital->id
+            ]);
+            $data['status'] = true;
+            $data['message'] = "success";
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+
+        return response()->json($data);
     }
 
     // Display the specified resource.
@@ -43,9 +65,26 @@ class PatientProcedureController extends Controller
             'consultation_id' => 'required|exists:consultations,id',
         ]);
 
-        $patientProcedure->update($validatedData);
+        $data = [
+            'status' =>false,
+            'message'=>'Failed'
+        ];
 
-        return response()->json($patientProcedure);
+        try {
+           $patientProcedure = $patientProcedure->update([
+                'procedure_id' =>$request->procedure_id,
+                'consultation_id' => $request->consultation_id,
+                'quantity' => $request->quantity,
+                'description' =>$request->description
+            ]);
+            $data['status'] = true;
+            $data['message'] ="success";
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+
+        return response()->json($data);
     }
 
     // Remove the specified resource from storage.
