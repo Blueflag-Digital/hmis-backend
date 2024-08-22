@@ -48,7 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('update-password', 'updatePassword');
     });
     Route::controller(LeaveController::class)->prefix('leave')->group(function () {
-        Route::post('sick-leave', 'generateSickLeavePDF');
+        Route::post('apply-leave', 'generateSickLeavePDF');
+
     });
 
     Route::apiResource('hospitals', HospitalsController::class);

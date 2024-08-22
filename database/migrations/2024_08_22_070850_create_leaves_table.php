@@ -21,7 +21,9 @@ return new class extends Migration
             $table->longText('reason')->nullable();
             $table->integer('working_days')->nullable();
             $table->unsignedBigInteger('patient_id')->nullable();
+            $table->unsignedBigInteger('leave_type_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->foreign('leave_type_id')->references('id')->on('leave_types')->onDelete('cascade');
             $table->timestamps();
 
         });
