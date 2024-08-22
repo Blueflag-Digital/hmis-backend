@@ -103,34 +103,33 @@ class ConsultationController extends Controller
         $id = $request->id;
         info($id);
 
-        $consultation = Consultation::findOrFail($id);
-
-        // info($request->all());
-
-        $validatedData = $request->validate([
-            // 'patient_visit_id' => 'required|exists:patient_visits,id',
-            'current_medications' => 'nullable|string',
-            'height_cm' => 'nullable|numeric',
-            'weight_kg' => 'nullable|numeric',
-            'allergies' => 'nullable|string',
-            'reason_for_visit' => 'nullable|string',
-            'blood_pressure' => 'nullable|string',
-            'heart_rate' => 'nullable|numeric',
-            'temperature' => 'nullable|numeric',
-            'respiratory_rate' => 'nullable|numeric',
-            'oxygen_saturation' => 'nullable|numeric',
-            'past_medical_history' => 'nullable|string',
-            'family_medical_history' => 'nullable|string',
-            'immunization_history' => 'nullable|string',
-            'doctors_notes' => 'nullable|string',
-            'diagnosis_ids' => 'nullable|array',
-            'custom_diagnosis' => 'nullable|string',
-            'next_appointment' => 'nullable|date',
-        ]);
-
-
-        $consultation->update($validatedData);
-
+        try {
+            $consultation = Consultation::findOrFail($id);
+            $validatedData = $request->validate([
+                // 'patient_visit_id' => 'required|exists:patient_visits,id',
+                'current_medications' => 'nullable|string',
+                'height_cm' => 'nullable|numeric',
+                'weight_kg' => 'nullable|numeric',
+                'allergies' => 'nullable|string',
+                'reason_for_visit' => 'nullable|string',
+                'blood_pressure' => 'nullable|string',
+                'heart_rate' => 'nullable|numeric',
+                'temperature' => 'nullable|numeric',
+                'respiratory_rate' => 'nullable|numeric',
+                'oxygen_saturation' => 'nullable|numeric',
+                'past_medical_history' => 'nullable|string',
+                'family_medical_history' => 'nullable|string',
+                'immunization_history' => 'nullable|string',
+                'doctors_notes' => 'nullable|string',
+                'diagnosis_ids' => 'nullable|array',
+                'custom_diagnosis' => 'nullable|string',
+                'icd' => 'nullable|array',
+                'next_appointment' => 'nullable|date',
+            ]);
+            $consultation->update($validatedData);
+         } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
         return response()->json([
             'message' => 'Consultation updated successfully',
             'consultation' => $consultation,

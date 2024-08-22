@@ -1,30 +1,92 @@
-@yield('LeaveLayout.blade.php')
-@section('title', $title)
-@section('content')
-    <div class="content">
-        <p class="label">Patient Name: <span
-                class="value">{{ isset($leave->patient) && isset($leave->patient->person) ? $leave->patient->person->getName() : '' }}</span>
-        </p>
+<!DOCTYPE html>
+<html lang="en">
 
-        <p class="label">Patient ID: <span
-                class="value">{{ isset($leave->patient) && isset($leave->patient->person) ? $leave->patient->person->identifier_number : '' }}</span>
-        </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {{ $title }}
+    </title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-        <p class="label">Working Days for Sickness Leave: <span class="value">{{ $leave->working_days ?? '' }}</span></p>
+        .header img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
 
-        <p class="label">Start Date: <span class="value">{{ $leave->start_date ?? '' }}</span></p>
+        .content {
+            padding: 20px;
+        }
 
-        <p class="label">End Date: <span class="value">{{ $leave->end_date ?? '' }}</span></p>
+        .label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-        <p class="label">Reason for Sickness Leave:</p>
-        <textarea class="form-control">{{ $leave->reason ?? 'Flu and fever.' }}</textarea>
+        .value {
+            margin-bottom: 20px;
+        }
 
-        <p class="label">Doctor Name:</p>
-        <p class="value">{{ isset($leave->user) ? $leave->user->name : '' }}</p>
+        .signatures p {
+            margin-top: 30px;
+        }
 
-        <div class="signatures">
-            <p>Patient's Signature: ______________________</p>
-            <p>Doctor's Signature: ______________________</p>
+        .form-control {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            border-radius: 0;
+            box-shadow: none;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="header">
+
+            {{-- <img src="{{ public_path('assets/images/background-login.png') }}" alt="Kenyatta Logo"> --}}
+            <h1>{{ $hospital->hospital_name }}</h1>
+            <h2>{{ $title }}</h2>
+
         </div>
+
+        <div class="content">
+            <p class="label">Patient Name: <span
+                    class="value">{{ isset($leave->patient) && isset($leave->patient->person) ? $leave->patient->person->getName() : '' }}</span>
+            </p>
+
+            <p class="label">Patient ID: <span
+                    class="value">{{ isset($leave->patient) && isset($leave->patient->person) ? $leave->patient->person->identifier_number : '' }}</span>
+            </p>
+
+            <p class="label">Working Days for Sickness Leave: <span
+                    class="value">{{ $leave->working_days ?? '' }}</span></p>
+
+            <p class="label">Start Date: <span class="value">{{ $leave->start_date ?? '' }}</span></p>
+
+            <p class="label">End Date: <span class="value">{{ $leave->end_date ?? '' }}</span></p>
+
+            <p class="label">Reason for Sickness Leave:</p>
+            <textarea class="form-control">{{ $leave->reason ?? 'Flu and fever.' }}</textarea>
+
+            <p class="label">Doctor Name:</p>
+            <p class="value">{{ isset($leave->user) ? $leave->user->name : '' }}</p>
+
+            <div class="signatures">
+                <p>Patient's Signature: ______________________</p>
+                <p>Doctor's Signature: ______________________</p>
+            </div>
+        </div>
+
     </div>
-@endsection
+</body>
+
+</html>

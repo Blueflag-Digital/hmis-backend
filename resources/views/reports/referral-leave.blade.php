@@ -47,6 +47,8 @@
 </head>
 
 <body>
+
+
     <div class="container">
         <div class="header">
 
@@ -75,8 +77,10 @@
             <p class="label">Reason for Sickness Leave:</p>
             <textarea class="form-control">{{ $leave->reason ?? 'Flu and fever.' }}</textarea>
 
-            <p class="label">Doctor Name:</p>
-            <p class="value">{{ isset($leave->user) ? $leave->user->name : '' }}</p>
+            <p class="label">Doctor Name: <span
+                    class="value">{{ isset($leave->user) ? $leave->user->name : '' }}</span></p>
+            <p class="label">Doctor Phone: <span
+                    class="value">{{ isset($leave->user) ? $leave->user->phone : '' }}</span></p>
 
             <div class="signatures">
                 <p>Patient's Signature: ______________________</p>
@@ -84,8 +88,6 @@
             </div>
         </div>
 
-
-        {{-- @yield('content') --}}
     </div>
 </body>
 

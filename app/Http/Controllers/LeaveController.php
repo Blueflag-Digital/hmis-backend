@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Leave;
+use App\Models\LeaveType;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -45,15 +46,20 @@ class LeaveController extends Controller
 
             $pdf = app('dompdf.wrapper');
             if($leave->leave_type_id == 1){
-                $title = "Sick Leave";
+                $leaveType =  LeaveType::find(1);
+                $title = $leaveType->name;
                 $pdf->loadView('reports.sick-leave', compact('leave','hospital','title'));
             }
             if($leave->leave_type_id == 2){
-               $title = "Referral Leave";
+               $leaveType =  LeaveType::find(2);
+               $title =  $leaveType->name;
                $pdf->loadView('reports.referral-leave', compact('leave','hospital','title'));
             }
              if($leave->leave_type_id == 3){
-                $title = "Medical Evacuation Leave";
+                // $title = "Medical Evacuation Leave";
+                $leaveType =  LeaveType::find(3);
+                $title =  $leaveType->name;
+
                 $pdf->loadView('reports.medical-evacuation-leave', compact('leave','hospital','title'));
             }
             return $pdf->download('leave_form.pdf');

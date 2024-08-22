@@ -233,11 +233,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
-
-
-
-
     Route::apiResource('patient-prescriptions', PatientPrescriptionController::class);
     Route::post('patient-prescriptions/consultations/{consultationId}', [PatientPrescriptionController::class, 'getSpecificPrescription']);
 });
