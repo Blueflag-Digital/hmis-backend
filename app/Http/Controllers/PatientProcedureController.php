@@ -10,8 +10,34 @@ class PatientProcedureController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $patientProcedures = PatientProcedure::with('procedure')->get();
+
+        if (!$hospital = request()->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+        }
+
+        $patientProcedures = PatientProcedure::with('procedure')->where('hospitalk_id',$hospital->id)->get();
         return response()->json($patientProcedures);
+    }
+    //displays all the procedures done for this patient
+    public function allProcedures()
+    {
+
+        $consultationId = request()->consultationId;
+        $data = [
+            'status'=>false,
+            'data' =>[],
+        ];
+        try {
+            $data['data'] =  PatientProcedure::with('procedure')->where('consultation_id',$consultationId)->latest()->get()->map(function($procedure){
+                return $procedure->getPatientProcedureData();
+            });
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+        }
+
+
+        return response()->json($data);
     }
 
     // Store a newly created resource in storage.
@@ -54,6 +80,7 @@ class PatientProcedureController extends Controller
     // Display the specified resource.
     public function show(PatientProcedure $patientProcedure)
     {
+
         return response()->json($patientProcedure->load('procedure'));
     }
 

@@ -134,6 +134,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('procedures', ProcedureController::class);
     Route::apiResource('patient-procedures', PatientProcedureController::class);
+    Route::controller(PatientProcedureController::class)->prefix('patient-procedures')->group(function () {
+        Route::post('all-procedures', 'allProcedures');
+    });
+
 
 
 
