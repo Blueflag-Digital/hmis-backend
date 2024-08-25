@@ -14,10 +14,10 @@ class InvestigationController extends Controller
     {
         try {
 
-            if(!$hospital = $request->user()->getHospital()){
+            if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
-            $investigations = Investigation::where('hospital_id',$hospital->id)->latest()->get()->map(function($investigation){
+            $investigations = Investigation::where('hospital_id', $hospital->id)->latest()->get()->map(function ($investigation) {
                 return $investigation->investigationsData();
             });
             return response()->json($investigations, 200);
@@ -42,13 +42,13 @@ class InvestigationController extends Controller
     public function store(Request $request)
     {
         $data = [
-            'status'=> false,
-            'message'=> 'Failed to add investigation',
+            'status' => false,
+            'message' => 'Failed to add investigation',
         ];
 
         try {
 
-            if(!$hospital = $request->user()->getHospital()){
+            if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
             $uniqueCode = Investigation::generateUniqueInvestigationCode();
@@ -56,7 +56,8 @@ class InvestigationController extends Controller
             Investigation::create([
                 'name' => $request->name,
                 'code' => $uniqueCode,
-                'hospital_id'=> $hospital->id
+                'type' => $request->type,
+                'hospital_id' => $hospital->id
             ]);
             $data['status'] = true;
             $data['message'] = "Successfully added investigation";
@@ -88,12 +89,12 @@ class InvestigationController extends Controller
     public function update(Request $request, string $id)
     {
         $data = [
-            'status'=> false,
-            'message'=> 'Failed to update investigation',
+            'status' => false,
+            'message' => 'Failed to update investigation',
         ];
 
         try {
-            if(!$inv = Investigation::find($id)){
+            if (!$inv = Investigation::find($id)) {
                 throw new \Exception("Hospital does not exist", 1);
             }
             $inv->name = $request->name;
@@ -112,17 +113,17 @@ class InvestigationController extends Controller
      */
     public function destroy(string $id)
     {
-         $data = [
-            'status'=>false,
-            'message'=>'Failed to remove investigation'
+        $data = [
+            'status' => false,
+            'message' => 'Failed to remove investigation'
         ];
         try {
-             if(!$investigation =  Investigation::find($id)){
+            if (!$investigation =  Investigation::find($id)) {
                 throw new \Exception("investigation does not exist", 1);
             }
-             $investigation->delete();
-             $data['status'] = false;
-             $data['message'] =  'Successfully removed investigation';
+            $investigation->delete();
+            $data['status'] = false;
+            $data['message'] =  'Successfully removed investigation';
         } catch (\Throwable $th) {
             info($th->getMessage());
         }

@@ -13,10 +13,12 @@ class ReportsController extends Controller
     {
         // $data['startDate'] = $request->startDate;
         // $data['endDate'] = $request->endDate;
-
-
-
         try {
+
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
             if ($request->value) {
                 $reportDate =  $request->report;
 
@@ -35,8 +37,18 @@ class ReportsController extends Controller
                 $data['startDate'] = $request->startDate ? Carbon::parse($request->startDate) : Carbon::today();
                 $data['endDate'] = $request->endDate ? Carbon::parse($request->endDate) : Carbon::today();
             }
-            $paginatedData = Patient::whereBetween('created_at', [$data['startDate'], $data['endDate']])->latest()->get();
-            $count = $paginatedData->whereBetween('created_at', [$data['startDate'], $data['endDate']])->count();
+
+            $patientsQuery = Patient::where('hospital_id', $hospital->id)
+                ->whereBetween('created_at', [$data['startDate'], $data['endDate']])
+                ->latest();
+
+            $paginatedData = $patientsQuery->get();
+            $count = $patientsQuery->count();
+
+
+            // $paginatedData = Patient::where('hospital_id', $hospital->id)->whereBetween('created_at', [$data['startDate'], $data['endDate']])->latest()->get();
+            // $count = Patient::where('hospital_id', $hospital->id)->whereBetween('created_at', [$data['startDate'], $data['endDate']])->count();
+
             $patients = $paginatedData->map(function ($patient) {
                 return $patient->patientData();
             });
