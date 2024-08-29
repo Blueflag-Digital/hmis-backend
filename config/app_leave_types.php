@@ -3,7 +3,7 @@
 return [
     [
         'name' => 'Sick Leave',
-        'slug' => \Illuminate\Support\Str::slug('enable-suppliers-menu'),
+        'slug' => \Illuminate\Support\Str::slug('sick leave'),
         'description' => 'This sick leave  enables the patient portal, allowing patients to access their medical records, schedule appointments, and communicate with their healthcare providers online. It is crucial to provide secure access and ensure that all patient data is protected in compliance with HIPAA regulations.',
         'created_at' => now(),
         'updated_at' => now(),
