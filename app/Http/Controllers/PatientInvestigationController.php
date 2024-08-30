@@ -41,9 +41,14 @@ class PatientInvestigationController extends Controller
     {
         $consultation = Consultation::findOrFail($consultation_id);
         $syncData = [];
+        if(!$hospital = $request->user()->getHospital()){
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
         foreach ($request->investigations as $investigation) {
             $investigationData = [
                 'results' => $investigation['results'],
+                'hospital_id' => $hospital->id,
             ];
 
             // Save the file if it exists

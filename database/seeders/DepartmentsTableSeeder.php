@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\Models\Hospital;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,24 +14,34 @@ class DepartmentsTableSeeder extends Seeder
      */
     public function run(): void
     {
+
+        if (!$hospital = Hospital::first() ) {
+            throw new \Exception("Hospital does not exist", 1);
+        }
+
         Department::create([
-            'name' => 'Doctor'
+            'name' => 'Doctor',
+            'hospital_id'=>$hospital->id
         ]);
 
         Department::create([
-            'name' => 'Lab'
+            'name' => 'Lab',
+            'hospital_id'=>$hospital->id
         ]);
 
         Department::create([
-            'name' => 'Radiology'
+            'name' => 'Radiology',
+            'hospital_id'=>$hospital->id
         ]);
 
         Department::create([
-            'name' => 'Pharmacy'
+            'name' => 'Pharmacy',
+            'hospital_id'=>$hospital->id
         ]);
 
         Department::create([
-            'name' => 'Nurse'
+            'name' => 'Nurse',
+            'hospital_id'=>$hospital->id
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Hospital;
 use App\Models\UnitOfMeasure;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,8 +14,16 @@ class UnitsOfMeasuresTableSeeder extends Seeder
      */
     public function run(): void
     {
-        UnitOfMeasure::create(['name' => 'Kilogram']);
-        UnitOfMeasure::create(['name' => 'Liter']);
-        UnitOfMeasure::create(['name' => 'Packet']);
+        $units = ['Kilogram','Liter','Packet'];
+        $hospital = Hospital::first();
+        foreach ($units as $unit) {
+           UnitOfMeasure::create([
+                'name' => $unit,
+                'hospital_id'=>$hospital->id
+            ]);
+        }
+
     }
 }
+
+

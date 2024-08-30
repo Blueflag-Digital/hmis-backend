@@ -97,7 +97,7 @@ class BatchController extends Controller
                 'hospital_id' =>$batchData['hospital_id'],
                 'quantity_available' =>$batchData['quantity_available'],
             ]);
-           
+
             return response()->json($batch, 201);
         } catch (\Throwable $th) {
             info($th->getMessage());

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Hospital;
 use App\Models\Procedure;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,15 +14,13 @@ class ProcedureSeeder extends Seeder
      */
     public function run(): void
     {
-        $procedures = [
-            ['name' => 'Physical Examination'],
-            ['name' => 'Colonoscopy'],
-            ['name' => 'Endoscopy'],
-            ['name' => 'Surgical Biopsy'],
-        ];
-
+        $procedures = ['Physical Examination','Colonoscopy','Endoscopy','Surgical Biopsy'];
+        $hospital = Hospital::first();
         foreach ($procedures as $procedure) {
-            Procedure::create($procedure);
+            Procedure::create([
+                'name' => $procedure,
+                'hospital_id'=>$hospital->id
+            ]);
         }
     }
 }

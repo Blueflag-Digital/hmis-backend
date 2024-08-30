@@ -52,6 +52,7 @@ class InvestigationController extends Controller
                 throw new \Exception("Hospital does not exist", 1);
             }
             $uniqueCode = Investigation::generateUniqueInvestigationCode();
+            info($uniqueCode);
 
             Investigation::create([
                 'name' => $request->name,

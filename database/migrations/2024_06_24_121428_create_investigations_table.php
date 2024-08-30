@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code', 10)->nullable();
             $table->string('name', 255)->nullable();
-            $table->string('type', 10)->default('Lab');
+            $table->string('type', 255)->default('Lab');
             $table->timestamps();
         });
     }

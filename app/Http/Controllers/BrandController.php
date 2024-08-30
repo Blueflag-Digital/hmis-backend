@@ -21,9 +21,15 @@ class BrandController extends Controller
             'data' => [],
             'totalCount' => 0
         ];
+
+        if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
+
         if ($request->value) {
             try {
-                $data['data'] = Brand::get()->map(function ($brand) {
+                $data['data'] = Brand::where('hospital_id',$hospital->id)->get()->map(function ($brand) {
                     return $brand->brandData3();
                 });
                 $data['status'] = true;
@@ -35,7 +41,7 @@ class BrandController extends Controller
 
         try {
             $data['totalCount'] = Brand::count();
-            $paginatedData = Brand::latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $paginatedData = Brand::where('hospital_id',$hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
             $brands = $paginatedData->getCollection()->map(function ($brand) {
                 return $brand->brandData();
             });
@@ -59,8 +65,13 @@ class BrandController extends Controller
         $search  = $request->search;
         $data['data'] = [];
         $data['status'] = false;
+
+         if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
         try {
-            $data['data']  = Brand::where('name', 'like', '%' . $search . '%')->get()->map(function ($brand) {
+            $data['data']  = Brand::where('hospital_id',$hospital->id)->where('name', 'like', '%' . $search . '%')->get()->map(function ($brand) {
                 return $brand->brandData();
             });
             info($data['data']);
@@ -78,8 +89,15 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
 
         $brand = Brand::create($request->all());
+        $brand->update([
+            'hospital_id'=>$hospital->id
+        ]);
         return response()->json($brand, 201);
     }
 
