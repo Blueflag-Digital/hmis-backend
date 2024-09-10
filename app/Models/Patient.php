@@ -10,11 +10,11 @@ class Patient extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['person_id','hospital_id'];
+    protected $fillable = ['person_id', 'user_id', 'hospital_id'];
 
     public function person()
     {
-        return $this->belongsTo(Person::class,'person_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 
     public function visits()
@@ -24,7 +24,7 @@ class Patient extends Model
 
     public function hospital()
     {
-        return $this->belongsTo(Hospital::class,'hospital_id');
+        return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 
 

@@ -19,13 +19,13 @@ class PatientController extends Controller
     public function index(Request $request)
     {
 
-           if(!$hospital = $request->user()->getHospital()){
-                throw new \Exception("Hospital does not exist", 1);
-            }
+        if (!$hospital = $request->user()->getHospital()) {
+            throw new \Exception("Hospital does not exist", 1);
+        }
 
         if ($request->value) {
             //fetch all patients
-            return Person::where('hospital_id',$hospital->id)->get()->map(function ($patient) {
+            return Person::where('hospital_id', $hospital->id)->get()->map(function ($patient) {
                 return [
                     'id' => $patient->id,
                     'name' =>   $patient->first_name . " " . $patient->last_name
@@ -43,8 +43,8 @@ class PatientController extends Controller
 
 
         try {
-            $data['totalCount'] = Patient::where('hospital_id',$hospital->id)->count();
-            $paginatedData = Patient::where('hospital_id',$hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
+            $data['totalCount'] = Patient::where('hospital_id', $hospital->id)->count();
+            $paginatedData = Patient::where('hospital_id', $hospital->id)->latest()->paginate($limit, ['*'], 'page', $pageNo);
             $patients = $paginatedData->getCollection()->map(function ($patient) {
                 $dataToReturn = $patient->patientData();
                 return $dataToReturn;
@@ -87,7 +87,7 @@ class PatientController extends Controller
 
         try {
 
-            if(!$hospital = $request->user()->getHospital()){
+            if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
             //phone number validation
@@ -181,7 +181,14 @@ class PatientController extends Controller
 
         $datas = $request->data;
 
+
+
         try {
+
+            if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+
             foreach ($datas as $key => $validatedData) {
                 //remove the first row if email is 'test@gmail.com
                 if (isset($validatedData['Email']) && $validatedData['Email'] === 'test@gmail.com') {
@@ -233,7 +240,7 @@ class PatientController extends Controller
                 //save the data if the patient is not in the system
                 if (!$personExists = Person::where('email', $validatedData['Email'])->first()) {
                     $person = new Person();
-                    $person->user_id = null;
+                    $person->user_id = $request->user()->id;
                     $person->person_type_id = 1;
                     $person->first_name = $validatedData['First Name'];
                     $person->last_name = $validatedData['Last Name'];
@@ -244,10 +251,13 @@ class PatientController extends Controller
                     $person->city_id = $city_id;
                     $person->blood_group = $validatedData['Blood Group'];
                     $person->identifier_number = $validatedData['National ID'];
+                    $person->hospital_id = $hospital->id;
                     $person->save();
 
                     $patient = new Patient();
                     $patient->person_id = $person->id;
+                    $patient->user_id = $request->user()->id;
+                    $patient->hospital_id = $hospital->id;
                     $patient->save();
 
                     $newPhone = new Phone;
@@ -256,8 +266,8 @@ class PatientController extends Controller
                     $newPhone->save();
                 } else {
 
-                    //patient already exists in the system
-                    $personExists->user_id = null;
+                    //patient already exists in the system;
+                    $personExists->user_id = $request->user()->id;
                     $personExists->person_type_id = 1;
                     $personExists->first_name = $validatedData['First Name'];
                     $personExists->last_name = $validatedData['Last Name'];

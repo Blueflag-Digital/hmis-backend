@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id', 255)->unique()->nullable();
+            $table->foreignId('user_id', 255)->on('users')->onDelete('cascade')->nullable();
             $table->foreignId('person_type_id')->on('person_types')->onDelete('cascade');
             $table->foreignId('city_id')->on('cities')->onDelete('cascade');
             $table->string('first_name', 100)->index();
