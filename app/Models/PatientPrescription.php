@@ -25,11 +25,17 @@ class PatientPrescription extends Model
         return $this->belongsTo(Drug::class, 'drug_id');
     }
 
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
+
     public function prescriptionData()
     {
         return [
             'id' => $this->id,
             'drug' => isset($this->drug) ? $this->drug->drugData2() : null,
+            'brand' => isset($this->batch) && isset($this->batch->brand) ? $this->batch->brand->brandData3() : null,
             'dosage' => $this->dosage,
             'number_dispensed' =>  $this->number_dispensed,
             'date_added' => Carbon::parse($this->created_at)->format('d/m/Y')

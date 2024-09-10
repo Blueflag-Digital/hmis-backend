@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             PackSizesTableSeeder::class,
             UnitsOfMeasuresTableSeeder::class,
             WorkPlacesTableSeeder::class,
+            DrugsTableSeeder::class,
+            BrandsTableSeeder::class,
             // PaymentTableSeeder::class,
             // SubscriptionTableSeeder::class
             ProcedureSeeder::class,

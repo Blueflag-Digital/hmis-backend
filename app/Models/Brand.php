@@ -9,7 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'drug_id','hospital_id'];
+    protected $fillable = ['name', 'drug_id', 'hospital_id'];
 
 
     public function drug()
@@ -22,7 +22,7 @@ class Brand extends Model
         return $this->hasMany(Batch::class);
     }
 
-     public function brandData3()
+    public function brandData3()
     {
         return [
             'id' => $this->id,

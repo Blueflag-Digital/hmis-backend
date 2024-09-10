@@ -10,7 +10,7 @@ class PatientProcedure extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['procedure_id', 'quantity', 'consultation_id','description','hospital_id'];
+    protected $fillable = ['procedure_id', 'quantity', 'consultation_id', 'description', 'hospital_id'];
 
     // Relationships
     public function procedure()
@@ -23,13 +23,14 @@ class PatientProcedure extends Model
         return $this->belongsTo(Consultation::class);
     }
 
-    public function getPatientProcedureData(){
+    public function getPatientProcedureData()
+    {
         return [
-             'id'=>$this->id,
-            'procedure' =>$this->procedure->name,
-            'quantity'=>$this->quantity,
-            'description'=>$this->description,
-            'dateDone'=>isset($this->created_at) ? Carbon::parse($this->created_at)->format('d/m/Y') : "",
+            'id' => $this->id,
+            'procedure' => $this->procedure->name,
+            'quantity' => $this->quantity,
+            'description' => $this->description,
+            'dateDone' => isset($this->created_at) ? Carbon::parse($this->created_at)->format('d/m/Y') : "",
         ];
     }
 }

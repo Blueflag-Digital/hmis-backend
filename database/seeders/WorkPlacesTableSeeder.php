@@ -19,12 +19,12 @@ class WorkPlacesTableSeeder extends Seeder
         WorkPlace::create([
             'name' => 'Lake Turkana Wind Power',
             'description' => 'The Lake Turkana Wind Power (LTWP) Project. is a wind farm that supplies renewable energy to Kenya',
-            'hospital_id'=>$hospital->id
+            'hospital_id' => $hospital->id
         ]);
-        WorkPlace::create([
-            'name' => 'Lake Turkana Wind Power 2',
-            'description' => 'The Lake Turkana Wind Power 2 (LTWP) Project. is a wind farm that supplies renewable energy to Kenya',
-            'hospital_id'=>$hospital->id
-        ]);
+        // WorkPlace::create([
+        //     'name' => 'Lake Turkana Wind Power 2',
+        //     'description' => 'The Lake Turkana Wind Power 2 (LTWP) Project. is a wind farm that supplies renewable energy to Kenya',
+        //     'hospital_id'=>$hospital->id
+        // ]);
     }
 }
