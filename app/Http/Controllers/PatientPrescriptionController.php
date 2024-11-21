@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Batch;
+use App\Models\BillingItem;
 use App\Models\Brand;
 use App\Models\PatientPrescription;
 use Illuminate\Http\Request;
@@ -64,17 +65,16 @@ class PatientPrescriptionController extends Controller
         ];
 
         try {
-
             if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
 
-            DB::transaction(function () use ($rows, $consultation_id, $hospital) {
-                foreach($rows as $index => $row) {
-                    
-                    // Get the brand_id from the brands table using the provided drug_id
+            DB::transaction(function () use ($request, $hospital) {
+                $consultation_id = $request->consultation_id;
+                $rows = json_decode($request['rows'], true);
+
+                foreach($rows as $row) {
                     $brand = Brand::find($row['brandId']);
-                    
                     if (!$brand) {
                         throw new \Exception("No brand found : {$row['brandName']}");
                     }
@@ -82,49 +82,52 @@ class PatientPrescriptionController extends Controller
                     $brand_id = $brand->id;
                     $drugId = isset($brand->drug) ? $brand->drug->id : null;
 
-                    // Find the batch that corresponds to the brand_id and has enough quantity
                     $batch = Batch::where('brand_id', $brand_id)
                         ->where('quantity_available', '>', 0)
-                        ->orderBy('created_at', 'asc') // First, dispense from the oldest batch
+                        ->orderBy('created_at', 'asc')
                         ->first();
-                    
+
                     if ($batch) {
-                        // Check if there's enough quantity available
                         if ($batch->quantity_available >= $row['noDispensed']) {
                             $rem = (float)$batch->quantity_available - (float)$row['noDispensed'];
-                            // Deduct the dispensed quantity from the available quantity
-                            $batch->quantity_available = $rem; 
+                            $batch->quantity_available = $rem;
                             $batch->save();
 
-                            // Create a patient prescription record
-                            PatientPrescription::create([
+                            // Create prescription
+                            $prescription = PatientPrescription::create([
                                 'consultation_id' => $consultation_id,
-                                'drug_id' => $drugId, // Saving drug_id for tracking purposes
+                                'drug_id' => $drugId,
                                 'batch_id' => $batch->id,
                                 'dosage' => $row['dosage'],
                                 'number_dispensed' => $row['noDispensed'],
                                 'hospital_id' => $hospital->id
                             ]);
-                           
+
+                            // Create billing item
+                            BillingItem::create([
+                                'patient_visit_id' => $prescription->consultation->patient_visit_id,
+                                'hospital_id' => $hospital->id,
+                                'billable_type' => PatientPrescription::class,
+                                'billable_id' => $prescription->id,
+                                'quantity' => $row['noDispensed'],
+                                'unit_price' => $batch->selling_price,
+                                'amount' => $row['noDispensed'] * $batch->selling_price,
+                                'status' => 'pending'
+                            ]);
                         } else {
-                            // Handle the case where the available quantity is less than the dispensed quantity
                             throw new \Exception("Not enough quantity available in batch for brand Name: {$brand->name}");
                         }
                     } else {
-                        // Handle the case where no batch is found
                         throw new \Exception("No batch found with sufficient quantity for brand ID: {$brand_id}");
                     }
                 }
             });
-            $data['status'] = true;
-            $data['message'] = 'Success';
 
+            return response()->json(['status' => true, 'message' => 'Success']);
         } catch (\Throwable $th) {
             info($th->getMessage());
-            $data['message'] = $th->getMessage();
+            return response()->json(['status' => false, 'message' => $th->getMessage()]);
         }
-
-        return response()->json($data);
     }
 
 

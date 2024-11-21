@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BillingItem;
 use App\Models\Consultation;
 use App\Models\Investigation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PatientInvestigationController extends Controller
@@ -41,34 +43,54 @@ class PatientInvestigationController extends Controller
     {
         $consultation = Consultation::findOrFail($consultation_id);
         $syncData = [];
-        if(!$hospital = $request->user()->getHospital()){
-            throw new \Exception("Hospital does not exist", 1);
-        }
 
-        foreach ($request->investigations as $investigation) {
-            $investigationData = [
-                'results' => $investigation['results'],
-                'hospital_id' => $hospital->id,
-            ];
-
-            // Save the file if it exists
-            if (isset($investigation['file']) && $investigation['file']->isValid()) {
-
-                $filenamewithext = $investigation['file']->getClientOriginalName();
-                $filename = pathinfo($filenamewithext, PATHINFO_FILENAME);
-                $ext = $investigation['file']->getClientOriginalExtension();
-                $filenametostore = $filename . '_' . time() . '.' . $ext;
-                $path = $investigation['file']->storeAs('public/hmis_files', $filenametostore); // Ensure 'public/hmis_files' matches your filesystem disk setup
-                $filePath = Storage::url($path);
-                $investigationData['file_path'] = $filePath;
+        try {
+            if(!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
             }
 
-            $syncData[$investigation['id']] = $investigationData;
-        }
+            DB::transaction(function () use ($request, $consultation_id, $hospital) {
+                $consultation = Consultation::findOrFail($consultation_id);
 
-        // Sync the investigations with additional pivot data
-        $consultation->investigations()->sync($syncData);
-        return response()->json(['message' => 'Investigations added to consultation successfully'], 201);
+                foreach ($request->investigations as $investigation) {
+                    // Create investigation record
+                    $investigationData = [
+                        'results' => $investigation['results'],
+                        'hospital_id' => $hospital->id,
+                    ];
+
+                    if (isset($investigation['file']) && $investigation['file']->isValid()) {
+                        $filenamewithext = $investigation['file']->getClientOriginalName();
+                        $filename = pathinfo($filenamewithext, PATHINFO_FILENAME);
+                        $ext = $investigation['file']->getClientOriginalExtension();
+                        $filenametostore = $filename . '_' . time() . '.' . $ext;
+                        $path = $investigation['file']->storeAs('public/hmis_files', $filenametostore);
+                        $filePath = Storage::url($path);
+                        $investigationData['file_path'] = $filePath;
+                    }
+
+                    $consultation->investigations()->attach($investigation['id'], $investigationData);
+
+                    // Create billing item
+                    $investigationModel = Investigation::findOrFail($investigation['id']);
+                    BillingItem::create([
+                        'patient_visit_id' => $consultation->patient_visit_id,
+                        'hospital_id' => $hospital->id,
+                        'billable_type' => Investigation::class,
+                        'billable_id' => $investigationModel->id,
+                        'quantity' => 1,
+                        'unit_price' => $investigationModel->price,
+                        'amount' => $investigationModel->price,
+                        'status' => 'pending'
+                    ]);
+                }
+            });
+
+            return response()->json(['message' => 'Investigations added successfully'], 201);
+        } catch (\Throwable $th) {
+            info($th->getMessage());
+            return response()->json(['message' => $th->getMessage()], 500);
+        }
     }
 
     /**

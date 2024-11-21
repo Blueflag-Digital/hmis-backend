@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BillingItem;
 use App\Models\PatientProcedure;
+use App\Models\Procedure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PatientProcedureController extends Controller
 {
@@ -55,26 +58,44 @@ class PatientProcedureController extends Controller
         ];
 
         try {
-
             if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
 
-            $patientProcedure = PatientProcedure::create([
-                'procedure_id' =>$request->procedure_id,
-                'consultation_id' => $request->consultation_id,
-                'quantity' => $request->quantity,
-                'description' =>$request->description,
-                'hospital_id'=> $hospital->id
-            ]);
-            $data['status'] = true;
-            $data['message'] = "success";
+            DB::transaction(function () use ($request, $hospital) {
+                // Create procedure
+                $patientProcedure = PatientProcedure::create([
+                    'procedure_id' => $request->procedure_id,
+                    'consultation_id' => $request->consultation_id,
+                    'quantity' => $request->quantity,
+                    'description' => $request->description,
+                    'hospital_id' => $hospital->id
+                ]);
+
+                // Get procedure price
+                $procedure = Procedure::findOrFail($request->procedure_id);
+
+                // Create billing item
+                BillingItem::create([
+                    'patient_visit_id' => $patientProcedure->consultation->patient_visit_id,
+                    'hospital_id' => $hospital->id,
+                    'billable_type' => Procedure::class,
+                    'billable_id' => $procedure->id,
+                    'quantity' => $request->quantity,
+                    'unit_price' => $procedure->price,
+                    'amount' => $request->quantity * $procedure->price,
+                    'status' => 'pending'
+                ]);
+            });
+
+            return response()->json(['status' => true, 'message' => 'success']);
         } catch (\Throwable $th) {
             info($th->getMessage());
+            return response()->json(['status' => false, 'message' => $th->getMessage()]);
         }
 
 
-        return response()->json($data);
+        //return response()->json($data);
     }
 
     // Display the specified resource.

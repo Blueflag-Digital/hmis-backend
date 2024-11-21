@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DepartmentController;
@@ -239,4 +240,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('patient-prescriptions', PatientPrescriptionController::class);
     Route::post('patient-prescriptions/consultations/{consultationId}', [PatientPrescriptionController::class, 'getSpecificPrescription']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/billing/pending', [BillingController::class, 'getPendingBills']);
+        Route::get('/billing/visit/{visitId}', [BillingController::class, 'getBillDetails']);
+        Route::post('/billing/visit/{visitId}/pay', [BillingController::class, 'processPayment']);
+        Route::get('/billing/receipt/{invoiceId}', [BillingController::class, 'getReceipt']);
+    });
 });
