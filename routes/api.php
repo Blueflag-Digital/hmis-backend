@@ -52,7 +52,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::controller(LeaveController::class)->prefix('leave')->group(function () {
         Route::post('apply-leave', 'generateSickLeavePDF');
-
     });
 
     Route::apiResource('hospitals', HospitalsController::class);
@@ -230,14 +229,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('billing')->group(function () {
         Route::get('/pending', [BillingController::class, 'getPendingBills'])->name('billing.pending');
-        Route::get('/visit/{visitId}', [BillingController::class, 'getBillDetails'])->name('billing.details');
+        Route::post('/visit/{visitId}', [BillingController::class, 'getBillDetails'])->name('billing.details');
         Route::post('/visit/{visitId}/pay', [BillingController::class, 'processPayment'])->name('billing.pay');
         Route::get('/receipt/{invoiceId}', [BillingController::class, 'getReceipt'])->name('billing.receipt');
         Route::get('/payment-methods', [BillingController::class, 'paymentMethods'])->name('billing.paymentMethods');
         Route::get('/paid', [BillingController::class, 'getPaidBills'])->name('billing.paid');
-        
     });
-
-
-
 });

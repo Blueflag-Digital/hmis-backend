@@ -16,10 +16,6 @@ class DrugController extends Controller
         $pageNo = $request->pageNo ?? 1;
         $limit = $request->limit ?? 10;
 
-
-
-
-
         $data = [
             'data' => [],
             'status' => false,
