@@ -15,21 +15,23 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            RolesTableSeeder::class,
-            HospitalTableSeeder::class,
-            UsersTableSeeder::class,
-            CityTableSeeder::class,
-            DepartmentsTableSeeder::class,
-            DiagnosisCodesTableSeeder::class,
-            InvestigationsTableSeeder::class,
-            PackSizesTableSeeder::class,
-            UnitsOfMeasuresTableSeeder::class,
-            WorkPlacesTableSeeder::class,
-            DrugsTableSeeder::class,
-            BrandsTableSeeder::class,
+            // RolesTableSeeder::class,
+            // HospitalTableSeeder::class,
+            // UsersTableSeeder::class,
+            // CityTableSeeder::class,
+            // DepartmentsTableSeeder::class,
+            // DiagnosisCodesTableSeeder::class,
+            // InvestigationsTableSeeder::class,
+            // PackSizesTableSeeder::class,
+            // UnitsOfMeasuresTableSeeder::class,
+            // WorkPlacesTableSeeder::class,
+            // DrugsTableSeeder::class,
+            // BrandsTableSeeder::class,
             // PaymentTableSeeder::class,
             // SubscriptionTableSeeder::class
-            ProcedureSeeder::class,
+            // ProcedureSeeder::class,
+            InvoiceSeeder::class,
+            BillingItemSeeder::class,
         ]);
     }
 }

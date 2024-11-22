@@ -30,7 +30,9 @@ use App\Http\Controllers\UnitOfMeasureController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WorkPlacesController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -86,8 +88,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('{id}', 'update');
     });
 
-
-
     Route::controller(PatientController::class)->prefix('patients')->group(function () {
         Route::post('/', 'index');
         Route::post('/add', 'store');
@@ -96,7 +96,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/update', 'update');
         Route::post('/delete', 'destroy');
     });
-
 
     Route::controller(PatientVisitController::class)->prefix('patient-visits')->group(function () {
 
@@ -112,9 +111,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(CityController::class)->prefix('cities')->group(function () {
         Route::post('/', 'index');
     });
-
-
-
 
     Route::controller(ConsultationController::class)->prefix('consultation')->group(function () {
         Route::post('/', 'index');
@@ -139,10 +135,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('all-procedures', 'allProcedures');
     });
 
-
-
-
-
     Route::controller(PatientInvestigationController::class)->prefix('patient-investigations')->group(function () {
         Route::get('patient-investigations/{consultation_id}/investigations', 'index');
         Route::post('patient-investigations/{consultation_id}/investigations', 'store');
@@ -150,8 +142,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('patient-investigations/{consultation_id}/investigations/delete', 'destroy');
         Route::post('download-file', 'download');
     });
-
-
 
     Route::controller(DiagnosisCodeController::class)->prefix('diagnosis')->group(function () {
         Route::post('diagnosis-codes', 'index');
@@ -176,10 +166,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('search-brands', 'search');
     });
 
-
-
-
-
     Route::controller(DrugController::class)->prefix('drugs')->group(function () {
         Route::post('list', 'index');
         Route::post('create', 'store');
@@ -188,8 +174,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('delete/{id}', 'destroy');
         Route::post('search-drugs', 'search');
     });
-
-
 
     Route::controller(BatchController::class)->prefix('batches')->group(function () {
         Route::post('list', 'index');
@@ -218,8 +202,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('report-data', [ReportDataController::class, 'getReportData']);
     });
 
-
-
     Route::prefix('users')->group(function () {
         Route::post('/get-users', [UsersController::class, 'index']);
         Route::post('/', [UsersController::class, 'store']);
@@ -228,8 +210,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/delete', [UsersController::class, 'delete']);
     });
 
-
-
     Route::prefix('roles')->group(function () {
         Route::get('/', [RolesController::class, 'index']);
         Route::post('/', [RolesController::class, 'store']);
@@ -237,14 +217,27 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/delete', [RolesController::class, 'delete']);
     });
 
-
     Route::apiResource('patient-prescriptions', PatientPrescriptionController::class);
     Route::post('patient-prescriptions/consultations/{consultationId}', [PatientPrescriptionController::class, 'getSpecificPrescription']);
 
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/billing/pending', [BillingController::class, 'getPendingBills']);
-        Route::get('/billing/visit/{visitId}', [BillingController::class, 'getBillDetails']);
-        Route::post('/billing/visit/{visitId}/pay', [BillingController::class, 'processPayment']);
-        Route::get('/billing/receipt/{invoiceId}', [BillingController::class, 'getReceipt']);
+    // Route::middleware('auth:sanctum')->group(function () {
+    //     Route::get('/billing/pending', [BillingController::class, 'getPendingBills']);
+    //     Route::get('/billing/visit/{visitId}', [BillingController::class, 'getBillDetails']);
+    //     Route::post('/billing/visit/{visitId}/pay', [BillingController::class, 'processPayment']);
+    //     Route::get('/billing/receipt/{invoiceId}', [BillingController::class, 'getReceipt']);
+    // });
+
+
+    Route::prefix('billing')->group(function () {
+        Route::get('/pending', [BillingController::class, 'getPendingBills'])->name('billing.pending');
+        Route::get('/visit/{visitId}', [BillingController::class, 'getBillDetails'])->name('billing.details');
+        Route::post('/visit/{visitId}/pay', [BillingController::class, 'processPayment'])->name('billing.pay');
+        Route::get('/receipt/{invoiceId}', [BillingController::class, 'getReceipt'])->name('billing.receipt');
+        Route::get('/payment-methods', [BillingController::class, 'paymentMethods'])->name('billing.paymentMethods');
+        Route::get('/paid', [BillingController::class, 'getPaidBills'])->name('billing.paid');
+        
     });
+
+
+
 });

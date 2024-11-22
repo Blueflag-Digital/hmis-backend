@@ -30,4 +30,13 @@ class Helper
         return $data;
     }
 
+
+    public static function paymentMethods(){
+        return [
+            '1' => 'Cash',
+            '2' => 'Mpesa',
+            '3' =>'Bank Transfer'
+        ];
+    }
+
 }

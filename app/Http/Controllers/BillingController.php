@@ -5,13 +5,38 @@ use App\Models\Invoice;
 use App\Models\BillingItem;
 use App\Models\PatientVisit;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
+use Barryvdh\DomPDF\PDF;
+use Carbon\Carbon;
 
 class BillingController extends Controller
 {
+    public function getPaidBills(Request $request)
+    {
+        $pendingBills = PatientVisit::with(['patient.person', 'billingItems'])
+            ->whereHas( 'billingItems', function ($query) {
+                $query->where('status', 'paid');
+            })
+            ->where('hospital_id', $request->user()->hospital_id)
+            ->get()
+            ->map(function ($visit) {
+                return [
+                    'visit_id' => $visit->id,
+                    'patient_name' => $visit->patient->person->getName(),
+                    'visit_date' => Carbon::parse($visit->created_at)->format('d/m/Y') ,
+                    'total_pending' => $visit->billingItems()
+                        ->where('status', 'paid')
+                        ->sum('amount')
+                ];
+            });
+
+        return response()->json($pendingBills);
+    }
+
     public function getPendingBills(Request $request)
     {
         $pendingBills = PatientVisit::with(['patient.person', 'billingItems'])
-            ->whereHas('billingItems', function ($query) {
+            ->whereHas( 'billingItems', function ($query) {
                 $query->where('status', 'pending');
             })
             ->where('hospital_id', $request->user()->hospital_id)
@@ -20,7 +45,7 @@ class BillingController extends Controller
                 return [
                     'visit_id' => $visit->id,
                     'patient_name' => $visit->patient->person->getName(),
-                    'visit_date' => $visit->created_at->format('Y-m-d'),
+                    'visit_date' => Carbon::parse($visit->created_at)->format('d/m/Y') ,
                     'total_pending' => $visit->billingItems()
                         ->where('status', 'pending')
                         ->sum('amount')
@@ -40,7 +65,7 @@ class BillingController extends Controller
         $billDetails = [
             'visit_id' => $visit->id,
             'patient_name' => $visit->patient->person->getName(),
-            'visit_date' => $visit->created_at->format('Y-m-d'),
+            'visit_date' => Carbon::parse($visit->created_at)->format('d/m/Y') ,
             'total_amount' => $visit->billingItems()->where('status', 'pending')->sum('amount'),
             'items' => $visit->billingItems()
                 ->where('status', 'pending')
@@ -58,13 +83,27 @@ class BillingController extends Controller
         return response()->json($billDetails);
     }
 
+    public function paymentMethods(){
+        $paymentMethods = Helper::paymentMethods();
+        return response()->json(['data'=>$paymentMethods]);
+    }
+
     public function processPayment(Request $request, $visitId)
     {
-        $request->validate([
+
+     $amount = 0;
+     $request->validate([
             'payment_method' => 'required|string',
             'payment_reference' => 'required|string',
             'items' => 'required|array'
         ]);
+
+        // if($request->payment_method == "")
+
+        $itemIds = $request->items;
+
+        $billingItemsQuery = BillingItem::whereIn('id',$itemIds);
+
 
         $visit = PatientVisit::findOrFail($visitId);
 
@@ -72,15 +111,15 @@ class BillingController extends Controller
             'patient_visit_id' => $visitId,
             'hospital_id' => $request->user()->hospital_id,
             'invoice_number' => Invoice::generateInvoiceNumber(),
-            'total_amount' => collect($request->items)->sum('amount'),
+            'total_amount' => $billingItemsQuery->sum('amount'),
             'status' => 'paid',
             'paid_at' => now(),
             'payment_method' => $request->payment_method,
-            'payment_reference' => $request->payment_reference
+            'payment_reference' => $request->payment_reference,
+            'processed_by' =>$request->user()->id
         ]);
 
-        foreach ($request->items as $itemId) {
-            $billingItem = BillingItem::findOrFail($itemId);
+        foreach ($billingItemsQuery->get() as $billingItem) {
             $billingItem->update(['status' => 'paid']);
 
             $invoice->items()->create([
@@ -116,7 +155,11 @@ class BillingController extends Controller
             'payment_method' => $invoice->payment_method,
             'payment_reference' => $invoice->payment_reference
         ];
+      
 
-        return response()->json($receiptData);
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('receipts.invoice_receipt_template', compact('receiptData'));
+        return $pdf->download('invoice.pdf');
+
     }
 }

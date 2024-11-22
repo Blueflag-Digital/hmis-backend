@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BillingItem extends Model
 {
-    protected $fillable = ['patient_visit_id', 'hospital_id', 'billable_type', 'billable_id', 'amount', 'status'];
+    protected $fillable = ['patient_visit_id', 'hospital_id', 'billable_type', 'billable_id', 'status','quantity','unit_price','amount'];
 
     public function billable()
     {

@@ -32,6 +32,9 @@ class PatientVisit extends Model
         return $this->belongsTo(User::class, 'checked_in_by');
     }
 
+    public function billingItems(){
+        return $this->hasMany(BillingItem::class);
+    }
 
     public function visitData()
     {

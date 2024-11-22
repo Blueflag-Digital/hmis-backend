@@ -62,6 +62,7 @@ class LeaveController extends Controller
 
                 $pdf->loadView('reports.medical-evacuation-leave', compact('leave','hospital','title'));
             }
+            
             return $pdf->download('leave_form.pdf');
 
         } catch (\Throwable $th) {

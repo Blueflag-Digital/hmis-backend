@@ -102,18 +102,23 @@ class PatientPrescriptionController extends Controller
                                 'number_dispensed' => $row['noDispensed'],
                                 'hospital_id' => $hospital->id
                             ]);
+                            if($prescription){
+                                // Create billing item
+                                BillingItem::create([
+                                    'patient_visit_id' => $prescription->consultation->patient_visit_id,
+                                    'hospital_id' => $hospital->id,
+                                    'billable_type' => PatientPrescription::class,
+                                    'billable_id' => $prescription->id,
+                                    'quantity' => $row['noDispensed'],
+                                    'unit_price' => $batch->selling_price,
+                                    'amount' => $row['noDispensed'] * $batch->selling_price,
+                                    'status' => 'pending'
+                                ]);
 
-                            // Create billing item
-                            BillingItem::create([
-                                'patient_visit_id' => $prescription->consultation->patient_visit_id,
-                                'hospital_id' => $hospital->id,
-                                'billable_type' => PatientPrescription::class,
-                                'billable_id' => $prescription->id,
-                                'quantity' => $row['noDispensed'],
-                                'unit_price' => $batch->selling_price,
-                                'amount' => $row['noDispensed'] * $batch->selling_price,
-                                'status' => 'pending'
-                            ]);
+                               
+                            }
+
+                            
                         } else {
                             throw new \Exception("Not enough quantity available in batch for brand Name: {$brand->name}");
                         }

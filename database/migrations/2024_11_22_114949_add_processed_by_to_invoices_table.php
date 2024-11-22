@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('procedures', function (Blueprint $table) {
-            $table->decimal('price', 8, 2)->after('name')->default(0);
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->unsignedBigInteger('processed_by')->after('payment_reference')->nullable();
+            $table->foreign('processed_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -21,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('procedures', function (Blueprint $table) {
-            $table->dropColumn('price');
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->dropForeign('processed_by');
         });
     }
 };

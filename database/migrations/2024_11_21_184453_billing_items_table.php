@@ -11,9 +11,9 @@ return new class extends Migration {
             $table->foreignId('patient_visit_id')->constrained()->onDelete('cascade');
             $table->foreignId('hospital_id')->constrained()->onDelete('cascade');
             $table->morphs('billable');
-            $table->integer('quantity');
-            $table->decimal('unit_price', 10, 2);
-            $table->decimal('amount', 10, 2);
+            $table->integer('quantity')->default(0);
+            $table->decimal('unit_price', 10, 2)->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->string('status')->default('pending'); // pending, paid
             $table->timestamps();
         });

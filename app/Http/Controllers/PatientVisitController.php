@@ -121,14 +121,23 @@ class PatientVisitController extends Controller
         */
 
         $user = $request->user();
+            try {
+                if (!$hospital = $request->user()->getHospital()) {
+                throw new \Exception("Hospital does not exist", 1);
+            }
+            $patientVisit = PatientVisit::create([
+                'patient_id' => $request->patient_id,
+                'department_id' => $request->department_id,
+                'checked_in_by' => $user->id,
+                'hospital_id' => $hospital->id
+            ]);
+            return response()->json($patientVisit, 201);
+        } catch (\Throwable $th) {
+            return response()->json(['data'=>$th->getMessage()], 501);
+        }
+        
 
-        $patientVisit = PatientVisit::create([
-            'patient_id' => $request->patient_id,
-            'department_id' => $request->department_id,
-            'checked_in_by' => $user->id,
-        ]);
-
-        return response()->json($patientVisit, 201);
+       
     }
 
     /**

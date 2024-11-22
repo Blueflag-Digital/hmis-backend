@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->foreignId('patient_visit_id')->constrained()->onDelete('cascade');
             $table->foreignId('hospital_id')->constrained()->onDelete('cascade');
             $table->string('invoice_number')->unique();
-            $table->decimal('total_amount', 10, 2);
+            $table->decimal('total_amount', 10, 2)->default(0);
             $table->string('status')->default('pending');
             $table->timestamp('paid_at')->nullable();
             $table->string('payment_method')->nullable();

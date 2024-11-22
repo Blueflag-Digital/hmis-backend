@@ -12,7 +12,7 @@ class Invoice extends Model
     protected $fillable = [
         'patient_visit_id', 'hospital_id', 'invoice_number',
         'total_amount', 'status', 'paid_at',
-        'payment_method', 'payment_reference'
+        'payment_method', 'payment_reference','processed_by'
     ];
 
     protected $casts = [

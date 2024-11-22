@@ -30,6 +30,10 @@ class PatientPrescription extends Model
         return $this->belongsTo(Batch::class);
     }
 
+    public function consultation(){
+         return $this->belongsTo(Consultation::class,'consultation_id'); 
+    }
+
     public function prescriptionData()
     {
         return [
