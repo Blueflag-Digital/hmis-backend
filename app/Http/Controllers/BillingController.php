@@ -46,7 +46,6 @@ class BillingController extends Controller
     public function getPendingBills(Request $request)
     {
         $pendingBills = $this->getBillsByStatus($request, 'pending');
-
         return response()->json($pendingBills);
     }
 
@@ -68,7 +67,7 @@ class BillingController extends Controller
                 ->map(function ($item) {
                     return [
                         'id' => $item->id,
-                        'description' => $item->billable->name,
+                        'description' => $item->billable->name ?? null,
                         'type' => class_basename($item->billable_type),
                         'amount' => $item->amount
                     ];

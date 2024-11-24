@@ -121,8 +121,8 @@ class PatientVisitController extends Controller
         */
 
         $user = $request->user();
-            try {
-                if (!$hospital = $request->user()->getHospital()) {
+        try {
+            if (!$hospital = $user->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
             $patientVisit = PatientVisit::create([
@@ -133,11 +133,8 @@ class PatientVisitController extends Controller
             ]);
             return response()->json($patientVisit, 201);
         } catch (\Throwable $th) {
-            return response()->json(['data'=>$th->getMessage()], 501);
+            return response()->json(['data' => $th->getMessage()], 501);
         }
-        
-
-       
     }
 
     /**

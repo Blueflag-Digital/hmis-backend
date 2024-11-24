@@ -45,7 +45,7 @@ class InvestigationController extends Controller
             'status' => false,
             'message' => 'Failed to add investigation',
         ];
-        
+
 
         try {
 
@@ -53,12 +53,12 @@ class InvestigationController extends Controller
                 throw new \Exception("Hospital does not exist", 1);
             }
             $uniqueCode = Investigation::generateUniqueInvestigationCode();
-        
 
             Investigation::create([
                 'name' => $request->name,
                 'code' => $uniqueCode,
                 'type' => $request->type,
+                'price' => $request->price,
                 'hospital_id' => $hospital->id
             ]);
             $data['status'] = true;
@@ -101,6 +101,7 @@ class InvestigationController extends Controller
             }
             $inv->name = $request->name;
             $inv->type = $request->type;
+            $inv->price = $request->price;
             $inv->update();
             $data['status'] = true;
             $data['message'] = "Successfully updated investigation";

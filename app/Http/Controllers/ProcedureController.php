@@ -11,19 +11,18 @@ class ProcedureController extends Controller
     public function index(Request $request)
     {
         $data = [
-            'status'=>false,
-            'data' =>[],
+            'status' => false,
+            'data' => [],
         ];
 
         try {
             if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
-            $data['data'] = Procedure::where('hospital_id',$hospital->id)->get()->map(function($procedure){
+            $data['data'] = Procedure::where('hospital_id', $hospital->id)->get()->map(function ($procedure) {
                 return $procedure->procedureData();
             });
             $data['status'] = true;
-
         } catch (\Throwable $th) {
             info($th->getMessage());
         }
@@ -35,25 +34,23 @@ class ProcedureController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'price' => 'required|max:255',
         ]);
 
         $data = [
-            'status'=>false,
+            'status' => false,
         ];
 
         try {
             if (!$hospital = $request->user()->getHospital()) {
                 throw new \Exception("Hospital does not exist", 1);
             }
+            $validatedData['hospital_id'] = $hospital->id;
 
-            if(!$procedure = Procedure::create($validatedData)){
+            if (!$procedure = Procedure::create($validatedData)) {
                 throw new \Exception("Failed to store Procedure", 1);
             }
-            $procedure->update([
-                    'hospital_id' =>$hospital->id
-                ]);
-                $data['status'] = true;
-
+            $data['status'] = true;
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -71,11 +68,21 @@ class ProcedureController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'price' => 'required|max:255',
         ]);
+        $data = [
+            'status' => false,
+            'message' => 'Failed to update Procedure',
+        ];
 
-        $procedure->update($validatedData);
-
-        return response()->json($procedure);
+        try {
+            $procedure->update($validatedData);
+            $data['status'] = true;
+            $data['message'] = "Successfully updated Procedure";
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        return response()->json($data);
     }
 
     // Remove the specified resource from storage.
