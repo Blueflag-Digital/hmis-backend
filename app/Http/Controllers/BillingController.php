@@ -7,12 +7,69 @@ use App\Models\BillingItem;
 use App\Models\PatientVisit;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use App\Models\Patient;
+use App\Models\Person;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 
 class BillingController extends Controller
 {
 
+
+    public function searchBillByParam($request){
+       
+        $patientId = null;
+        $message = "This patient is not found";
+        if(!$person = Person::where('first_name','like','%'.$request['searchData']['nameParam'].'%')->first()){
+            throw new \Exception($message, 1);
+        }
+       
+        if(!$patient = Patient::where('person_id',$person->id)->first()){
+            throw new \Exception($message, 1);
+        }
+         //person is found.
+        $patientId  = $patient->id;
+        //search in the 
+
+        $bills = PatientVisit::with(['patient.person:id,name', 'billingItems'])
+                ->whereHas('billingItems', function ($query) use ($request) {
+                    $query->where('status', $request['searchData']['statusParam']);
+                })
+                ->where('hospital_id', $request->user()->hospital_id)
+                ->where('patient_id', $patientId)
+                ->take(20)
+                ->get()
+                ->map(function ($visit) use ($request) {
+                    return [
+                        'visit_id' => $visit->id,
+                        'patient_name' => $visit->patient->person->getName(),
+                        'visit_date' => Carbon::parse($visit->created_at)->format('d/m/Y'),
+                        // Use the correct variable and access the billingItems property
+                        'total_pending' => $visit->billingItems
+                            ->where('status', $request['searchData']['statusParam']) // Correctly use $searchData['statusParam']
+                            ->sum('amount')
+                    ];
+                });
+
+            return $bills;
+
+    }
+
+    public function searchBill(Request $request){
+      
+        $searchData = [
+            'nameParam' =>$request->name,
+            'statusParam' => $request->status,
+            'byDate' => $request->byDate,
+            'date_between' => $request->date_between
+        ];
+        $request['searchData'] = $searchData;
+
+        $bills = $this->searchBillByParam($request);
+        return response()->json([
+            'data'=>$bills
+        ]);
+    }
 
 
     public function getBillsByStatus(Request $request, $status)
@@ -23,6 +80,7 @@ class BillingController extends Controller
                 $query->where('status', $status);
             })
             ->where('hospital_id', $request->user()->hospital_id)
+            ->take(20)
             ->get()
             ->map(function ($visit) use ($status) {
                 return [
@@ -139,6 +197,8 @@ class BillingController extends Controller
 
     public function getReceipt($invoiceId)
     {
+
+        
         $invoice = Invoice::with([
             'patientVisit.patient.person',
             'items.billingItem.billable'

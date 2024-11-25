@@ -48,7 +48,7 @@ class PatientProcedureController extends Controller
     {
         $validatedData = $request->validate([
             'procedure_id' => 'required|exists:procedures,id',
-            'quantity' => 'required|integer',
+            // 'quantity' => '',
             'consultation_id' => 'required|exists:consultations,id',
         ]);
 
@@ -67,7 +67,7 @@ class PatientProcedureController extends Controller
                 $patientProcedure = PatientProcedure::create([
                     'procedure_id' => $request->procedure_id,
                     'consultation_id' => $request->consultation_id,
-                    'quantity' => $request->quantity,
+                    // 'quantity' => $request->quantity,
                     'description' => $request->description,
                     'hospital_id' => $hospital->id
                 ]);
@@ -81,7 +81,7 @@ class PatientProcedureController extends Controller
                     'hospital_id' => $hospital->id,
                     'billable_type' => Procedure::class,
                     'billable_id' => $procedure->id,
-                    'quantity' => $request->quantity,
+                    // 'quantity' => $request->quantity,
                     'unit_price' => $procedure->price,
                     'amount' => $request->quantity * $procedure->price,
                     'status' => 'pending'

@@ -15,6 +15,7 @@ class Person extends Model
         'date_of_birth', 'gender', 'identifier_number', 'work_place_id'
     ];
 
+
     public function patients()
     {
         return $this->hasMany(Patient::class);
