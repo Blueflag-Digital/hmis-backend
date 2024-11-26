@@ -17,19 +17,19 @@ class BillingController extends Controller
 
 
     public function searchBillByParam($request){
-       
+
         $patientId = null;
         $message = "This patient is not found";
         if(!$person = Person::where('first_name','like','%'.$request['searchData']['nameParam'].'%')->first()){
             throw new \Exception($message, 1);
         }
-       
+
         if(!$patient = Patient::where('person_id',$person->id)->first()){
             throw new \Exception($message, 1);
         }
          //person is found.
         $patientId  = $patient->id;
-        //search in the 
+        //search in the
 
         $bills = PatientVisit::with(['patient.person:id,name', 'billingItems'])
                 ->whereHas('billingItems', function ($query) use ($request) {
@@ -56,7 +56,7 @@ class BillingController extends Controller
     }
 
     public function searchBill(Request $request){
-      
+
         $searchData = [
             'nameParam' =>$request->name,
             'statusParam' => $request->status,
@@ -195,10 +195,41 @@ class BillingController extends Controller
         ]);
     }
 
+    public function printBillReceipt(Request $request){
+        $visitId = $request->visitId;
+        if(!$patientVisit = PatientVisit::find($visitId)){
+            throw new \Exception("Visit with this id does not exist", 1);
+        }
+        if(!$billingItems = BillingItem::where('patient_visit_id',$visitId)->where('status','pending')->get()){
+             throw new \Exception("billing item does not exist", 1);
+        }
+        //get the patients personal information
+        $data['patientsInformation'] = $patientVisit->patient->person->personData2();
+        $data['hospital'] = $request->user()->getHospital();
+        $data['served_by'] = $request->user()->userData();
+
+
+        $data['items'] = $billingItems->map(function($item){
+            return [
+                    'description' => $item->billable->name,
+                    'amount' => $item->amount,
+                    'unit_price' =>$item->unit_price,
+                    'quantity' =>$item->quantity,
+                    'total_amount' => $item->unit_price * $item->quantity,
+                    'bill_date' =>Carbon::parse($item->created_at)->format('d/m/Y')
+                ];
+        });
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('receipts.bill-receipt-template', compact('data'));
+        return $pdf->download('invoice.pdf');
+
+    }
+
     public function getReceipt($invoiceId)
     {
 
-        
+
         $invoice = Invoice::with([
             'patientVisit.patient.person',
             'items.billingItem.billable'
@@ -210,7 +241,7 @@ class BillingController extends Controller
             'patient_name' => $invoice->patientVisit->patient->person->getName(),
             'items' => $invoice->items->map(function ($item) {
                 return [
-                    'description' => $item->billingItem->billable->name,
+                    'description' => $item->billable->name,
                     'amount' => $item->amount
                 ];
             }),

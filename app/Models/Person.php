@@ -63,6 +63,14 @@ class Person extends Model
         return $this->first_name . " " . $this->last_name;
     }
 
+    public function personData2()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->first_name . " " . $this->last_name
+        ];
+    }
+
 
 
     public function personData()

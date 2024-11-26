@@ -234,5 +234,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/receipt/{invoiceId}', [BillingController::class, 'getReceipt'])->name('billing.receipt');
         Route::get('/payment-methods', [BillingController::class, 'paymentMethods'])->name('billing.paymentMethods');
         Route::get('/paid', [BillingController::class, 'getPaidBills'])->name('billing.paid');
+        Route::post('/print-bill', [BillingController::class, 'printBillReceipt'])->name('billing.print-bill');
     });
 });
