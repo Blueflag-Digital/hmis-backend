@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Container\Attributes\DB;
+use Illuminate\Support\Facades\DB;
 
 class Currencies extends Command
 {
@@ -34,7 +34,7 @@ class Currencies extends Command
                 [
                     'symbol' => $currency['symbol'],
                     'name' => $currency['name'],
-                    'created_at' => $currency['created_at'],
+                    'created_at' => now(),
                     'updated_at' => now(),
                 ]
             );

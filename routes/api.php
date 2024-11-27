@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\Currencies;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BillingController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\PatientProcedureController;
 use App\Http\Controllers\PatientVisitController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\CurrenciesController;
 use App\Http\Controllers\HospitalsController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ProcedureController;
@@ -43,6 +45,19 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Route::get('/currencies', function (Request $request) {
+    //     return $request->user();
+    // });
+
+
+
+    Route::controller(CurrenciesController::class)->prefix('currencies')->group(function () {
+        Route::get('/', 'currencies');
+        Route::post('/update-system-currency', 'updateHospCurrency');
+        // Route('/get-hospital-currency','getHospitalCurrency');
+    });
+
+
 
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -56,6 +71,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('hospitals', HospitalsController::class);
     Route::apiResource('work-places', WorkPlacesController::class);
+
 
     Route::controller(RolesPermissionsController::class)->prefix('roles-permissions')->group(function () {
         Route::get('get-role-permissions/{roleId}', 'getRolePermissions');

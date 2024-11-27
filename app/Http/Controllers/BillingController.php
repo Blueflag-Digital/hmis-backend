@@ -83,13 +83,16 @@ class BillingController extends Controller
             ->take(20)
             ->get()
             ->map(function ($visit) use ($status) {
+
+                $total = $visit->billingItems()
+                        ->where('status', $status)
+                        ->sum('amount');
+
                 return [
                     'visit_id' => $visit->id,
                     'patient_name' => $visit->patient->person->getName(),
                     'visit_date' => Carbon::parse($visit->created_at)->format('d/m/Y'),
-                    'total_pending' => $visit->billingItems()
-                        ->where('status', $status)
-                        ->sum('amount')
+                    'total_pending' => number_format($total,2)
                 ];
             });
         return $bills;
@@ -127,7 +130,7 @@ class BillingController extends Controller
                         'id' => $item->id,
                         'description' => $item->billable->name ?? null,
                         'type' => class_basename($item->billable_type),
-                        'amount' => $item->amount
+                        'amount' => number_format($item->amount,2)
                     ];
                 })
         ];
@@ -152,7 +155,6 @@ class BillingController extends Controller
     public function processPayment(Request $request, $visitId)
     {
 
-        $amount = 0;
         $request->validate([
             'payment_method' => 'required|string',
             'payment_reference' => 'required|string',
@@ -215,7 +217,7 @@ class BillingController extends Controller
                     'amount' => $item->amount,
                     'unit_price' =>$item->unit_price,
                     'quantity' =>$item->quantity,
-                    'total_amount' => $item->unit_price * $item->quantity,
+                    'total_amount' => number_format(($item->unit_price * $item->quantity),2),
                     'bill_date' =>Carbon::parse($item->created_at)->format('d/m/Y')
                 ];
         });

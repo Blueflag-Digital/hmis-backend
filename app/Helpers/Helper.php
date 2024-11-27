@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\CountryCurrency;
+
 class Helper
 {
     public static function validPhone($phone)
@@ -29,14 +31,22 @@ class Helper
 
         return $data;
     }
-
-
     public static function paymentMethods(){
         return [
             '1' => 'Cash',
             '2' => 'Mpesa',
             '3' =>'Bank Transfer'
         ];
+    }
+
+    public static function getHospCurrency($user){
+
+        $hospitalId = $user->getHospital()->id;
+        $currency = "Ksh";
+        if($hospCurrency =  CountryCurrency::where('hospital_id',$hospitalId)->first()){
+            $currency = $hospCurrency->currency->symbol;
+        }
+        return $currency;
     }
 
 }

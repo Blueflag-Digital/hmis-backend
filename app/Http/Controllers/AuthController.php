@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -46,17 +47,21 @@ class AuthController extends Controller
     public function loginUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        info($credentials);
+
 
         if (Auth::attempt($credentials)) {
 
             $user = Auth::user();
             $token = $user->createToken('AuthToken')->plainTextToken;
 
+            //get the business hospital currecny used
+            $currency = Helper::getHospCurrency($user);
+
             return response()->json([
                 'status' => true,
                 'token' => $token,
                 'user' => $user->user_data,
+                'currency'=> $currency
             ], 200);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
